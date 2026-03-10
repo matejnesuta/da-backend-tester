@@ -41,3 +41,15 @@ test-results/
 
 # Test failure cache (optional - can be committed to share failures with team)
 .test-failures.json
+
+# Build artifacts and dependencies generated during test runs
+testfiles/**/.gradle/
+testfiles/**/build/
+testfiles/**/target/
+testfiles/**/node_modules/
+testfiles/**/dist/
+testfiles/**/__pycache__/
+testfiles/**/.pytest_cache/
+testfiles/**/package-lock.json
+testfiles/**/yarn.lock
+testfiles/**/pnpm-lock.yaml
