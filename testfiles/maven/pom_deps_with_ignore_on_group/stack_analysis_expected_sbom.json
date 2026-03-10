@@ -1,0 +1,19 @@
+{
+  "scanned": {
+    "total": 0,
+    "direct": 0,
+    "transitive": 0
+  },
+  "providers": {
+    "rhtpa": {
+      "status": {
+        "ok": true,
+        "name": "rhtpa",
+        "code": 200,
+        "message": "OK",
+        "warnings": {}
+      },
+      "sources": {}
+    }
+  }
+}

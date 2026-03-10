@@ -1,0 +1,190 @@
+{
+  "scanned": {
+    "total": 24,
+    "direct": 24,
+    "transitive": 0
+  },
+  "providers": {
+    "rhtpa": {
+      "status": {
+        "ok": true,
+        "name": "rhtpa",
+        "code": 200,
+        "message": "OK",
+        "warnings": {}
+      },
+      "sources": {
+        "osv-github": {
+          "summary": {
+            "direct": 4,
+            "transitive": 0,
+            "total": 4,
+            "dependencies": 3,
+            "critical": 1,
+            "high": 2,
+            "medium": 1,
+            "low": 0,
+            "remediations": 0,
+            "recommendations": 12,
+            "unscanned": 0
+          },
+          "dependencies": [
+            {
+              "ref": "pkg:maven/org.postgresql/postgresql@42.7.1?scope=compile",
+              "issues": [
+                {
+                  "id": "CVE-2024-1597",
+                  "source": "osv-github",
+                  "cvssScore": 10.0,
+                  "severity": "CRITICAL",
+                  "cves": [
+                    "CVE-2024-1597"
+                  ],
+                  "unique": false
+                }
+              ],
+              "transitive": [],
+              "highestVulnerability": {
+                "id": "CVE-2024-1597",
+                "source": "osv-github",
+                "cvssScore": 10.0,
+                "severity": "CRITICAL",
+                "cves": [
+                  "CVE-2024-1597"
+                ],
+                "unique": false
+              }
+            },
+            {
+              "ref": "pkg:maven/mysql/mysql-connector-java@8.0.33?scope=compile",
+              "issues": [
+                {
+                  "id": "CVE-2023-22102",
+                  "title": "Vulnerability in the MySQL Connectors product of Oracle MySQL (component: Connector/J).  Supported versions that are affected are 8.1.0 and prior. Difficult to exploit vulnerability allows unauthenticated attacker with network access via multiple protocols to compromise MySQL Connectors.  Successful attacks require human interaction from a person other than the attacker and while the vulnerability is in MySQL Connectors, attacks may significantly impact additional products (scope change). Successful attacks of this vulnerability can result in takeover of MySQL Connectors. CVSS 3.1 Base Score 8.3 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:C/C:H/I:H/A:H).",
+                  "source": "osv-github",
+                  "cvssScore": 8.3,
+                  "severity": "HIGH",
+                  "cves": [
+                    "CVE-2023-22102"
+                  ],
+                  "unique": false
+                }
+              ],
+              "transitive": [],
+              "highestVulnerability": {
+                "id": "CVE-2023-22102",
+                "title": "Vulnerability in the MySQL Connectors product of Oracle MySQL (component: Connector/J).  Supported versions that are affected are 8.1.0 and prior. Difficult to exploit vulnerability allows unauthenticated attacker with network access via multiple protocols to compromise MySQL Connectors.  Successful attacks require human interaction from a person other than the attacker and while the vulnerability is in MySQL Connectors, attacks may significantly impact additional products (scope change). Successful attacks of this vulnerability can result in takeover of MySQL Connectors. CVSS 3.1 Base Score 8.3 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:C/C:H/I:H/A:H).",
+                "source": "osv-github",
+                "cvssScore": 8.3,
+                "severity": "HIGH",
+                "cves": [
+                  "CVE-2023-22102"
+                ],
+                "unique": false
+              }
+            },
+            {
+              "ref": "pkg:maven/org.apache.kafka/kafka-clients@3.6.1?scope=compile",
+              "issues": [
+                {
+                  "id": "CVE-2025-27817",
+                  "title": "Apache Kafka Client: Arbitrary file read and SSRF vulnerability",
+                  "source": "osv-github",
+                  "cvssScore": 7.5,
+                  "severity": "HIGH",
+                  "cves": [
+                    "CVE-2025-27817"
+                  ],
+                  "unique": false
+                },
+                {
+                  "id": "CVE-2024-31141",
+                  "title": "Apache Kafka Clients: Privilege escalation to filesystem read-access via automatic ConfigProvider",
+                  "source": "osv-github",
+                  "cvssScore": 6.5,
+                  "severity": "MEDIUM",
+                  "cves": [
+                    "CVE-2024-31141"
+                  ],
+                  "unique": false
+                }
+              ],
+              "transitive": [],
+              "highestVulnerability": {
+                "id": "CVE-2025-27817",
+                "title": "Apache Kafka Client: Arbitrary file read and SSRF vulnerability",
+                "source": "osv-github",
+                "cvssScore": 7.5,
+                "severity": "HIGH",
+                "cves": [
+                  "CVE-2025-27817"
+                ],
+                "unique": false
+              }
+            },
+            {
+              "ref": "pkg:maven/com.squareup.okhttp3/okhttp@4.12.0?scope=compile",
+              "transitive": [],
+              "recommendation": "pkg:maven/com.squareup.okhttp3/okhttp@4.12.0.redhat-00002?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=jar"
+            },
+            {
+              "ref": "pkg:maven/com.google.guava/guava@33.0.0-jre?scope=compile",
+              "transitive": [],
+              "recommendation": "pkg:maven/com.google.guava/guava@33.0.0.jre-redhat-00002"
+            },
+            {
+              "ref": "pkg:maven/jakarta.xml.bind/jakarta.xml.bind-api@4.0.1?scope=compile",
+              "transitive": [],
+              "recommendation": "pkg:maven/jakarta.xml.bind/jakarta.xml.bind-api@4.0.1.redhat-00001"
+            },
+            {
+              "ref": "pkg:maven/org.slf4j/slf4j-api@2.0.11?scope=compile",
+              "transitive": [],
+              "recommendation": "pkg:maven/org.slf4j/slf4j-api@2.0.11.redhat-00001?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=pom"
+            },
+            {
+              "ref": "pkg:maven/com.google.code.gson/gson@2.9.1?scope=compile",
+              "transitive": [],
+              "recommendation": "pkg:maven/com.google.code.gson/gson@2.9.1.redhat-00003?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=jar"
+            },
+            {
+              "ref": "pkg:maven/com.google.code.findbugs/jsr305@3.0.2?scope=compile",
+              "transitive": [],
+              "recommendation": "pkg:maven/com.google.code.findbugs/jsr305@3.0.2.redhat-00020?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=jar"
+            },
+            {
+              "ref": "pkg:maven/commons-io/commons-io@2.15.1?scope=compile",
+              "transitive": [],
+              "recommendation": "pkg:maven/commons-io/commons-io@2.15.1.redhat-00001?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=jar"
+            },
+            {
+              "ref": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.16.1?scope=compile",
+              "transitive": [],
+              "recommendation": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.16.1.redhat-00003?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=jar"
+            },
+            {
+              "ref": "pkg:maven/commons-configuration/commons-configuration@1.10?scope=compile",
+              "transitive": [],
+              "recommendation": "pkg:maven/commons-configuration/commons-configuration@1.10.0.redhat-00002?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=pom"
+            },
+            {
+              "ref": "pkg:maven/org.apache.httpcomponents/httpclient@4.5.14?scope=compile",
+              "transitive": [],
+              "recommendation": "pkg:maven/org.apache.httpcomponents/httpclient@4.5.14.redhat-00016?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=jar"
+            },
+            {
+              "ref": "pkg:maven/org.mapstruct/mapstruct@1.5.5.Final?scope=compile",
+              "transitive": [],
+              "recommendation": "pkg:maven/org.mapstruct/mapstruct@1.5.5.Final-redhat-00002?type=jar"
+            },
+            {
+              "ref": "pkg:maven/jakarta.inject/jakarta.inject-api@2.0.1?scope=compile",
+              "transitive": [],
+              "recommendation": "pkg:maven/jakarta.inject/jakarta.inject-api@2.0.1.redhat-00007?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=jar"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

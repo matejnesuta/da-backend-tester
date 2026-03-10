@@ -1,0 +1,1839 @@
+{
+  "scanned": {
+    "total": 44,
+    "direct": 5,
+    "transitive": 39
+  },
+  "providers": {
+    "rhtpa": {
+      "status": {
+        "ok": true,
+        "name": "rhtpa",
+        "code": 200,
+        "message": "OK",
+        "warnings": {}
+      },
+      "sources": {
+        "osv-github": {
+          "summary": {
+            "direct": 1,
+            "transitive": 52,
+            "total": 53,
+            "dependencies": 19,
+            "critical": 5,
+            "high": 28,
+            "medium": 19,
+            "low": 1,
+            "remediations": 7,
+            "recommendations": 4,
+            "unscanned": 0
+          },
+          "dependencies": [
+            {
+              "ref": "pkg:maven/org.springframework.boot/spring-boot-starter-web@2.6.7?scope=compile",
+              "transitive": [
+                {
+                  "ref": "pkg:maven/org.springframework/spring-web@5.3.19?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2016-1000027",
+                      "title": "Pivotal Spring Framework through 5.3.16 suffers from a potential remote code execution (RCE) issue if used for Java deserialization of untrusted data. Depending on how the library is implemented within a product, this issue may or not occur, and authentication may be required. NOTE: the vendor's position is that untrusted data is not an intended use case. The product's behavior will not be changed because some users rely on deserialization of trusted data.",
+                      "source": "osv-github",
+                      "cvssScore": 9.8,
+                      "severity": "CRITICAL",
+                      "cves": [
+                        "CVE-2016-1000027"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2024-22243",
+                      "title": "CVE-2024-22243: Spring Framework URL Parsing with Host Validation",
+                      "source": "osv-github",
+                      "cvssScore": 8.1,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2024-22243"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2024-22259",
+                      "title": "CVE-2024-22259: Spring Framework URL Parsing with Host Validation (2nd report)",
+                      "source": "osv-github",
+                      "cvssScore": 8.1,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2024-22259"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2024-22262",
+                      "title": "CVE-2024-22262: Spring Framework URL Parsing with Host Validation",
+                      "source": "osv-github",
+                      "cvssScore": 8.1,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2024-22262"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2024-38809",
+                      "title": "Applications that parse ETags from \"If-Match\" or \"If-None-Match\" request headers are vulnerable to DoS attack.\n\nUsers of affected versions should upgrade to the corresponding fixed version.\n\nUsers of older, unsupported versions could enforce a size limit on \"If-Match\" and \"If-None-Match\" headers, e.g. through a Filter.",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2024-38809"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2024-38820",
+                      "title": "CVE-2024-38820: Spring Framework DataBinder Case Sensitive Match Exception",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2024-38820"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2016-1000027",
+                    "title": "Pivotal Spring Framework through 5.3.16 suffers from a potential remote code execution (RCE) issue if used for Java deserialization of untrusted data. Depending on how the library is implemented within a product, this issue may or not occur, and authentication may be required. NOTE: the vendor's position is that untrusted data is not an intended use case. The product's behavior will not be changed because some users rely on deserialization of trusted data.",
+                    "source": "osv-github",
+                    "cvssScore": 9.8,
+                    "severity": "CRITICAL",
+                    "cves": [
+                      "CVE-2016-1000027"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:maven/org.apache.tomcat.embed/tomcat-embed-core@9.0.62?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2024-50379",
+                      "source": "osv-github",
+                      "cvssScore": 9.8,
+                      "severity": "CRITICAL",
+                      "cves": [
+                        "CVE-2024-50379"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-55754",
+                      "source": "osv-github",
+                      "cvssScore": 9.6,
+                      "severity": "CRITICAL",
+                      "cves": [
+                        "CVE-2025-55754"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2022-42252",
+                      "title": "Apache Tomcat request smuggling via malformed content-length",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2022-42252"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2022-45143",
+                      "title": "Apache Tomcat: JsonErrorReportValve escaping",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2022-45143"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-24998",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2023-24998"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-46589",
+                      "title": "Apache Tomcat: HTTP request smuggling via malformed trailer headers",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2023-46589"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2024-24549",
+                      "title": "Apache Tomcat: HTTP/2 header handling DoS",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2024-24549"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2024-34750",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2024-34750"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-48988",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2025-48988"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-48989",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2025-48989"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-52520",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2025-52520"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-53506",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2025-53506"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-55752",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2025-55752"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-41080",
+                      "title": "Apache Tomcat: Open redirect with FORM authentication",
+                      "source": "osv-github",
+                      "cvssScore": 6.1,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-41080"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-42795",
+                      "title": "Apache Tomcat: Failure during request clean-up leads to sensitive data leaking to subsequent requests",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-42795"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-45648",
+                      "title": "Apache Tomcat: Trailer header parsing too lenient",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-45648"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2024-50379",
+                    "source": "osv-github",
+                    "cvssScore": 9.8,
+                    "severity": "CRITICAL",
+                    "cves": [
+                      "CVE-2024-50379"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:maven/org.springframework/spring-webmvc@5.3.19?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2023-20860",
+                      "title": "Spring Framework running version 6.0.0 - 6.0.6 or 5.3.0 - 5.3.25 using \"**\" as a pattern in Spring Security configuration with the mvcRequestMatcher creates a mismatch in pattern matching between Spring Security and Spring MVC, and the potential for a security bypass.",
+                      "source": "osv-github",
+                      "cvssScore": 9.1,
+                      "severity": "CRITICAL",
+                      "cves": [
+                        "CVE-2023-20860"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2024-38816",
+                      "title": "CVE-2024-38816: Path traversal vulnerability in functional web frameworks",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2024-38816"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2024-38819",
+                      "title": "Applications serving static resources through the functional web frameworks WebMvc.fn or WebFlux.fn are vulnerable to path traversal attacks. An attacker can craft malicious HTTP requests and obtain any file on the file system that is also accessible to the process in which the Spring application is running.",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2024-38819"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-41242",
+                      "title": "CVE-2025-41242: Path traversal vulnerability on non-compliant Servlet containers",
+                      "source": "osv-github",
+                      "cvssScore": 5.9,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-41242"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2024-38828",
+                      "title": "CVE-2024-38828: DoS via Spring MVC controller method with byte[] parameter",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2024-38828"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2023-20860",
+                    "title": "Spring Framework running version 6.0.0 - 6.0.6 or 5.3.0 - 5.3.25 using \"**\" as a pattern in Spring Security configuration with the mvcRequestMatcher creates a mismatch in pattern matching between Spring Security and Spring MVC, and the potential for a security bypass.",
+                    "source": "osv-github",
+                    "cvssScore": 9.1,
+                    "severity": "CRITICAL",
+                    "cves": [
+                      "CVE-2023-20860"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:maven/org.yaml/snakeyaml@1.29?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2022-1471",
+                      "title": "Remote Code execution in SnakeYAML",
+                      "source": "osv-github",
+                      "cvssScore": 8.3,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2022-1471"
+                      ],
+                      "unique": false,
+                      "remediation": {
+                        "trustedContent": {
+                          "ref": "pkg:maven/org.yaml/snakeyaml@1.29.0.redhat-00001?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=pom",
+                          "status": "unknown",
+                          "justification": "null"
+                        }
+                      }
+                    },
+                    {
+                      "id": "CVE-2022-25857",
+                      "title": "Denial of Service (DoS)",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2022-25857"
+                      ],
+                      "unique": false,
+                      "remediation": {
+                        "trustedContent": {
+                          "ref": "pkg:maven/org.yaml/snakeyaml@1.29.0.redhat-00001?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=pom",
+                          "status": "unknown",
+                          "justification": "null"
+                        }
+                      }
+                    },
+                    {
+                      "id": "CVE-2022-38749",
+                      "title": "DoS in SnakeYAML",
+                      "source": "osv-github",
+                      "cvssScore": 6.5,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2022-38749"
+                      ],
+                      "unique": false,
+                      "remediation": {
+                        "trustedContent": {
+                          "ref": "pkg:maven/org.yaml/snakeyaml@1.29.0.redhat-00001?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=pom",
+                          "status": "unknown",
+                          "justification": "null"
+                        }
+                      }
+                    },
+                    {
+                      "id": "CVE-2022-38751",
+                      "title": "DoS in SnakeYAML",
+                      "source": "osv-github",
+                      "cvssScore": 6.5,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2022-38751"
+                      ],
+                      "unique": false,
+                      "remediation": {
+                        "trustedContent": {
+                          "ref": "pkg:maven/org.yaml/snakeyaml@1.29.0.redhat-00001?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=pom",
+                          "status": "unknown",
+                          "justification": "null"
+                        }
+                      }
+                    },
+                    {
+                      "id": "CVE-2022-38752",
+                      "title": "DoS in SnakeYAML",
+                      "source": "osv-github",
+                      "cvssScore": 6.5,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2022-38752"
+                      ],
+                      "unique": false,
+                      "remediation": {
+                        "trustedContent": {
+                          "ref": "pkg:maven/org.yaml/snakeyaml@1.29.0.redhat-00001?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=pom",
+                          "status": "unknown",
+                          "justification": "null"
+                        }
+                      }
+                    },
+                    {
+                      "id": "CVE-2022-41854",
+                      "title": "Stack Overflow in Snakeyaml",
+                      "source": "osv-github",
+                      "cvssScore": 6.5,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2022-41854"
+                      ],
+                      "unique": false,
+                      "remediation": {
+                        "trustedContent": {
+                          "ref": "pkg:maven/org.yaml/snakeyaml@1.29.0.redhat-00001?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=pom",
+                          "status": "unknown",
+                          "justification": "null"
+                        }
+                      }
+                    },
+                    {
+                      "id": "CVE-2022-38750",
+                      "title": "DoS in SnakeYAML",
+                      "source": "osv-github",
+                      "cvssScore": 5.5,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2022-38750"
+                      ],
+                      "unique": false,
+                      "remediation": {
+                        "trustedContent": {
+                          "ref": "pkg:maven/org.yaml/snakeyaml@1.29.0.redhat-00001?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=pom",
+                          "status": "unknown",
+                          "justification": "null"
+                        }
+                      }
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2022-1471",
+                    "title": "Remote Code execution in SnakeYAML",
+                    "source": "osv-github",
+                    "cvssScore": 8.3,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2022-1471"
+                    ],
+                    "unique": false,
+                    "remediation": {
+                      "trustedContent": {
+                        "ref": "pkg:maven/org.yaml/snakeyaml@1.29.0.redhat-00001?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=pom",
+                        "status": "unknown",
+                        "justification": "null"
+                      }
+                    }
+                  }
+                },
+                {
+                  "ref": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.13.2.1?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2022-42003",
+                      "title": "In FasterXML jackson-databind before versions 2.13.4.1 and 2.12.17.1, resource exhaustion can occur because of a lack of a check in primitive value deserializers to avoid deep wrapper array nesting, when the UNWRAP_SINGLE_VALUE_ARRAYS feature is enabled.",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2022-42003"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2022-42004",
+                      "title": "In FasterXML jackson-databind before 2.13.4, resource exhaustion can occur because of a lack of a check in BeanDeserializer._deserializeFromArray to prevent use of deeply nested arrays. An application is vulnerable only with certain customized choices for deserialization.",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2022-42004"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2022-42003",
+                    "title": "In FasterXML jackson-databind before versions 2.13.4.1 and 2.12.17.1, resource exhaustion can occur because of a lack of a check in primitive value deserializers to avoid deep wrapper array nesting, when the UNWRAP_SINGLE_VALUE_ARRAYS feature is enabled.",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2022-42003"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:maven/org.springframework/spring-core@5.3.19?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2025-41249",
+                      "title": "CVE-2025-41249: Spring Framework Annotation Detection Vulnerability",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2025-41249"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2025-41249",
+                    "title": "CVE-2025-41249: Spring Framework Annotation Detection Vulnerability",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2025-41249"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:maven/org.springframework/spring-expression@5.3.19?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2023-20863",
+                      "title": "In spring framework versions prior to 5.2.24 release+ ,5.3.27+ and 6.0.8+ , it is possible for a user to provide a specially crafted SpEL expression that may cause a denial-of-service (DoS) condition.",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2023-20863"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-20861",
+                      "title": "In Spring Framework versions 6.0.0 - 6.0.6, 5.3.0 - 5.3.25, 5.2.0.RELEASE - 5.2.22.RELEASE, and older unsupported versions, it is possible for a user to provide a specially crafted SpEL expression that may cause a denial-of-service (DoS) condition.",
+                      "source": "osv-github",
+                      "cvssScore": 6.5,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-20861"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2024-38808",
+                      "title": "CVE-2024-38808: Spring Expression DoS Vulnerability",
+                      "source": "osv-github",
+                      "cvssScore": 4.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2024-38808"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2023-20863",
+                    "title": "In spring framework versions prior to 5.2.24 release+ ,5.3.27+ and 6.0.8+ , it is possible for a user to provide a specially crafted SpEL expression that may cause a denial-of-service (DoS) condition.",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2023-20863"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:maven/org.springframework/spring-beans@5.3.19?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2022-22970",
+                      "title": "In spring framework versions prior to 5.3.20+ , 5.2.22+ and old unsupported versions, applications that handle file uploads are vulnerable to DoS attack if they rely on data binding to set a MultipartFile or javax.servlet.Part to a field in a model object.",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2022-22970"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2022-22970",
+                    "title": "In spring framework versions prior to 5.3.20+ , 5.2.22+ and old unsupported versions, applications that handle file uploads are vulnerable to DoS attack if they rely on data binding to set a MultipartFile or javax.servlet.Part to a field in a model object.",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2022-22970"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:maven/org.springframework.boot/spring-boot-autoconfigure@2.6.7?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2023-20883",
+                      "title": "In Spring Boot versions 3.0.0 - 3.0.6, 2.7.0 - 2.7.11, 2.6.0 - 2.6.14, 2.5.0 - 2.5.14 and older unsupported versions, there is potential for a denial-of-service (DoS) attack if Spring MVC is used together with a reverse proxy cache.",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2023-20883"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2023-20883",
+                    "title": "In Spring Boot versions 3.0.0 - 3.0.6, 2.7.0 - 2.7.11, 2.6.0 - 2.6.14, 2.5.0 - 2.5.14 and older unsupported versions, there is potential for a denial-of-service (DoS) attack if Spring MVC is used together with a reverse proxy cache.",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2023-20883"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:maven/org.springframework.boot/spring-boot@2.6.7?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2025-22235",
+                      "title": "Spring Boot EndpointRequest.to() creates wrong matcher if actuator endpoint is not exposed",
+                      "source": "osv-github",
+                      "cvssScore": 7.3,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2025-22235"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2025-22235",
+                    "title": "Spring Boot EndpointRequest.to() creates wrong matcher if actuator endpoint is not exposed",
+                    "source": "osv-github",
+                    "cvssScore": 7.3,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2025-22235"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:maven/ch.qos.logback/logback-core@1.2.11?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2023-6378",
+                      "title": "Logback \"receiver\" DOS vulnerability ",
+                      "source": "osv-github",
+                      "cvssScore": 7.1,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2023-6378"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2023-6378",
+                    "title": "Logback \"receiver\" DOS vulnerability ",
+                    "source": "osv-github",
+                    "cvssScore": 7.1,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2023-6378"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:maven/ch.qos.logback/logback-classic@1.2.11?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2023-6378",
+                      "title": "Logback \"receiver\" DOS vulnerability ",
+                      "source": "osv-github",
+                      "cvssScore": 7.1,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2023-6378"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2023-6378",
+                    "title": "Logback \"receiver\" DOS vulnerability ",
+                    "source": "osv-github",
+                    "cvssScore": 7.1,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2023-6378"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:maven/org.apache.tomcat.embed/tomcat-embed-websocket@9.0.62?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2024-23672",
+                      "title": "Apache Tomcat: WebSocket DoS with incomplete closing handshake",
+                      "source": "osv-github",
+                      "cvssScore": 6.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2024-23672"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2024-23672",
+                    "title": "Apache Tomcat: WebSocket DoS with incomplete closing handshake",
+                    "source": "osv-github",
+                    "cvssScore": 6.3,
+                    "severity": "MEDIUM",
+                    "cves": [
+                      "CVE-2024-23672"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:maven/org.springframework/spring-context@5.3.19?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2024-38820",
+                      "title": "CVE-2024-38820: Spring Framework DataBinder Case Sensitive Match Exception",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2024-38820"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-22233",
+                      "title": "Spring Framework DataBinder Case Sensitive Match Exception",
+                      "source": "osv-github",
+                      "cvssScore": 3.1,
+                      "severity": "LOW",
+                      "cves": [
+                        "CVE-2025-22233"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2024-38820",
+                    "title": "CVE-2024-38820: Spring Framework DataBinder Case Sensitive Match Exception",
+                    "source": "osv-github",
+                    "cvssScore": 5.3,
+                    "severity": "MEDIUM",
+                    "cves": [
+                      "CVE-2024-38820"
+                    ],
+                    "unique": false
+                  }
+                }
+              ],
+              "highestVulnerability": {
+                "id": "CVE-2016-1000027",
+                "title": "Pivotal Spring Framework through 5.3.16 suffers from a potential remote code execution (RCE) issue if used for Java deserialization of untrusted data. Depending on how the library is implemented within a product, this issue may or not occur, and authentication may be required. NOTE: the vendor's position is that untrusted data is not an intended use case. The product's behavior will not be changed because some users rely on deserialization of trusted data.",
+                "source": "osv-github",
+                "cvssScore": 9.8,
+                "severity": "CRITICAL",
+                "cves": [
+                  "CVE-2016-1000027"
+                ],
+                "unique": false
+              }
+            },
+            {
+              "ref": "pkg:maven/org.springframework.boot/spring-boot-starter-actuator@2.6.7?scope=compile",
+              "transitive": [
+                {
+                  "ref": "pkg:maven/org.springframework.boot/spring-boot-actuator-autoconfigure@2.6.7?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2023-20873",
+                      "title": "In Spring Boot versions 3.0.0 - 3.0.5, 2.7.0 - 2.7.10, and older unsupported versions, an application that is deployed to Cloud Foundry could be susceptible to a security bypass. Users of affected versions should apply the following mitigation: 3.0.x users should upgrade to 3.0.6+. 2.7.x users should upgrade to 2.7.11+. Users of older, unsupported versions should upgrade to 3.0.6+ or 2.7.11+.",
+                      "source": "osv-github",
+                      "cvssScore": 9.8,
+                      "severity": "CRITICAL",
+                      "cves": [
+                        "CVE-2023-20873"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2023-20873",
+                    "title": "In Spring Boot versions 3.0.0 - 3.0.5, 2.7.0 - 2.7.10, and older unsupported versions, an application that is deployed to Cloud Foundry could be susceptible to a security bypass. Users of affected versions should apply the following mitigation: 3.0.x users should upgrade to 3.0.6+. 2.7.x users should upgrade to 2.7.11+. Users of older, unsupported versions should upgrade to 3.0.6+ or 2.7.11+.",
+                    "source": "osv-github",
+                    "cvssScore": 9.8,
+                    "severity": "CRITICAL",
+                    "cves": [
+                      "CVE-2023-20873"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:maven/org.yaml/snakeyaml@1.29?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2022-1471",
+                      "title": "Remote Code execution in SnakeYAML",
+                      "source": "osv-github",
+                      "cvssScore": 8.3,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2022-1471"
+                      ],
+                      "unique": false,
+                      "remediation": {
+                        "trustedContent": {
+                          "ref": "pkg:maven/org.yaml/snakeyaml@1.29.0.redhat-00001?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=pom",
+                          "status": "unknown",
+                          "justification": "null"
+                        }
+                      }
+                    },
+                    {
+                      "id": "CVE-2022-25857",
+                      "title": "Denial of Service (DoS)",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2022-25857"
+                      ],
+                      "unique": false,
+                      "remediation": {
+                        "trustedContent": {
+                          "ref": "pkg:maven/org.yaml/snakeyaml@1.29.0.redhat-00001?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=pom",
+                          "status": "unknown",
+                          "justification": "null"
+                        }
+                      }
+                    },
+                    {
+                      "id": "CVE-2022-38749",
+                      "title": "DoS in SnakeYAML",
+                      "source": "osv-github",
+                      "cvssScore": 6.5,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2022-38749"
+                      ],
+                      "unique": false,
+                      "remediation": {
+                        "trustedContent": {
+                          "ref": "pkg:maven/org.yaml/snakeyaml@1.29.0.redhat-00001?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=pom",
+                          "status": "unknown",
+                          "justification": "null"
+                        }
+                      }
+                    },
+                    {
+                      "id": "CVE-2022-38751",
+                      "title": "DoS in SnakeYAML",
+                      "source": "osv-github",
+                      "cvssScore": 6.5,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2022-38751"
+                      ],
+                      "unique": false,
+                      "remediation": {
+                        "trustedContent": {
+                          "ref": "pkg:maven/org.yaml/snakeyaml@1.29.0.redhat-00001?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=pom",
+                          "status": "unknown",
+                          "justification": "null"
+                        }
+                      }
+                    },
+                    {
+                      "id": "CVE-2022-38752",
+                      "title": "DoS in SnakeYAML",
+                      "source": "osv-github",
+                      "cvssScore": 6.5,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2022-38752"
+                      ],
+                      "unique": false,
+                      "remediation": {
+                        "trustedContent": {
+                          "ref": "pkg:maven/org.yaml/snakeyaml@1.29.0.redhat-00001?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=pom",
+                          "status": "unknown",
+                          "justification": "null"
+                        }
+                      }
+                    },
+                    {
+                      "id": "CVE-2022-41854",
+                      "title": "Stack Overflow in Snakeyaml",
+                      "source": "osv-github",
+                      "cvssScore": 6.5,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2022-41854"
+                      ],
+                      "unique": false,
+                      "remediation": {
+                        "trustedContent": {
+                          "ref": "pkg:maven/org.yaml/snakeyaml@1.29.0.redhat-00001?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=pom",
+                          "status": "unknown",
+                          "justification": "null"
+                        }
+                      }
+                    },
+                    {
+                      "id": "CVE-2022-38750",
+                      "title": "DoS in SnakeYAML",
+                      "source": "osv-github",
+                      "cvssScore": 5.5,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2022-38750"
+                      ],
+                      "unique": false,
+                      "remediation": {
+                        "trustedContent": {
+                          "ref": "pkg:maven/org.yaml/snakeyaml@1.29.0.redhat-00001?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=pom",
+                          "status": "unknown",
+                          "justification": "null"
+                        }
+                      }
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2022-1471",
+                    "title": "Remote Code execution in SnakeYAML",
+                    "source": "osv-github",
+                    "cvssScore": 8.3,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2022-1471"
+                    ],
+                    "unique": false,
+                    "remediation": {
+                      "trustedContent": {
+                        "ref": "pkg:maven/org.yaml/snakeyaml@1.29.0.redhat-00001?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=pom",
+                        "status": "unknown",
+                        "justification": "null"
+                      }
+                    }
+                  }
+                },
+                {
+                  "ref": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.13.2.1?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2022-42003",
+                      "title": "In FasterXML jackson-databind before versions 2.13.4.1 and 2.12.17.1, resource exhaustion can occur because of a lack of a check in primitive value deserializers to avoid deep wrapper array nesting, when the UNWRAP_SINGLE_VALUE_ARRAYS feature is enabled.",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2022-42003"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2022-42004",
+                      "title": "In FasterXML jackson-databind before 2.13.4, resource exhaustion can occur because of a lack of a check in BeanDeserializer._deserializeFromArray to prevent use of deeply nested arrays. An application is vulnerable only with certain customized choices for deserialization.",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2022-42004"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2022-42003",
+                    "title": "In FasterXML jackson-databind before versions 2.13.4.1 and 2.12.17.1, resource exhaustion can occur because of a lack of a check in primitive value deserializers to avoid deep wrapper array nesting, when the UNWRAP_SINGLE_VALUE_ARRAYS feature is enabled.",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2022-42003"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:maven/org.springframework/spring-core@5.3.19?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2025-41249",
+                      "title": "CVE-2025-41249: Spring Framework Annotation Detection Vulnerability",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2025-41249"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2025-41249",
+                    "title": "CVE-2025-41249: Spring Framework Annotation Detection Vulnerability",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2025-41249"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:maven/org.springframework/spring-expression@5.3.19?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2023-20863",
+                      "title": "In spring framework versions prior to 5.2.24 release+ ,5.3.27+ and 6.0.8+ , it is possible for a user to provide a specially crafted SpEL expression that may cause a denial-of-service (DoS) condition.",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2023-20863"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-20861",
+                      "title": "In Spring Framework versions 6.0.0 - 6.0.6, 5.3.0 - 5.3.25, 5.2.0.RELEASE - 5.2.22.RELEASE, and older unsupported versions, it is possible for a user to provide a specially crafted SpEL expression that may cause a denial-of-service (DoS) condition.",
+                      "source": "osv-github",
+                      "cvssScore": 6.5,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-20861"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2024-38808",
+                      "title": "CVE-2024-38808: Spring Expression DoS Vulnerability",
+                      "source": "osv-github",
+                      "cvssScore": 4.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2024-38808"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2023-20863",
+                    "title": "In spring framework versions prior to 5.2.24 release+ ,5.3.27+ and 6.0.8+ , it is possible for a user to provide a specially crafted SpEL expression that may cause a denial-of-service (DoS) condition.",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2023-20863"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:maven/org.springframework/spring-beans@5.3.19?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2022-22970",
+                      "title": "In spring framework versions prior to 5.3.20+ , 5.2.22+ and old unsupported versions, applications that handle file uploads are vulnerable to DoS attack if they rely on data binding to set a MultipartFile or javax.servlet.Part to a field in a model object.",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2022-22970"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2022-22970",
+                    "title": "In spring framework versions prior to 5.3.20+ , 5.2.22+ and old unsupported versions, applications that handle file uploads are vulnerable to DoS attack if they rely on data binding to set a MultipartFile or javax.servlet.Part to a field in a model object.",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2022-22970"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:maven/org.springframework.boot/spring-boot-autoconfigure@2.6.7?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2023-20883",
+                      "title": "In Spring Boot versions 3.0.0 - 3.0.6, 2.7.0 - 2.7.11, 2.6.0 - 2.6.14, 2.5.0 - 2.5.14 and older unsupported versions, there is potential for a denial-of-service (DoS) attack if Spring MVC is used together with a reverse proxy cache.",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2023-20883"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2023-20883",
+                    "title": "In Spring Boot versions 3.0.0 - 3.0.6, 2.7.0 - 2.7.11, 2.6.0 - 2.6.14, 2.5.0 - 2.5.14 and older unsupported versions, there is potential for a denial-of-service (DoS) attack if Spring MVC is used together with a reverse proxy cache.",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2023-20883"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:maven/org.springframework.boot/spring-boot@2.6.7?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2025-22235",
+                      "title": "Spring Boot EndpointRequest.to() creates wrong matcher if actuator endpoint is not exposed",
+                      "source": "osv-github",
+                      "cvssScore": 7.3,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2025-22235"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2025-22235",
+                    "title": "Spring Boot EndpointRequest.to() creates wrong matcher if actuator endpoint is not exposed",
+                    "source": "osv-github",
+                    "cvssScore": 7.3,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2025-22235"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:maven/ch.qos.logback/logback-core@1.2.11?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2023-6378",
+                      "title": "Logback \"receiver\" DOS vulnerability ",
+                      "source": "osv-github",
+                      "cvssScore": 7.1,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2023-6378"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2023-6378",
+                    "title": "Logback \"receiver\" DOS vulnerability ",
+                    "source": "osv-github",
+                    "cvssScore": 7.1,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2023-6378"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:maven/ch.qos.logback/logback-classic@1.2.11?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2023-6378",
+                      "title": "Logback \"receiver\" DOS vulnerability ",
+                      "source": "osv-github",
+                      "cvssScore": 7.1,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2023-6378"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2023-6378",
+                    "title": "Logback \"receiver\" DOS vulnerability ",
+                    "source": "osv-github",
+                    "cvssScore": 7.1,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2023-6378"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:maven/org.springframework/spring-context@5.3.19?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2024-38820",
+                      "title": "CVE-2024-38820: Spring Framework DataBinder Case Sensitive Match Exception",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2024-38820"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-22233",
+                      "title": "Spring Framework DataBinder Case Sensitive Match Exception",
+                      "source": "osv-github",
+                      "cvssScore": 3.1,
+                      "severity": "LOW",
+                      "cves": [
+                        "CVE-2025-22233"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2024-38820",
+                    "title": "CVE-2024-38820: Spring Framework DataBinder Case Sensitive Match Exception",
+                    "source": "osv-github",
+                    "cvssScore": 5.3,
+                    "severity": "MEDIUM",
+                    "cves": [
+                      "CVE-2024-38820"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:maven/org.springframework.boot/spring-boot-actuator@2.6.7?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2023-34055",
+                      "title": "Spring Boot server Web Observations DoS Vulnerability",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-34055"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2023-34055",
+                    "title": "Spring Boot server Web Observations DoS Vulnerability",
+                    "source": "osv-github",
+                    "cvssScore": 5.3,
+                    "severity": "MEDIUM",
+                    "cves": [
+                      "CVE-2023-34055"
+                    ],
+                    "unique": false
+                  }
+                }
+              ],
+              "highestVulnerability": {
+                "id": "CVE-2023-20873",
+                "title": "In Spring Boot versions 3.0.0 - 3.0.5, 2.7.0 - 2.7.10, and older unsupported versions, an application that is deployed to Cloud Foundry could be susceptible to a security bypass. Users of affected versions should apply the following mitigation: 3.0.x users should upgrade to 3.0.6+. 2.7.x users should upgrade to 2.7.11+. Users of older, unsupported versions should upgrade to 3.0.6+ or 2.7.11+.",
+                "source": "osv-github",
+                "cvssScore": 9.8,
+                "severity": "CRITICAL",
+                "cves": [
+                  "CVE-2023-20873"
+                ],
+                "unique": false
+              }
+            },
+            {
+              "ref": "pkg:maven/org.springframework.kafka/spring-kafka@2.8.5?scope=compile",
+              "issues": [
+                {
+                  "id": "CVE-2023-34040",
+                  "title": "Java Deserialization vulnerability in Spring-Kafka When Improperly Configured",
+                  "source": "osv-github",
+                  "cvssScore": 7.8,
+                  "severity": "HIGH",
+                  "cves": [
+                    "CVE-2023-34040"
+                  ],
+                  "unique": false
+                }
+              ],
+              "transitive": [
+                {
+                  "ref": "pkg:maven/org.springframework/spring-beans@5.3.19?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2022-22970",
+                      "title": "In spring framework versions prior to 5.3.20+ , 5.2.22+ and old unsupported versions, applications that handle file uploads are vulnerable to DoS attack if they rely on data binding to set a MultipartFile or javax.servlet.Part to a field in a model object.",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2022-22970"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2022-22970",
+                    "title": "In spring framework versions prior to 5.3.20+ , 5.2.22+ and old unsupported versions, applications that handle file uploads are vulnerable to DoS attack if they rely on data binding to set a MultipartFile or javax.servlet.Part to a field in a model object.",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2022-22970"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:maven/org.springframework/spring-core@5.3.19?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2025-41249",
+                      "title": "CVE-2025-41249: Spring Framework Annotation Detection Vulnerability",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2025-41249"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2025-41249",
+                    "title": "CVE-2025-41249: Spring Framework Annotation Detection Vulnerability",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2025-41249"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:maven/org.springframework/spring-expression@5.3.19?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2023-20863",
+                      "title": "In spring framework versions prior to 5.2.24 release+ ,5.3.27+ and 6.0.8+ , it is possible for a user to provide a specially crafted SpEL expression that may cause a denial-of-service (DoS) condition.",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2023-20863"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-20861",
+                      "title": "In Spring Framework versions 6.0.0 - 6.0.6, 5.3.0 - 5.3.25, 5.2.0.RELEASE - 5.2.22.RELEASE, and older unsupported versions, it is possible for a user to provide a specially crafted SpEL expression that may cause a denial-of-service (DoS) condition.",
+                      "source": "osv-github",
+                      "cvssScore": 6.5,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-20861"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2024-38808",
+                      "title": "CVE-2024-38808: Spring Expression DoS Vulnerability",
+                      "source": "osv-github",
+                      "cvssScore": 4.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2024-38808"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2023-20863",
+                    "title": "In spring framework versions prior to 5.2.24 release+ ,5.3.27+ and 6.0.8+ , it is possible for a user to provide a specially crafted SpEL expression that may cause a denial-of-service (DoS) condition.",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2023-20863"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:maven/org.apache.kafka/kafka-clients@3.0.1?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2024-31141",
+                      "title": "Apache Kafka Clients: Privilege escalation to filesystem read-access via automatic ConfigProvider",
+                      "source": "osv-github",
+                      "cvssScore": 6.5,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2024-31141"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2024-31141",
+                    "title": "Apache Kafka Clients: Privilege escalation to filesystem read-access via automatic ConfigProvider",
+                    "source": "osv-github",
+                    "cvssScore": 6.5,
+                    "severity": "MEDIUM",
+                    "cves": [
+                      "CVE-2024-31141"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:maven/org.springframework/spring-messaging@5.3.19?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2022-22971",
+                      "title": "In spring framework versions prior to 5.3.20+ , 5.2.22+ and old unsupported versions, application with a STOMP over WebSocket endpoint is vulnerable to a denial of service attack by an authenticated user.",
+                      "source": "osv-github",
+                      "cvssScore": 6.5,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2022-22971"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2022-22971",
+                    "title": "In spring framework versions prior to 5.3.20+ , 5.2.22+ and old unsupported versions, application with a STOMP over WebSocket endpoint is vulnerable to a denial of service attack by an authenticated user.",
+                    "source": "osv-github",
+                    "cvssScore": 6.5,
+                    "severity": "MEDIUM",
+                    "cves": [
+                      "CVE-2022-22971"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:maven/org.springframework/spring-context@5.3.19?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2024-38820",
+                      "title": "CVE-2024-38820: Spring Framework DataBinder Case Sensitive Match Exception",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2024-38820"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-22233",
+                      "title": "Spring Framework DataBinder Case Sensitive Match Exception",
+                      "source": "osv-github",
+                      "cvssScore": 3.1,
+                      "severity": "LOW",
+                      "cves": [
+                        "CVE-2025-22233"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2024-38820",
+                    "title": "CVE-2024-38820: Spring Framework DataBinder Case Sensitive Match Exception",
+                    "source": "osv-github",
+                    "cvssScore": 5.3,
+                    "severity": "MEDIUM",
+                    "cves": [
+                      "CVE-2024-38820"
+                    ],
+                    "unique": false
+                  }
+                }
+              ],
+              "highestVulnerability": {
+                "id": "CVE-2023-34040",
+                "title": "Java Deserialization vulnerability in Spring-Kafka When Improperly Configured",
+                "source": "osv-github",
+                "cvssScore": 7.8,
+                "severity": "HIGH",
+                "cves": [
+                  "CVE-2023-34040"
+                ],
+                "unique": false
+              }
+            },
+            {
+              "ref": "pkg:maven/org.apache.kafka/kafka-streams@3.0.1?scope=compile",
+              "transitive": [
+                {
+                  "ref": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.13.2.1?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2022-42003",
+                      "title": "In FasterXML jackson-databind before versions 2.13.4.1 and 2.12.17.1, resource exhaustion can occur because of a lack of a check in primitive value deserializers to avoid deep wrapper array nesting, when the UNWRAP_SINGLE_VALUE_ARRAYS feature is enabled.",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2022-42003"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2022-42004",
+                      "title": "In FasterXML jackson-databind before 2.13.4, resource exhaustion can occur because of a lack of a check in BeanDeserializer._deserializeFromArray to prevent use of deeply nested arrays. An application is vulnerable only with certain customized choices for deserialization.",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2022-42004"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2022-42003",
+                    "title": "In FasterXML jackson-databind before versions 2.13.4.1 and 2.12.17.1, resource exhaustion can occur because of a lack of a check in primitive value deserializers to avoid deep wrapper array nesting, when the UNWRAP_SINGLE_VALUE_ARRAYS feature is enabled.",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2022-42003"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:maven/org.apache.kafka/kafka-clients@3.0.1?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2024-31141",
+                      "title": "Apache Kafka Clients: Privilege escalation to filesystem read-access via automatic ConfigProvider",
+                      "source": "osv-github",
+                      "cvssScore": 6.5,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2024-31141"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2024-31141",
+                    "title": "Apache Kafka Clients: Privilege escalation to filesystem read-access via automatic ConfigProvider",
+                    "source": "osv-github",
+                    "cvssScore": 6.5,
+                    "severity": "MEDIUM",
+                    "cves": [
+                      "CVE-2024-31141"
+                    ],
+                    "unique": false
+                  }
+                }
+              ],
+              "highestVulnerability": {
+                "id": "CVE-2022-42003",
+                "title": "In FasterXML jackson-databind before versions 2.13.4.1 and 2.12.17.1, resource exhaustion can occur because of a lack of a check in primitive value deserializers to avoid deep wrapper array nesting, when the UNWRAP_SINGLE_VALUE_ARRAYS feature is enabled.",
+                "source": "osv-github",
+                "cvssScore": 7.5,
+                "severity": "HIGH",
+                "cves": [
+                  "CVE-2022-42003"
+                ],
+                "unique": false
+              }
+            },
+            {
+              "ref": "pkg:maven/org.slf4j/slf4j-api@1.7.36?scope=compile",
+              "recommendation": "pkg:maven/org.slf4j/slf4j-api@1.7.36.redhat-00006"
+            },
+            {
+              "ref": "pkg:maven/org.apache.logging.log4j/log4j-api@2.17.2?scope=compile",
+              "recommendation": "pkg:maven/org.apache.logging.log4j/log4j-api@2.17.2.redhat-00003?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=pom"
+            },
+            {
+              "ref": "pkg:maven/org.hdrhistogram/HdrHistogram@2.1.12?scope=compile",
+              "recommendation": "pkg:maven/org.hdrhistogram/HdrHistogram@2.1.12.redhat-00005"
+            },
+            {
+              "ref": "pkg:maven/jakarta.annotation/jakarta.annotation-api@1.3.5?scope=compile",
+              "recommendation": "pkg:maven/jakarta.annotation/jakarta.annotation-api@1.3.5.redhat-00009?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=pom"
+            }
+          ]
+        },
+        "redhat-csaf": {
+          "summary": {
+            "direct": 0,
+            "transitive": 1,
+            "total": 1,
+            "dependencies": 1,
+            "critical": 0,
+            "high": 1,
+            "medium": 0,
+            "low": 0,
+            "remediations": 1,
+            "recommendations": 4,
+            "unscanned": 0
+          },
+          "dependencies": [
+            {
+              "ref": "pkg:maven/org.springframework.boot/spring-boot-starter-web@2.6.7?scope=compile",
+              "transitive": [
+                {
+                  "ref": "pkg:maven/org.yaml/snakeyaml@1.29?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2022-25857",
+                      "title": "Denial of Service (DoS)",
+                      "source": "redhat-csaf",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2022-25857"
+                      ],
+                      "unique": false,
+                      "remediation": {
+                        "trustedContent": {
+                          "ref": "pkg:maven/org.yaml/snakeyaml@1.29.0.redhat-00001?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=pom",
+                          "status": "unknown",
+                          "justification": "null"
+                        }
+                      }
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2022-25857",
+                    "title": "Denial of Service (DoS)",
+                    "source": "redhat-csaf",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2022-25857"
+                    ],
+                    "unique": false,
+                    "remediation": {
+                      "trustedContent": {
+                        "ref": "pkg:maven/org.yaml/snakeyaml@1.29.0.redhat-00001?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=pom",
+                        "status": "unknown",
+                        "justification": "null"
+                      }
+                    }
+                  }
+                }
+              ],
+              "highestVulnerability": {
+                "id": "CVE-2022-25857",
+                "title": "Denial of Service (DoS)",
+                "source": "redhat-csaf",
+                "cvssScore": 7.5,
+                "severity": "HIGH",
+                "cves": [
+                  "CVE-2022-25857"
+                ],
+                "unique": false,
+                "remediation": {
+                  "trustedContent": {
+                    "ref": "pkg:maven/org.yaml/snakeyaml@1.29.0.redhat-00001?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=pom",
+                    "status": "unknown",
+                    "justification": "null"
+                  }
+                }
+              }
+            },
+            {
+              "ref": "pkg:maven/org.springframework.boot/spring-boot-starter-actuator@2.6.7?scope=compile",
+              "transitive": [
+                {
+                  "ref": "pkg:maven/org.yaml/snakeyaml@1.29?scope=compile",
+                  "issues": [
+                    {
+                      "id": "CVE-2022-25857",
+                      "title": "Denial of Service (DoS)",
+                      "source": "redhat-csaf",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2022-25857"
+                      ],
+                      "unique": false,
+                      "remediation": {
+                        "trustedContent": {
+                          "ref": "pkg:maven/org.yaml/snakeyaml@1.29.0.redhat-00001?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=pom",
+                          "status": "unknown",
+                          "justification": "null"
+                        }
+                      }
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2022-25857",
+                    "title": "Denial of Service (DoS)",
+                    "source": "redhat-csaf",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2022-25857"
+                    ],
+                    "unique": false,
+                    "remediation": {
+                      "trustedContent": {
+                        "ref": "pkg:maven/org.yaml/snakeyaml@1.29.0.redhat-00001?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=pom",
+                        "status": "unknown",
+                        "justification": "null"
+                      }
+                    }
+                  }
+                }
+              ],
+              "highestVulnerability": {
+                "id": "CVE-2022-25857",
+                "title": "Denial of Service (DoS)",
+                "source": "redhat-csaf",
+                "cvssScore": 7.5,
+                "severity": "HIGH",
+                "cves": [
+                  "CVE-2022-25857"
+                ],
+                "unique": false,
+                "remediation": {
+                  "trustedContent": {
+                    "ref": "pkg:maven/org.yaml/snakeyaml@1.29.0.redhat-00001?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=pom",
+                    "status": "unknown",
+                    "justification": "null"
+                  }
+                }
+              }
+            },
+            {
+              "ref": "pkg:maven/org.apache.logging.log4j/log4j-api@2.17.2?scope=compile",
+              "recommendation": "pkg:maven/org.apache.logging.log4j/log4j-api@2.17.2.redhat-00003?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=pom"
+            },
+            {
+              "ref": "pkg:maven/org.hdrhistogram/HdrHistogram@2.1.12?scope=compile",
+              "recommendation": "pkg:maven/org.hdrhistogram/HdrHistogram@2.1.12.redhat-00005"
+            },
+            {
+              "ref": "pkg:maven/org.slf4j/slf4j-api@1.7.36?scope=compile",
+              "recommendation": "pkg:maven/org.slf4j/slf4j-api@1.7.36.redhat-00006"
+            },
+            {
+              "ref": "pkg:maven/jakarta.annotation/jakarta.annotation-api@1.3.5?scope=compile",
+              "recommendation": "pkg:maven/jakarta.annotation/jakarta.annotation-api@1.3.5.redhat-00009?repository_url=https%3A%2F%2Fmaven.repository.redhat.com%2Fga%2F&type=pom"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

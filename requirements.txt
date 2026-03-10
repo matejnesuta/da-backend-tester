@@ -1,0 +1,7 @@
+# Core dependencies
+python-dotenv>=0.19.0  # For loading .env files
+
+# Future dependencies for backend testing:
+# requests  # For HTTP requests to backend
+# beautifulsoup4  # For HTML parsing
+# lxml  # For XML/HTML parsing

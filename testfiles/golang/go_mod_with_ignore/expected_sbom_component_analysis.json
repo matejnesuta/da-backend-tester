@@ -1,0 +1,125 @@
+{
+  "scanned": {
+    "total": 42,
+    "direct": 42,
+    "transitive": 0
+  },
+  "providers": {
+    "rhtpa": {
+      "status": {
+        "ok": true,
+        "name": "rhtpa",
+        "code": 200,
+        "message": "OK",
+        "warnings": {}
+      },
+      "sources": {
+        "osv-github": {
+          "summary": {
+            "direct": 5,
+            "transitive": 0,
+            "total": 5,
+            "dependencies": 2,
+            "critical": 0,
+            "high": 2,
+            "medium": 3,
+            "low": 0,
+            "remediations": 0,
+            "recommendations": 0,
+            "unscanned": 0
+          },
+          "dependencies": [
+            {
+              "ref": "pkg:golang/golang.org/x/net@v0.10.0",
+              "issues": [
+                {
+                  "id": "CVE-2023-39325",
+                  "title": "HTTP/2 rapid reset can cause excessive work in net/http",
+                  "source": "osv-github",
+                  "cvssScore": 7.5,
+                  "severity": "HIGH",
+                  "cves": [
+                    "CVE-2023-39325"
+                  ],
+                  "unique": false
+                },
+                {
+                  "id": "CVE-2023-3978",
+                  "title": "Improper rendering of text nodes in golang.org/x/net/html",
+                  "source": "osv-github",
+                  "cvssScore": 6.1,
+                  "severity": "MEDIUM",
+                  "cves": [
+                    "CVE-2023-3978"
+                  ],
+                  "unique": false
+                },
+                {
+                  "id": "CVE-2023-45288",
+                  "source": "osv-github",
+                  "cvssScore": 5.3,
+                  "severity": "MEDIUM",
+                  "cves": [
+                    "CVE-2023-45288"
+                  ],
+                  "unique": false
+                },
+                {
+                  "id": "CVE-2025-22870",
+                  "title": "HTTP Proxy bypass using IPv6 Zone IDs in golang.org/x/net",
+                  "source": "osv-github",
+                  "cvssScore": 4.4,
+                  "severity": "MEDIUM",
+                  "cves": [
+                    "CVE-2025-22870"
+                  ],
+                  "unique": false
+                }
+              ],
+              "transitive": [],
+              "highestVulnerability": {
+                "id": "CVE-2023-39325",
+                "title": "HTTP/2 rapid reset can cause excessive work in net/http",
+                "source": "osv-github",
+                "cvssScore": 7.5,
+                "severity": "HIGH",
+                "cves": [
+                  "CVE-2023-39325"
+                ],
+                "unique": false
+              }
+            },
+            {
+              "ref": "pkg:golang/google.golang.org/protobuf@v1.30.0",
+              "issues": [
+                {
+                  "id": "CVE-2024-24786",
+                  "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                  "source": "osv-github",
+                  "cvssScore": 7.5,
+                  "severity": "HIGH",
+                  "cves": [
+                    "CVE-2024-24786"
+                  ],
+                  "unique": false
+                }
+              ],
+              "transitive": [],
+              "highestVulnerability": {
+                "id": "CVE-2024-24786",
+                "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                "source": "osv-github",
+                "cvssScore": 7.5,
+                "severity": "HIGH",
+                "cves": [
+                  "CVE-2024-24786"
+                ],
+                "unique": false
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

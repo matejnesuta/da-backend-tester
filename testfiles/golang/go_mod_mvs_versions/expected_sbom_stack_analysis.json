@@ -1,0 +1,2023 @@
+{
+  "scanned": {
+    "total": 174,
+    "direct": 45,
+    "transitive": 129
+  },
+  "providers": {
+    "rhtpa": {
+      "status": {
+        "ok": true,
+        "name": "rhtpa",
+        "code": 200,
+        "message": "OK",
+        "warnings": {}
+      },
+      "sources": {
+        "osv-github": {
+          "summary": {
+            "direct": 5,
+            "transitive": 5,
+            "total": 10,
+            "dependencies": 3,
+            "critical": 1,
+            "high": 3,
+            "medium": 6,
+            "low": 0,
+            "remediations": 0,
+            "recommendations": 0,
+            "unscanned": 0
+          },
+          "dependencies": [
+            {
+              "ref": "pkg:golang/k8s.io/client-go@v0.26.1",
+              "transitive": [
+                {
+                  "ref": "pkg:golang/golang.org/x/crypto@v0.9.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2024-45337",
+                      "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                      "source": "osv-github",
+                      "cvssScore": 9.1,
+                      "severity": "CRITICAL",
+                      "cves": [
+                        "CVE-2024-45337"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-22869",
+                      "title": "Potential denial of service in golang.org/x/crypto",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2025-22869"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-48795",
+                      "source": "osv-github",
+                      "cvssScore": 5.9,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-48795"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-47914",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-47914"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-58181",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-58181"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2024-45337",
+                    "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                    "source": "osv-github",
+                    "cvssScore": 9.1,
+                    "severity": "CRITICAL",
+                    "cves": [
+                      "CVE-2024-45337"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:golang/golang.org/x/net@v0.10.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2023-39325",
+                      "title": "HTTP/2 rapid reset can cause excessive work in net/http",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2023-39325"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-3978",
+                      "title": "Improper rendering of text nodes in golang.org/x/net/html",
+                      "source": "osv-github",
+                      "cvssScore": 6.1,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-3978"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-45288",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-45288"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-22870",
+                      "title": "HTTP Proxy bypass using IPv6 Zone IDs in golang.org/x/net",
+                      "source": "osv-github",
+                      "cvssScore": 4.4,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-22870"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2023-39325",
+                    "title": "HTTP/2 rapid reset can cause excessive work in net/http",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2023-39325"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:golang/google.golang.org/protobuf@v1.30.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2024-24786",
+                      "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2024-24786"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2024-24786",
+                    "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2024-24786"
+                    ],
+                    "unique": false
+                  }
+                }
+              ],
+              "highestVulnerability": {
+                "id": "CVE-2024-45337",
+                "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                "source": "osv-github",
+                "cvssScore": 9.1,
+                "severity": "CRITICAL",
+                "cves": [
+                  "CVE-2024-45337"
+                ],
+                "unique": false
+              }
+            },
+            {
+              "ref": "pkg:golang/k8s.io/api@v0.26.1",
+              "transitive": [
+                {
+                  "ref": "pkg:golang/golang.org/x/crypto@v0.9.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2024-45337",
+                      "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                      "source": "osv-github",
+                      "cvssScore": 9.1,
+                      "severity": "CRITICAL",
+                      "cves": [
+                        "CVE-2024-45337"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-22869",
+                      "title": "Potential denial of service in golang.org/x/crypto",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2025-22869"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-48795",
+                      "source": "osv-github",
+                      "cvssScore": 5.9,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-48795"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-47914",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-47914"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-58181",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-58181"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2024-45337",
+                    "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                    "source": "osv-github",
+                    "cvssScore": 9.1,
+                    "severity": "CRITICAL",
+                    "cves": [
+                      "CVE-2024-45337"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:golang/golang.org/x/net@v0.10.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2023-39325",
+                      "title": "HTTP/2 rapid reset can cause excessive work in net/http",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2023-39325"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-3978",
+                      "title": "Improper rendering of text nodes in golang.org/x/net/html",
+                      "source": "osv-github",
+                      "cvssScore": 6.1,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-3978"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-45288",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-45288"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-22870",
+                      "title": "HTTP Proxy bypass using IPv6 Zone IDs in golang.org/x/net",
+                      "source": "osv-github",
+                      "cvssScore": 4.4,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-22870"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2023-39325",
+                    "title": "HTTP/2 rapid reset can cause excessive work in net/http",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2023-39325"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:golang/google.golang.org/protobuf@v1.30.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2024-24786",
+                      "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2024-24786"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2024-24786",
+                    "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2024-24786"
+                    ],
+                    "unique": false
+                  }
+                }
+              ],
+              "highestVulnerability": {
+                "id": "CVE-2024-45337",
+                "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                "source": "osv-github",
+                "cvssScore": 9.1,
+                "severity": "CRITICAL",
+                "cves": [
+                  "CVE-2024-45337"
+                ],
+                "unique": false
+              }
+            },
+            {
+              "ref": "pkg:golang/github.com/gin-gonic/gin@v1.9.1",
+              "transitive": [
+                {
+                  "ref": "pkg:golang/golang.org/x/crypto@v0.9.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2024-45337",
+                      "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                      "source": "osv-github",
+                      "cvssScore": 9.1,
+                      "severity": "CRITICAL",
+                      "cves": [
+                        "CVE-2024-45337"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-22869",
+                      "title": "Potential denial of service in golang.org/x/crypto",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2025-22869"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-48795",
+                      "source": "osv-github",
+                      "cvssScore": 5.9,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-48795"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-47914",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-47914"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-58181",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-58181"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2024-45337",
+                    "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                    "source": "osv-github",
+                    "cvssScore": 9.1,
+                    "severity": "CRITICAL",
+                    "cves": [
+                      "CVE-2024-45337"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:golang/golang.org/x/net@v0.10.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2023-39325",
+                      "title": "HTTP/2 rapid reset can cause excessive work in net/http",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2023-39325"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-3978",
+                      "title": "Improper rendering of text nodes in golang.org/x/net/html",
+                      "source": "osv-github",
+                      "cvssScore": 6.1,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-3978"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-45288",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-45288"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-22870",
+                      "title": "HTTP Proxy bypass using IPv6 Zone IDs in golang.org/x/net",
+                      "source": "osv-github",
+                      "cvssScore": 4.4,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-22870"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2023-39325",
+                    "title": "HTTP/2 rapid reset can cause excessive work in net/http",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2023-39325"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:golang/google.golang.org/protobuf@v1.30.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2024-24786",
+                      "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2024-24786"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2024-24786",
+                    "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2024-24786"
+                    ],
+                    "unique": false
+                  }
+                }
+              ],
+              "highestVulnerability": {
+                "id": "CVE-2024-45337",
+                "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                "source": "osv-github",
+                "cvssScore": 9.1,
+                "severity": "CRITICAL",
+                "cves": [
+                  "CVE-2024-45337"
+                ],
+                "unique": false
+              }
+            },
+            {
+              "ref": "pkg:golang/google.golang.org/appengine@v1.6.7",
+              "transitive": [
+                {
+                  "ref": "pkg:golang/golang.org/x/crypto@v0.9.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2024-45337",
+                      "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                      "source": "osv-github",
+                      "cvssScore": 9.1,
+                      "severity": "CRITICAL",
+                      "cves": [
+                        "CVE-2024-45337"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-22869",
+                      "title": "Potential denial of service in golang.org/x/crypto",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2025-22869"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-48795",
+                      "source": "osv-github",
+                      "cvssScore": 5.9,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-48795"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-47914",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-47914"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-58181",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-58181"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2024-45337",
+                    "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                    "source": "osv-github",
+                    "cvssScore": 9.1,
+                    "severity": "CRITICAL",
+                    "cves": [
+                      "CVE-2024-45337"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:golang/google.golang.org/protobuf@v1.30.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2024-24786",
+                      "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2024-24786"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2024-24786",
+                    "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2024-24786"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:golang/golang.org/x/net@v0.10.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2023-39325",
+                      "title": "HTTP/2 rapid reset can cause excessive work in net/http",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2023-39325"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-3978",
+                      "title": "Improper rendering of text nodes in golang.org/x/net/html",
+                      "source": "osv-github",
+                      "cvssScore": 6.1,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-3978"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-45288",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-45288"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-22870",
+                      "title": "HTTP Proxy bypass using IPv6 Zone IDs in golang.org/x/net",
+                      "source": "osv-github",
+                      "cvssScore": 4.4,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-22870"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2023-39325",
+                    "title": "HTTP/2 rapid reset can cause excessive work in net/http",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2023-39325"
+                    ],
+                    "unique": false
+                  }
+                }
+              ],
+              "highestVulnerability": {
+                "id": "CVE-2024-45337",
+                "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                "source": "osv-github",
+                "cvssScore": 9.1,
+                "severity": "CRITICAL",
+                "cves": [
+                  "CVE-2024-45337"
+                ],
+                "unique": false
+              }
+            },
+            {
+              "ref": "pkg:golang/github.com/google/gnostic@v0.5.7-v3refs",
+              "transitive": [
+                {
+                  "ref": "pkg:golang/golang.org/x/crypto@v0.9.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2024-45337",
+                      "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                      "source": "osv-github",
+                      "cvssScore": 9.1,
+                      "severity": "CRITICAL",
+                      "cves": [
+                        "CVE-2024-45337"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-22869",
+                      "title": "Potential denial of service in golang.org/x/crypto",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2025-22869"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-48795",
+                      "source": "osv-github",
+                      "cvssScore": 5.9,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-48795"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-47914",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-47914"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-58181",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-58181"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2024-45337",
+                    "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                    "source": "osv-github",
+                    "cvssScore": 9.1,
+                    "severity": "CRITICAL",
+                    "cves": [
+                      "CVE-2024-45337"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:golang/golang.org/x/net@v0.10.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2023-39325",
+                      "title": "HTTP/2 rapid reset can cause excessive work in net/http",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2023-39325"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-3978",
+                      "title": "Improper rendering of text nodes in golang.org/x/net/html",
+                      "source": "osv-github",
+                      "cvssScore": 6.1,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-3978"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-45288",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-45288"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-22870",
+                      "title": "HTTP Proxy bypass using IPv6 Zone IDs in golang.org/x/net",
+                      "source": "osv-github",
+                      "cvssScore": 4.4,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-22870"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2023-39325",
+                    "title": "HTTP/2 rapid reset can cause excessive work in net/http",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2023-39325"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:golang/google.golang.org/protobuf@v1.30.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2024-24786",
+                      "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2024-24786"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2024-24786",
+                    "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2024-24786"
+                    ],
+                    "unique": false
+                  }
+                }
+              ],
+              "highestVulnerability": {
+                "id": "CVE-2024-45337",
+                "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                "source": "osv-github",
+                "cvssScore": 9.1,
+                "severity": "CRITICAL",
+                "cves": [
+                  "CVE-2024-45337"
+                ],
+                "unique": false
+              }
+            },
+            {
+              "ref": "pkg:golang/k8s.io/apimachinery@v0.26.1",
+              "transitive": [
+                {
+                  "ref": "pkg:golang/golang.org/x/crypto@v0.9.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2024-45337",
+                      "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                      "source": "osv-github",
+                      "cvssScore": 9.1,
+                      "severity": "CRITICAL",
+                      "cves": [
+                        "CVE-2024-45337"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-22869",
+                      "title": "Potential denial of service in golang.org/x/crypto",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2025-22869"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-48795",
+                      "source": "osv-github",
+                      "cvssScore": 5.9,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-48795"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-47914",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-47914"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-58181",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-58181"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2024-45337",
+                    "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                    "source": "osv-github",
+                    "cvssScore": 9.1,
+                    "severity": "CRITICAL",
+                    "cves": [
+                      "CVE-2024-45337"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:golang/golang.org/x/net@v0.10.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2023-39325",
+                      "title": "HTTP/2 rapid reset can cause excessive work in net/http",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2023-39325"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-3978",
+                      "title": "Improper rendering of text nodes in golang.org/x/net/html",
+                      "source": "osv-github",
+                      "cvssScore": 6.1,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-3978"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-45288",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-45288"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-22870",
+                      "title": "HTTP Proxy bypass using IPv6 Zone IDs in golang.org/x/net",
+                      "source": "osv-github",
+                      "cvssScore": 4.4,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-22870"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2023-39325",
+                    "title": "HTTP/2 rapid reset can cause excessive work in net/http",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2023-39325"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:golang/google.golang.org/protobuf@v1.30.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2024-24786",
+                      "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2024-24786"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2024-24786",
+                    "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2024-24786"
+                    ],
+                    "unique": false
+                  }
+                }
+              ],
+              "highestVulnerability": {
+                "id": "CVE-2024-45337",
+                "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                "source": "osv-github",
+                "cvssScore": 9.1,
+                "severity": "CRITICAL",
+                "cves": [
+                  "CVE-2024-45337"
+                ],
+                "unique": false
+              }
+            },
+            {
+              "ref": "pkg:golang/golang.org/x/net@v0.10.0",
+              "issues": [
+                {
+                  "id": "CVE-2023-39325",
+                  "title": "HTTP/2 rapid reset can cause excessive work in net/http",
+                  "source": "osv-github",
+                  "cvssScore": 7.5,
+                  "severity": "HIGH",
+                  "cves": [
+                    "CVE-2023-39325"
+                  ],
+                  "unique": false
+                },
+                {
+                  "id": "CVE-2023-3978",
+                  "title": "Improper rendering of text nodes in golang.org/x/net/html",
+                  "source": "osv-github",
+                  "cvssScore": 6.1,
+                  "severity": "MEDIUM",
+                  "cves": [
+                    "CVE-2023-3978"
+                  ],
+                  "unique": false
+                },
+                {
+                  "id": "CVE-2023-45288",
+                  "source": "osv-github",
+                  "cvssScore": 5.3,
+                  "severity": "MEDIUM",
+                  "cves": [
+                    "CVE-2023-45288"
+                  ],
+                  "unique": false
+                },
+                {
+                  "id": "CVE-2025-22870",
+                  "title": "HTTP Proxy bypass using IPv6 Zone IDs in golang.org/x/net",
+                  "source": "osv-github",
+                  "cvssScore": 4.4,
+                  "severity": "MEDIUM",
+                  "cves": [
+                    "CVE-2025-22870"
+                  ],
+                  "unique": false
+                }
+              ],
+              "transitive": [
+                {
+                  "ref": "pkg:golang/golang.org/x/crypto@v0.9.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2024-45337",
+                      "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                      "source": "osv-github",
+                      "cvssScore": 9.1,
+                      "severity": "CRITICAL",
+                      "cves": [
+                        "CVE-2024-45337"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-22869",
+                      "title": "Potential denial of service in golang.org/x/crypto",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2025-22869"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-48795",
+                      "source": "osv-github",
+                      "cvssScore": 5.9,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-48795"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-47914",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-47914"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-58181",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-58181"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2024-45337",
+                    "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                    "source": "osv-github",
+                    "cvssScore": 9.1,
+                    "severity": "CRITICAL",
+                    "cves": [
+                      "CVE-2024-45337"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:golang/google.golang.org/protobuf@v1.30.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2024-24786",
+                      "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2024-24786"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2024-24786",
+                    "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2024-24786"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:golang/golang.org/x/net@v0.10.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2023-39325",
+                      "title": "HTTP/2 rapid reset can cause excessive work in net/http",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2023-39325"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-3978",
+                      "title": "Improper rendering of text nodes in golang.org/x/net/html",
+                      "source": "osv-github",
+                      "cvssScore": 6.1,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-3978"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-45288",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-45288"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-22870",
+                      "title": "HTTP Proxy bypass using IPv6 Zone IDs in golang.org/x/net",
+                      "source": "osv-github",
+                      "cvssScore": 4.4,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-22870"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2023-39325",
+                    "title": "HTTP/2 rapid reset can cause excessive work in net/http",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2023-39325"
+                    ],
+                    "unique": false
+                  }
+                }
+              ],
+              "highestVulnerability": {
+                "id": "CVE-2024-45337",
+                "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                "source": "osv-github",
+                "cvssScore": 9.1,
+                "severity": "CRITICAL",
+                "cves": [
+                  "CVE-2024-45337"
+                ],
+                "unique": false
+              }
+            },
+            {
+              "ref": "pkg:golang/golang.org/x/oauth2@v0.0.0-20220223155221-ee480838109b",
+              "transitive": [
+                {
+                  "ref": "pkg:golang/golang.org/x/crypto@v0.9.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2024-45337",
+                      "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                      "source": "osv-github",
+                      "cvssScore": 9.1,
+                      "severity": "CRITICAL",
+                      "cves": [
+                        "CVE-2024-45337"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-22869",
+                      "title": "Potential denial of service in golang.org/x/crypto",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2025-22869"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-48795",
+                      "source": "osv-github",
+                      "cvssScore": 5.9,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-48795"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-47914",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-47914"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-58181",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-58181"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2024-45337",
+                    "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                    "source": "osv-github",
+                    "cvssScore": 9.1,
+                    "severity": "CRITICAL",
+                    "cves": [
+                      "CVE-2024-45337"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:golang/golang.org/x/net@v0.10.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2023-39325",
+                      "title": "HTTP/2 rapid reset can cause excessive work in net/http",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2023-39325"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-3978",
+                      "title": "Improper rendering of text nodes in golang.org/x/net/html",
+                      "source": "osv-github",
+                      "cvssScore": 6.1,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-3978"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-45288",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-45288"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-22870",
+                      "title": "HTTP Proxy bypass using IPv6 Zone IDs in golang.org/x/net",
+                      "source": "osv-github",
+                      "cvssScore": 4.4,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-22870"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2023-39325",
+                    "title": "HTTP/2 rapid reset can cause excessive work in net/http",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2023-39325"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:golang/google.golang.org/protobuf@v1.30.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2024-24786",
+                      "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2024-24786"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2024-24786",
+                    "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2024-24786"
+                    ],
+                    "unique": false
+                  }
+                }
+              ],
+              "highestVulnerability": {
+                "id": "CVE-2024-45337",
+                "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                "source": "osv-github",
+                "cvssScore": 9.1,
+                "severity": "CRITICAL",
+                "cves": [
+                  "CVE-2024-45337"
+                ],
+                "unique": false
+              }
+            },
+            {
+              "ref": "pkg:golang/k8s.io/kube-openapi@v0.0.0-20221012153701-172d655c2280",
+              "transitive": [
+                {
+                  "ref": "pkg:golang/golang.org/x/crypto@v0.9.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2024-45337",
+                      "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                      "source": "osv-github",
+                      "cvssScore": 9.1,
+                      "severity": "CRITICAL",
+                      "cves": [
+                        "CVE-2024-45337"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-22869",
+                      "title": "Potential denial of service in golang.org/x/crypto",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2025-22869"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-48795",
+                      "source": "osv-github",
+                      "cvssScore": 5.9,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-48795"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-47914",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-47914"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-58181",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-58181"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2024-45337",
+                    "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                    "source": "osv-github",
+                    "cvssScore": 9.1,
+                    "severity": "CRITICAL",
+                    "cves": [
+                      "CVE-2024-45337"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:golang/golang.org/x/net@v0.10.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2023-39325",
+                      "title": "HTTP/2 rapid reset can cause excessive work in net/http",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2023-39325"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-3978",
+                      "title": "Improper rendering of text nodes in golang.org/x/net/html",
+                      "source": "osv-github",
+                      "cvssScore": 6.1,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-3978"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-45288",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-45288"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-22870",
+                      "title": "HTTP Proxy bypass using IPv6 Zone IDs in golang.org/x/net",
+                      "source": "osv-github",
+                      "cvssScore": 4.4,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-22870"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2023-39325",
+                    "title": "HTTP/2 rapid reset can cause excessive work in net/http",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2023-39325"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:golang/google.golang.org/protobuf@v1.30.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2024-24786",
+                      "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2024-24786"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2024-24786",
+                    "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2024-24786"
+                    ],
+                    "unique": false
+                  }
+                }
+              ],
+              "highestVulnerability": {
+                "id": "CVE-2024-45337",
+                "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                "source": "osv-github",
+                "cvssScore": 9.1,
+                "severity": "CRITICAL",
+                "cves": [
+                  "CVE-2024-45337"
+                ],
+                "unique": false
+              }
+            },
+            {
+              "ref": "pkg:golang/golang.org/x/text@v0.9.0",
+              "transitive": [
+                {
+                  "ref": "pkg:golang/golang.org/x/crypto@v0.9.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2024-45337",
+                      "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                      "source": "osv-github",
+                      "cvssScore": 9.1,
+                      "severity": "CRITICAL",
+                      "cves": [
+                        "CVE-2024-45337"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-22869",
+                      "title": "Potential denial of service in golang.org/x/crypto",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2025-22869"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-48795",
+                      "source": "osv-github",
+                      "cvssScore": 5.9,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-48795"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-47914",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-47914"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-58181",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-58181"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2024-45337",
+                    "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                    "source": "osv-github",
+                    "cvssScore": 9.1,
+                    "severity": "CRITICAL",
+                    "cves": [
+                      "CVE-2024-45337"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:golang/google.golang.org/protobuf@v1.30.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2024-24786",
+                      "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2024-24786"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2024-24786",
+                    "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2024-24786"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:golang/golang.org/x/net@v0.10.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2023-39325",
+                      "title": "HTTP/2 rapid reset can cause excessive work in net/http",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2023-39325"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-3978",
+                      "title": "Improper rendering of text nodes in golang.org/x/net/html",
+                      "source": "osv-github",
+                      "cvssScore": 6.1,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-3978"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-45288",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-45288"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-22870",
+                      "title": "HTTP Proxy bypass using IPv6 Zone IDs in golang.org/x/net",
+                      "source": "osv-github",
+                      "cvssScore": 4.4,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-22870"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2023-39325",
+                    "title": "HTTP/2 rapid reset can cause excessive work in net/http",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2023-39325"
+                    ],
+                    "unique": false
+                  }
+                }
+              ],
+              "highestVulnerability": {
+                "id": "CVE-2024-45337",
+                "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                "source": "osv-github",
+                "cvssScore": 9.1,
+                "severity": "CRITICAL",
+                "cves": [
+                  "CVE-2024-45337"
+                ],
+                "unique": false
+              }
+            },
+            {
+              "ref": "pkg:golang/github.com/gogo/protobuf@v1.3.2",
+              "transitive": [
+                {
+                  "ref": "pkg:golang/golang.org/x/crypto@v0.9.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2024-45337",
+                      "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                      "source": "osv-github",
+                      "cvssScore": 9.1,
+                      "severity": "CRITICAL",
+                      "cves": [
+                        "CVE-2024-45337"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-22869",
+                      "title": "Potential denial of service in golang.org/x/crypto",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2025-22869"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-48795",
+                      "source": "osv-github",
+                      "cvssScore": 5.9,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-48795"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-47914",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-47914"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-58181",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-58181"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2024-45337",
+                    "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                    "source": "osv-github",
+                    "cvssScore": 9.1,
+                    "severity": "CRITICAL",
+                    "cves": [
+                      "CVE-2024-45337"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:golang/google.golang.org/protobuf@v1.30.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2024-24786",
+                      "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2024-24786"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2024-24786",
+                    "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2024-24786"
+                    ],
+                    "unique": false
+                  }
+                },
+                {
+                  "ref": "pkg:golang/golang.org/x/net@v0.10.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2023-39325",
+                      "title": "HTTP/2 rapid reset can cause excessive work in net/http",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2023-39325"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-3978",
+                      "title": "Improper rendering of text nodes in golang.org/x/net/html",
+                      "source": "osv-github",
+                      "cvssScore": 6.1,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-3978"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2023-45288",
+                      "source": "osv-github",
+                      "cvssScore": 5.3,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2023-45288"
+                      ],
+                      "unique": false
+                    },
+                    {
+                      "id": "CVE-2025-22870",
+                      "title": "HTTP Proxy bypass using IPv6 Zone IDs in golang.org/x/net",
+                      "source": "osv-github",
+                      "cvssScore": 4.4,
+                      "severity": "MEDIUM",
+                      "cves": [
+                        "CVE-2025-22870"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2023-39325",
+                    "title": "HTTP/2 rapid reset can cause excessive work in net/http",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2023-39325"
+                    ],
+                    "unique": false
+                  }
+                }
+              ],
+              "highestVulnerability": {
+                "id": "CVE-2024-45337",
+                "title": "Misuse of connection.serverAuthenticate may cause authorization bypass in golang.org/x/crypto",
+                "source": "osv-github",
+                "cvssScore": 9.1,
+                "severity": "CRITICAL",
+                "cves": [
+                  "CVE-2024-45337"
+                ],
+                "unique": false
+              }
+            },
+            {
+              "ref": "pkg:golang/github.com/golang/protobuf@v1.5.2",
+              "transitive": [
+                {
+                  "ref": "pkg:golang/google.golang.org/protobuf@v1.30.0",
+                  "issues": [
+                    {
+                      "id": "CVE-2024-24786",
+                      "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                      "source": "osv-github",
+                      "cvssScore": 7.5,
+                      "severity": "HIGH",
+                      "cves": [
+                        "CVE-2024-24786"
+                      ],
+                      "unique": false
+                    }
+                  ],
+                  "highestVulnerability": {
+                    "id": "CVE-2024-24786",
+                    "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                    "source": "osv-github",
+                    "cvssScore": 7.5,
+                    "severity": "HIGH",
+                    "cves": [
+                      "CVE-2024-24786"
+                    ],
+                    "unique": false
+                  }
+                }
+              ],
+              "highestVulnerability": {
+                "id": "CVE-2024-24786",
+                "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                "source": "osv-github",
+                "cvssScore": 7.5,
+                "severity": "HIGH",
+                "cves": [
+                  "CVE-2024-24786"
+                ],
+                "unique": false
+              }
+            },
+            {
+              "ref": "pkg:golang/google.golang.org/protobuf@v1.30.0",
+              "issues": [
+                {
+                  "id": "CVE-2024-24786",
+                  "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                  "source": "osv-github",
+                  "cvssScore": 7.5,
+                  "severity": "HIGH",
+                  "cves": [
+                    "CVE-2024-24786"
+                  ],
+                  "unique": false
+                }
+              ],
+              "transitive": [],
+              "highestVulnerability": {
+                "id": "CVE-2024-24786",
+                "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                "source": "osv-github",
+                "cvssScore": 7.5,
+                "severity": "HIGH",
+                "cves": [
+                  "CVE-2024-24786"
+                ],
+                "unique": false
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "scanned": {
+    "total": 33,
+    "direct": 33,
+    "transitive": 0
+  },
+  "providers": {
+    "rhtpa": {
+      "status": {
+        "ok": true,
+        "name": "rhtpa",
+        "code": 200,
+        "message": "OK",
+        "warnings": {}
+      },
+      "sources": {
+        "osv-github": {
+          "summary": {
+            "direct": 4,
+            "transitive": 0,
+            "total": 4,
+            "dependencies": 4,
+            "critical": 0,
+            "high": 3,
+            "medium": 1,
+            "low": 0,
+            "remediations": 0,
+            "recommendations": 0,
+            "unscanned": 0
+          },
+          "dependencies": [
+            {
+              "ref": "pkg:golang/golang.org/x/text@v0.3.7",
+              "issues": [
+                {
+                  "id": "CVE-2022-32149",
+                  "title": "Denial of service via crafted Accept-Language header in golang.org/x/text/language",
+                  "source": "osv-github",
+                  "cvssScore": 7.5,
+                  "severity": "HIGH",
+                  "cves": [
+                    "CVE-2022-32149"
+                  ],
+                  "unique": false
+                }
+              ],
+              "transitive": [],
+              "highestVulnerability": {
+                "id": "CVE-2022-32149",
+                "title": "Denial of service via crafted Accept-Language header in golang.org/x/text/language",
+                "source": "osv-github",
+                "cvssScore": 7.5,
+                "severity": "HIGH",
+                "cves": [
+                  "CVE-2022-32149"
+                ],
+                "unique": false
+              }
+            },
+            {
+              "ref": "pkg:golang/golang.org/x/net@v0.0.0-20220802222814-0bcc04d9c69b",
+              "issues": [
+                {
+                  "id": "CVE-2022-41721",
+                  "title": "Request smuggling due to improper request handling in golang.org/x/net/http2/h2c",
+                  "source": "osv-github",
+                  "cvssScore": 7.5,
+                  "severity": "HIGH",
+                  "cves": [
+                    "CVE-2022-41721"
+                  ],
+                  "unique": false
+                }
+              ],
+              "transitive": [],
+              "highestVulnerability": {
+                "id": "CVE-2022-41721",
+                "title": "Request smuggling due to improper request handling in golang.org/x/net/http2/h2c",
+                "source": "osv-github",
+                "cvssScore": 7.5,
+                "severity": "HIGH",
+                "cves": [
+                  "CVE-2022-41721"
+                ],
+                "unique": false
+              }
+            },
+            {
+              "ref": "pkg:golang/google.golang.org/protobuf@v1.28.0",
+              "issues": [
+                {
+                  "id": "CVE-2024-24786",
+                  "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                  "source": "osv-github",
+                  "cvssScore": 7.5,
+                  "severity": "HIGH",
+                  "cves": [
+                    "CVE-2024-24786"
+                  ],
+                  "unique": false
+                }
+              ],
+              "transitive": [],
+              "highestVulnerability": {
+                "id": "CVE-2024-24786",
+                "title": "Infinite loop in JSON unmarshaling in google.golang.org/protobuf",
+                "source": "osv-github",
+                "cvssScore": 7.5,
+                "severity": "HIGH",
+                "cves": [
+                  "CVE-2024-24786"
+                ],
+                "unique": false
+              }
+            },
+            {
+              "ref": "pkg:golang/github.com/prometheus/prometheus@v2.5.0%2Bincompatible",
+              "issues": [
+                {
+                  "id": "CVE-2019-3826",
+                  "title": "A stored, DOM based, cross-site scripting (XSS) flaw was found in Prometheus before version 2.7.1. An attacker could exploit this by convincing an authenticated user to visit a crafted URL on a Prometheus server, allowing for the execution and persistent storage of arbitrary scripts.",
+                  "source": "osv-github",
+                  "cvssScore": 5.4,
+                  "severity": "MEDIUM",
+                  "cves": [
+                    "CVE-2019-3826"
+                  ],
+                  "unique": false
+                }
+              ],
+              "transitive": [],
+              "highestVulnerability": {
+                "id": "CVE-2019-3826",
+                "title": "A stored, DOM based, cross-site scripting (XSS) flaw was found in Prometheus before version 2.7.1. An attacker could exploit this by convincing an authenticated user to visit a crafted URL on a Prometheus server, allowing for the execution and persistent storage of arbitrary scripts.",
+                "source": "osv-github",
+                "cvssScore": 5.4,
+                "severity": "MEDIUM",
+                "cves": [
+                  "CVE-2019-3826"
+                ],
+                "unique": false
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
