@@ -42,6 +42,12 @@ test-results/
 # Test failure cache (optional - can be committed to share failures with team)
 .test-failures.json
 
+# Pytest
+.pytest_cache/
+
+# Syrupy snapshots - UNCOMMENT to ignore snapshots (usually you want to commit them)
+# __snapshots__/
+
 # Build artifacts and dependencies generated during test runs
 testfiles/**/.gradle/
 testfiles/**/build/
@@ -53,3 +59,15 @@ testfiles/**/.pytest_cache/
 testfiles/**/package-lock.json
 testfiles/**/yarn.lock
 testfiles/**/pnpm-lock.yaml
+testfiles/**/.pnp.cjs
+testfiles/**/.pnp.js
+testfiles/**/.pnp.loader.mjs
+testfiles/**/.yarn/
+testfiles/**/.yarnrc.yml
+
+# pnpm content-addressable store
+testfiles/**/.pnpm-store/
+testfiles/.pnpm-store/
+
+# Old test failure cache
+testfiles/.test-failures.json

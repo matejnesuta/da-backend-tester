@@ -1,6 +1,7 @@
 """Client runner for executing Trustify DA clients"""
 
 import json
+import os
 import subprocess
 import shutil
 import tempfile
@@ -14,16 +15,19 @@ from .config import DEFAULT_TIMEOUT
 class ClientRunner:
     """Handles execution of Trustify DA clients"""
 
-    def __init__(self, java_client: Optional[str] = None, js_client: Optional[str] = None):
+    def __init__(self, java_client: Optional[str] = None, js_client: Optional[str] = None, backend_url: Optional[str] = None):
         """
         Initialize the client runner
 
         Args:
             java_client: Path to Java client JAR
             js_client: Path to JavaScript client executable
+            backend_url: URL of the Trustify DA backend
         """
-        self.java_client = java_client
-        self.js_client = js_client
+        # Expand paths (handles ~ and environment variables)
+        self.java_client = os.path.expanduser(java_client) if java_client else None
+        self.js_client = os.path.expanduser(js_client) if js_client else None
+        self.backend_url = backend_url
 
     def run_client(
         self,
@@ -60,10 +64,17 @@ class ClientRunner:
             temp_dir = tempfile.mkdtemp(prefix="trustify-test-")
             temp_path = Path(temp_dir)
 
-            # Copy the entire test case directory
+            # Copy the entire test case directory, excluding build caches
+            # Stale .gradle caches (from a different Gradle version) can break
+            # features like version catalog auto-discovery
             test_dir = manifest_path.parent
             temp_test_dir = temp_path / test_dir.name
-            shutil.copytree(test_dir, temp_test_dir, symlinks=True)
+            shutil.copytree(
+                test_dir, temp_test_dir, symlinks=True,
+                ignore=shutil.ignore_patterns(
+                    '.gradle', 'build', 'target', 'node_modules', '__pycache__',
+                ),
+            )
 
             # Get the new manifest path in the temp directory
             temp_manifest = temp_test_dir / manifest_path.name
@@ -71,12 +82,18 @@ class ClientRunner:
             # Build the command
             cmd = self._build_command(client_type, client_path, analysis_type, temp_manifest)
 
+            # Prepare environment with backend URL
+            env = os.environ.copy()
+            if self.backend_url:
+                env['TRUSTIFY_DA_BACKEND_URL'] = self.backend_url
+
             # Run the command
             result = subprocess.run(
                 cmd,
                 capture_output=True,
                 text=True,
                 timeout=timeout,
+                env=env,
             )
 
             if result.returncode != 0:

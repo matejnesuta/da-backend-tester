@@ -51,53 +51,28 @@ TESTFILES_DIR="${SCRIPT_DIR}/testfiles"
 JAVA_CLIENT="${TRUSTIFY_DA_JAVA_CLIENT:-}"
 JS_CLIENT="${TRUSTIFY_DA_JS_CLIENT:-}"
 
-# Build the container image if needed
-build_image() {
-    echo "Building container image: ${IMAGE_NAME}:${IMAGE_TAG}"
-
-    # Pass GITHUB_TOKEN as build arg if set (for Java client Maven dependencies)
-    BUILD_ARGS=()
-    if [ -n "${GITHUB_TOKEN:-}" ]; then
-        BUILD_ARGS+=(--build-arg "GITHUB_TOKEN=${GITHUB_TOKEN}")
-        echo "Using GITHUB_TOKEN from environment for Java client build"
-    else
-        echo "Note: No GITHUB_TOKEN set - Java client build may fail"
-        echo "      Add GITHUB_TOKEN to .env file or export it to enable Java client build"
-    fi
-
-    $CONTAINER_RUNTIME build "${BUILD_ARGS[@]}" -t "${IMAGE_NAME}:${IMAGE_TAG}" "${SCRIPT_DIR}"
-}
-
 # Check if image exists
 if ! $CONTAINER_RUNTIME image inspect "${IMAGE_NAME}:${IMAGE_TAG}" &> /dev/null; then
-    echo "Image not found, building..."
-    build_image
+    echo "Error: Container image '${IMAGE_NAME}:${IMAGE_TAG}' not found."
+    echo "Build it first with: ./manage-container.sh build"
+    exit 1
 fi
 
 # Prepare volume mounts and environment variables
 VOLUME_ARGS=()
 ENV_ARGS=()
 
-# Check if --update-failed flag is present in arguments
-UPDATE_MODE=false
-for arg in "$@"; do
-    if [ "$arg" = "--update-failed" ]; then
-        UPDATE_MODE=true
-        break
-    fi
-done
-
 # Mount testfiles directory
-# Always writable to allow failures file to be written
-# (failures file is stored inside testfiles directory)
 if [ -d "$TESTFILES_DIR" ]; then
     VOLUME_ARGS+=(-v "${TESTFILES_DIR}:/testfiles:z")
-    if [ "$UPDATE_MODE" = true ]; then
-        echo "⚠️  Mounting testfiles as READ-WRITE for snapshot updates"
-    fi
 else
     echo "Warning: testfiles directory not found at ${TESTFILES_DIR}"
 fi
+
+# Mount snapshots directory so syrupy snapshots persist to the host
+SNAPSHOTS_DIR="${SCRIPT_DIR}/__snapshots__"
+mkdir -p "$SNAPSHOTS_DIR"
+VOLUME_ARGS+=(-v "${SNAPSHOTS_DIR}:/app/__snapshots__:z")
 
 # Optional: Override built-in clients with custom versions
 # Mount Java client if configured
@@ -135,6 +110,7 @@ fi
 echo "Running tests in container..."
 echo ""
 $CONTAINER_RUNTIME run --rm \
+    --network host \
     "${VOLUME_ARGS[@]}" \
     "${ENV_ARGS[@]}" \
     "${IMAGE_NAME}:${IMAGE_TAG}" \

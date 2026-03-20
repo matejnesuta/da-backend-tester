@@ -90,6 +90,12 @@ build_container() {
         echo "         Set GITHUB_TOKEN in .env file to enable Java client build"
     fi
 
+    # Pass client repo/branch overrides if set
+    [ -n "${TRUSTIFY_DA_JAVA_CLIENT_REPO:-}" ] && BUILD_ARGS+=(--build-arg "JAVA_CLIENT_REPO=${TRUSTIFY_DA_JAVA_CLIENT_REPO}")
+    [ -n "${TRUSTIFY_DA_JAVA_CLIENT_BRANCH:-}" ] && BUILD_ARGS+=(--build-arg "JAVA_CLIENT_BRANCH=${TRUSTIFY_DA_JAVA_CLIENT_BRANCH}")
+    [ -n "${TRUSTIFY_DA_JS_CLIENT_REPO:-}" ] && BUILD_ARGS+=(--build-arg "JS_CLIENT_REPO=${TRUSTIFY_DA_JS_CLIENT_REPO}")
+    [ -n "${TRUSTIFY_DA_JS_CLIENT_BRANCH:-}" ] && BUILD_ARGS+=(--build-arg "JS_CLIENT_BRANCH=${TRUSTIFY_DA_JS_CLIENT_BRANCH}")
+
     # Build command
     $CONTAINER_RUNTIME build \
         ${no_cache} \
@@ -100,6 +106,22 @@ build_container() {
 
     echo ""
     echo "✓ Container image built successfully: ${IMAGE_NAME}:${IMAGE_TAG}"
+
+    # Generate lock files for JS ecosystem test cases
+    generate_lockfiles
+}
+
+generate_lockfiles() {
+    local testfiles_dir="${SCRIPT_DIR}/testfiles"
+    if [ -d "$testfiles_dir" ]; then
+        echo ""
+        echo "Generating lock files for JS ecosystem test cases..."
+        $CONTAINER_RUNTIME run --rm \
+            -v "${testfiles_dir}:/testfiles:z" \
+            --entrypoint /bin/bash \
+            "${IMAGE_NAME}:${IMAGE_TAG}" \
+            /app/generate-lockfiles.sh /testfiles
+    fi
 }
 
 clean_container() {

@@ -14,19 +14,5 @@ MANIFEST_PATTERNS: Dict[str, List[str]] = {
     "yarn-classic": ["package.json"],
 }
 
-# Expected SBOM file name patterns
-EXPECTED_SBOM_PATTERNS: Dict[str, List[str]] = {
-    "component": [
-        "component_analysis_expected_sbom.json",
-        "expected_component_sbom.json",
-        "expected_sbom_component_analysis.json",
-    ],
-    "stack": [
-        "stack_analysis_expected_sbom.json",
-        "expected_stack_sbom.json",
-        "expected_sbom_stack_analysis.json",
-    ],
-}
-
 # Default timeout for client execution (in seconds)
 DEFAULT_TIMEOUT = 300

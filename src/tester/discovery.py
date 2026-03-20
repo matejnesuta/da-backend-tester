@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import List, Optional
 
 from .models import TestCase
-from .config import MANIFEST_PATTERNS, EXPECTED_SBOM_PATTERNS
+from .config import MANIFEST_PATTERNS
 
 
 class TestDiscovery:
@@ -44,20 +44,10 @@ class TestDiscovery:
                 if not manifest_path:
                     continue
 
-                # Find expected SBOM files
-                expected_component = TestDiscovery._find_expected_sbom(test_dir, "component")
-                expected_stack = TestDiscovery._find_expected_sbom(test_dir, "stack")
-
-                if not expected_component and not expected_stack:
-                    # Skip if no expected outputs found
-                    continue
-
                 test_case = TestCase(
                     name=f"{ecosystem}/{test_dir.name}",
                     ecosystem=ecosystem,
                     manifest_path=manifest_path,
-                    expected_component_sbom=expected_component,
-                    expected_stack_sbom=expected_stack,
                 )
                 test_cases.append(test_case)
 
@@ -75,14 +65,3 @@ class TestDiscovery:
 
         return None
 
-    @staticmethod
-    def _find_expected_sbom(test_dir: Path, analysis_type: str) -> Optional[Path]:
-        """Find the expected SBOM file for the given analysis type"""
-        patterns = EXPECTED_SBOM_PATTERNS.get(analysis_type, [])
-
-        for pattern in patterns:
-            sbom_path = test_dir / pattern
-            if sbom_path.exists():
-                return sbom_path
-
-        return None

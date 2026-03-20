@@ -16,7 +16,7 @@ This tester validates **backend response consistency** across multiple package e
 
 ### How It Works
 
-The tester uses **snapshot testing** against a fixed backend dataset:
+The tester uses **snapshot testing** (via [syrupy](https://github.com/syrupy-project/syrupy)) against a fixed backend dataset:
 
 1. Clients send dependency manifests to the backend
 2. Backend returns analysis results (vulnerability data, etc.)
@@ -30,14 +30,20 @@ The tester uses **snapshot testing** against a fixed backend dataset:
 .
 ├── src/
 │   └── tester/
-│       ├── models.py       # Data models (TestCase, TestResult, enums)
+│       ├── models.py       # Data models (TestCase, AnalysisType, ClientType)
 │       ├── config.py       # Configuration constants
 │       ├── discovery.py    # Test case discovery logic
-│       ├── runner.py       # Client execution
-│       ├── comparator.py   # SBOM comparison logic
-│       └── tester.py       # Main orchestration
+│       └── runner.py       # Client execution
 ├── testfiles/              # Test cases organized by ecosystem
-├── test_runner.py          # Main entry point
+├── __snapshots__/          # Syrupy snapshot files (committed to git)
+├── test_vulnerability_analysis.py  # Pytest test definitions
+├── conftest.py             # Pytest fixtures and configuration
+├── pytest.ini              # Pytest settings
+├── entrypoint.sh           # Container entrypoint
+├── generate-lockfiles.sh   # Lock file generation for JS ecosystems
+├── Dockerfile              # Container image definition
+├── manage-container.sh     # Container build/management script
+├── run-in-container.sh     # Container test runner wrapper
 └── README.md
 ```
 
@@ -50,15 +56,20 @@ The tester uses **snapshot testing** against a fixed backend dataset:
 The containerized approach provides a **self-contained environment** with:
 - All package managers (Java, Node.js, Maven, Gradle, npm, pnpm, Yarn, Go, Python)
 - **Pre-built Trustify DA clients** (Java and JavaScript) from source
-- Isolation and reproducibility
 
 **First time setup:**
 ```bash
-# Make the wrapper script executable
-chmod +x run-in-container.sh
+# Make scripts executable
+chmod +x run-in-container.sh manage-container.sh
+
+# Create .env file with required configuration
+cp .env.example .env
+# Edit .env and set at minimum:
+#   GITHUB_TOKEN       - GitHub token for building Java client dependencies
+#   TRUSTIFY_DA_BACKEND_URL - URL of the Trustify DA backend
 
 # Build the container image (includes building clients from source)
-./run-in-container.sh --check-config
+./manage-container.sh build
 ```
 
 **Run tests:**
@@ -80,7 +91,8 @@ The wrapper script:
 - Auto-detects Docker or Podman
 - Builds the container image if needed (clones and builds clients from source)
 - Mounts your testfiles directory into the container
-- Passes all arguments through to test_runner.py
+- Mounts the `__snapshots__/` directory so snapshots persist to the host
+- Passes all arguments through to pytest
 
 **Optional: Override built-in clients**
 
@@ -102,19 +114,19 @@ export TRUSTIFY_DA_JAVA_CLIENT=/path/to/trustify-da-java-client.jar
 export TRUSTIFY_DA_JS_CLIENT=/path/to/trustify-da-js-client
 
 # Run all tests
-python test_runner.py
+python -m pytest
 
 # Test specific ecosystem
-python test_runner.py --ecosystem maven
+python -m pytest --ecosystem maven
 
 # Test specific client
-python test_runner.py --client java
+python -m pytest --client java
 
 # Test multiple ecosystems
-python test_runner.py --ecosystem maven --ecosystem npm
+python -m pytest --ecosystem maven --ecosystem npm
 
 # Custom testfiles directory
-python test_runner.py --testfiles-dir /path/to/testfiles
+python -m pytest --testfiles-dir /path/to/testfiles
 ```
 
 ### Command-line Options
@@ -125,10 +137,7 @@ python test_runner.py --testfiles-dir /path/to/testfiles
 --js-client PATH            Path to JavaScript client
 --ecosystem NAME            Test only specific ecosystem (can be repeated)
 --client TYPE               Test only specific client: java or javascript
---check-config              Check configuration and exit
---update-failed             Re-run and update snapshots for previously failed tests
---source {java,javascript}  Which client to use for snapshot updates (default: java)
---failures-file PATH        Path to failures cache file (default: testfiles/.test-failures.json)
+--snapshot-update            Update snapshots with current client output (syrupy flag)
 ```
 
 ### Snapshot Testing Workflow
@@ -136,51 +145,28 @@ python test_runner.py --testfiles-dir /path/to/testfiles
 **Normal testing mode** - Compare against snapshots:
 ```bash
 ./run-in-container.sh
-
-# Failed tests are automatically cached to .test-failures.json
 ```
 
-**Update failed snapshots** - Accept current outputs for previously failed tests:
+**Update snapshots** - Accept current outputs as the new expected values:
 ```bash
-# Step 1: Run tests normally (failures are cached)
-./run-in-container.sh --ecosystem maven
-# Output: 10 tests run, 2 failed
-# Failures saved to .test-failures.json
+# Update all snapshots
+./run-in-container.sh --snapshot-update
 
-# Step 2: Review the diffs and decide if changes are acceptable
-
-# Step 3: Update ONLY the failed snapshots
-./run-in-container.sh --update-failed
-# Only re-runs the 2 failed tests and updates their snapshots
-
-# Step 4: Verify all clients still match
-./run-in-container.sh --ecosystem maven
-# All tests should now pass
+# Update snapshots for a specific ecosystem only
+./run-in-container.sh --ecosystem maven --snapshot-update
 ```
 
-**Advanced options:**
-```bash
-# Use JavaScript client as source of truth for updates
-./run-in-container.sh --update-failed --source javascript
+Snapshots are stored in the `__snapshots__/` directory at the project root. This directory is mounted into the container so updates persist to the host and can be committed to git.
 
-# Update failed tests for specific ecosystem only
-# (requires running tests for that ecosystem first)
-./run-in-container.sh --ecosystem npm  # Generates failures
-./run-in-container.sh --update-failed  # Updates those failures
-```
-
-After updating snapshots, the tool automatically verifies that **both clients produce identical outputs**. If they differ, tests will fail, indicating a consistency issue between implementations.
+**Typical workflow when the backend changes:**
+1. Run tests - review failures to verify changes are intentional
+2. Update snapshots: `./run-in-container.sh --snapshot-update`
+3. Re-run tests to verify all pass: `./run-in-container.sh`
+4. Commit updated snapshots: `git add __snapshots__/ && git commit -m "Update snapshots for backend vX.Y.Z"`
 
 ## Test Case Format
 
-Each test case directory should contain:
-
-- A manifest file (e.g., `pom.xml`, `package.json`, `go.mod`)
-- Snapshot files (backend response snapshots):
-  - `component_analysis_expected_sbom.json` or `expected_component_sbom.json`
-  - `stack_analysis_expected_sbom.json` or `expected_stack_sbom.json`
-
-**Note:** These files are called "expected_sbom" for historical reasons, but they actually contain **backend API responses**, not raw SBOMs. Both Java and JavaScript clients are tested against the same snapshot files to ensure consistency.
+Each test case directory should contain a manifest file (e.g., `pom.xml`, `package.json`, `go.mod`).
 
 Example:
 ```
@@ -188,21 +174,10 @@ testfiles/
   maven/
     pom_deps_with_no_ignore/
       pom.xml
-      component_analysis_expected_sbom.json  # Snapshot of backend response
-      stack_analysis_expected_sbom.json      # Snapshot of backend response
+  npm/
+    package_json_deps_without_exhortignore_object/
+      package.json
 ```
-
-### When Backend Changes
-
-When the backend dataset or API responses change:
-
-1. Run tests - failures are automatically cached to `.test-failures.json`
-2. Review the diff output to verify changes are intentional
-3. Update failed snapshots: `./run-in-container.sh --update-failed`
-4. Re-run tests to verify all pass
-5. Commit updated snapshots: `git add testfiles/ .test-failures.json && git commit -m "Update snapshots for backend vX.Y.Z"`
-
-**Note:** The `.test-failures.json` file is used for tracking failed tests between runs. You can add it to `.gitignore` if you don't want to commit it, but it's useful for sharing failure context with team members.
 
 ## Container Architecture
 
@@ -211,14 +186,15 @@ The container is **fully self-contained** and builds the Trustify DA clients fro
 ```
 Container Build Process:
 1. Install dependencies (Java, Node.js, Maven, Gradle, etc.)
-2. Clone trustify-da-java-client repo → build with Maven → package JAR
-3. Clone trustify-da-javascript-client repo → build with npm → install globally
+2. Clone trustify-da-java-client repo -> build with Maven -> package JAR
+3. Clone trustify-da-javascript-client repo -> build with npm -> install globally
 4. Copy test framework code
 
 Runtime Volume Mounts:
 Host Machine          Container
 ─────────────        ──────────
-./testfiles/  ─────> /testfiles/ (read-only)
+./testfiles/  ─────> /testfiles/
+./__snapshots__/ ──> /app/__snapshots__/
 
 Built-in Clients:
 /opt/clients/java-client.jar              (built from source)
@@ -228,8 +204,8 @@ Built-in Clients:
 When you run `./run-in-container.sh`, it:
 1. Detects your container runtime (Docker or Podman)
 2. Builds the image if it doesn't exist (including building clients from source)
-3. Mounts your testfiles directory to `/testfiles` in the container
-4. Executes `test_runner.py` with your arguments
+3. Mounts your testfiles and snapshots directories into the container
+4. Executes pytest with your arguments
 
 ### Container Management
 
@@ -250,18 +226,6 @@ Use the `manage-container.sh` script for building and managing the container ima
 
 # Check container status
 ./manage-container.sh status
-
-# Show help
-./manage-container.sh help
-```
-
-**Manual container builds:**
-
-```bash
-# Force rebuild (will pull latest client code from GitHub)
-docker build --no-cache -t trustify-da-tester:latest .
-# or with podman
-podman build --no-cache -t trustify-da-tester:latest .
 ```
 
 **Build-time customization:**
@@ -280,14 +244,26 @@ docker build \
   -t trustify-da-tester:latest .
 ```
 
-## Future Extensions
+## Configuration
 
-The framework is designed to be extended for:
+The project uses a `.env` file for configuration. Copy the example and edit it:
 
-- Backend vulnerability testing
-- HTML report parsing
-- JSON validation of vulnerability results
-- Performance benchmarking
+```bash
+cp .env.example .env
+```
+
+The `.env` file is loaded automatically by both `run-in-container.sh` and `manage-container.sh`.
+
+See `.env.example` for all available options and documentation.
+
+### Environment Variables
+
+| Variable | Description |
+|---|---|
+| `GITHUB_TOKEN` | GitHub token with `read:packages` scope (required for building Java client) |
+| `TRUSTIFY_DA_BACKEND_URL` | URL of the Trustify DA backend |
+| `TRUSTIFY_DA_JAVA_CLIENT` | Path to Java client JAR (overrides built-in) |
+| `TRUSTIFY_DA_JS_CLIENT` | Path to JavaScript client executable (overrides built-in) |
 
 ## Exit Codes
 

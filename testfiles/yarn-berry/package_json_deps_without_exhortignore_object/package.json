@@ -26,5 +26,5 @@
     "mongoose": "^5.9.18",
     "nodemon": "^2.0.4"
   },
-  "packageManager": "yarn@4.9.1"
+  "packageManager": "yarn@4.13.0"
 }

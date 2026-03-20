@@ -20,6 +20,9 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
 
+# Upgrade npm (JS client requires >= 11.5.1)
+RUN npm install -g npm@11.5.1
+
 # Install pnpm
 RUN npm install -g pnpm
 
@@ -32,7 +35,9 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
     python3-venv \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && pip3 install pip==24.3.1 --break-system-packages
+ENV TRUSTIFY_DA_PIP_PATH=/usr/bin/pip3
 
 # Install Go
 ENV GO_VERSION=1.22.1
@@ -113,13 +118,15 @@ RUN pip3 install --no-cache-dir -r requirements.txt --break-system-packages
 
 # Copy application code
 COPY src/ ./src/
-COPY test_runner.py .
+COPY conftest.py .
+COPY test_vulnerability_analysis.py .
+COPY pytest.ini .
+COPY entrypoint.sh .
+COPY generate-lockfiles.sh .
 
 # Create mount point for testfiles
 RUN mkdir -p /testfiles
 
-# Default command - runs the test_runner.py script
-# Testfiles will be mounted at runtime to /testfiles
-# Use -u flag for unbuffered output (immediate stdout/stderr)
-ENTRYPOINT ["python3", "-u", "test_runner.py"]
-CMD ["--testfiles-dir", "/testfiles"]
+# Entrypoint runs pytest
+ENTRYPOINT ["/app/entrypoint.sh"]
+CMD ["--testfiles-dir", "/testfiles", "-n", "auto"]
