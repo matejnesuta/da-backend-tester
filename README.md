@@ -152,8 +152,9 @@ python -m pytest --testfiles-dir /path/to/testfiles
 # Update all snapshots
 ./run-in-container.sh --snapshot-update
 
-# Update snapshots for a specific ecosystem only
-./run-in-container.sh --ecosystem maven --snapshot-update
+# Update snapshots for a specific ecosystem only, without deleting other ecosystems' snapshots
+# Note: -n 1 is required to prevent syrupy from deleting unrelated snapshots
+./run-in-container.sh --snapshot-update -n 1 --ecosystem maven
 ```
 
 Snapshots are stored in the `__snapshots__/` directory at the project root. This directory is mounted into the container so updates persist to the host and can be committed to git.

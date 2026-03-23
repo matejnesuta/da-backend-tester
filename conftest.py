@@ -20,7 +20,7 @@ if env_path.exists():
 
 
 def _deep_sort(obj):
-    """Recursively sort all lists in a nested dict/list structure."""
+    """Recursively sort all lists and normalize numbers in a nested dict/list structure."""
     if isinstance(obj, dict):
         return {k: _deep_sort(v) for k, v in obj.items()}
     if isinstance(obj, list):
@@ -29,6 +29,8 @@ def _deep_sort(obj):
             return sorted(sorted_items, key=lambda x: json.dumps(x, sort_keys=True))
         except TypeError:
             return sorted_items
+    if isinstance(obj, float) and obj.is_integer():
+        return int(obj)
     return obj
 
 

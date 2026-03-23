@@ -5,7 +5,8 @@ from typing import Dict, List
 # Manifest file patterns for each ecosystem
 MANIFEST_PATTERNS: Dict[str, List[str]] = {
     "maven": ["pom.xml"],
-    "gradle": ["build.gradle", "build.gradle.kts"],
+    "gradle-groovy": ["build.gradle"],
+    "gradle-kotlin": ["build.gradle.kts"],
     "golang": ["go.mod"],
     "npm": ["package.json"],
     "pip": ["requirements.txt"],
