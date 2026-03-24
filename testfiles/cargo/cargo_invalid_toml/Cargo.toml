@@ -1,0 +1,6 @@
+[package
+name = "invalid-toml"
+version =
+
+[dependencies
+serde = 1.0.193"

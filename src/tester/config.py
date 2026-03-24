@@ -13,6 +13,7 @@ MANIFEST_PATTERNS: Dict[str, List[str]] = {
     "pnpm": ["package.json"],
     "yarn-berry": ["package.json"],
     "yarn-classic": ["package.json"],
+    "cargo": ["Cargo.toml"],
 }
 
 # Default timeout for client execution (in seconds)
