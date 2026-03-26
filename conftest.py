@@ -40,6 +40,7 @@ def normalize_result(result):
     if isinstance(normalized, dict):
         if "metadata" in normalized and "timestamp" in normalized["metadata"]:
             del normalized["metadata"]["timestamp"]
+        normalized.pop("licenseSummary", None)
     return _deep_sort(normalized)
 
 

@@ -62,6 +62,10 @@ RUN wget https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.
     && rm gradle-${GRADLE_VERSION}-bin.zip
 ENV PATH="/opt/gradle/bin:${PATH}"
 
+# Install Rust and Cargo
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+ENV PATH="/root/.cargo/bin:${PATH}"
+
 # Build Trustify DA Clients from source
 WORKDIR /build
 

@@ -10,7 +10,7 @@ members = [
 resolver = "2"
 
 [dependencies]
-serde = "1.0.193" # trustify-da-ignore
+serde-json-wasm = "=1.0.0" # trustify-da-ignore
 
 [dev-dependencies]
 tempfile = "3.8.0"

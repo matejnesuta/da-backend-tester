@@ -4,4 +4,4 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-serde = "1.0.193" # trustify-da-ignore
+serde-json-wasm = "=1.0.0" # trustify-da-ignore
