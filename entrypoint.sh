@@ -7,4 +7,5 @@
 
 set -e
 
+cd /app
 exec python3 -m pytest "$@"

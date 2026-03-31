@@ -133,4 +133,4 @@ RUN mkdir -p /testfiles
 
 # Entrypoint runs pytest
 ENTRYPOINT ["/app/entrypoint.sh"]
-CMD ["--testfiles-dir", "/testfiles", "-n", "auto"]
+CMD ["-n", "1"]

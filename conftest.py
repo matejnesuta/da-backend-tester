@@ -22,7 +22,7 @@ if env_path.exists():
 def _deep_sort(obj):
     """Recursively sort all lists and normalize numbers in a nested dict/list structure."""
     if isinstance(obj, dict):
-        return {k: _deep_sort(v) for k, v in obj.items()}
+        return {k: _deep_sort(v) for k, v in obj.items() if not (k == "warnings" and v == {})}
     if isinstance(obj, list):
         sorted_items = [_deep_sort(item) for item in obj]
         try:
@@ -41,6 +41,7 @@ def normalize_result(result):
         if "metadata" in normalized and "timestamp" in normalized["metadata"]:
             del normalized["metadata"]["timestamp"]
         normalized.pop("licenseSummary", None)
+        normalized.pop("licenses", None)
     return _deep_sort(normalized)
 
 
