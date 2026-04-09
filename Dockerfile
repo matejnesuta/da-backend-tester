@@ -128,6 +128,7 @@ COPY pytest.ini .
 COPY entrypoint.sh .
 COPY generate-lockfiles.sh .
 COPY generate-python-venvs.sh .
+COPY generate-all.sh .
 
 # Create mount point for testfiles
 RUN mkdir -p /testfiles

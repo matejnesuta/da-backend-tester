@@ -107,36 +107,21 @@ build_container() {
     echo ""
     echo "✓ Container image built successfully: ${IMAGE_NAME}:${IMAGE_TAG}"
 
-    # Generate lock files for JS ecosystem test cases
-    generate_lockfiles
-
-    # Generate Python venvs for pip ecosystem test cases
-    generate_python_venvs
+    # Generate lock files and Python venvs in parallel
+    generate_all
 }
 
-generate_lockfiles() {
+generate_all() {
     local testfiles_dir="${SCRIPT_DIR}/testfiles"
+    local max_jobs="${1:-16}"  # Default to 16 parallel jobs
+
     if [ -d "$testfiles_dir" ]; then
         echo ""
-        echo "Generating lock files for JS ecosystem test cases..."
         $CONTAINER_RUNTIME run --rm \
             -v "${testfiles_dir}:/testfiles:z" \
             --entrypoint /bin/bash \
             "${IMAGE_NAME}:${IMAGE_TAG}" \
-            /app/generate-lockfiles.sh /testfiles
-    fi
-}
-
-generate_python_venvs() {
-    local testfiles_dir="${SCRIPT_DIR}/testfiles"
-    if [ -d "$testfiles_dir" ]; then
-        echo ""
-        echo "Generating Python virtual environments for pip ecosystem test cases..."
-        $CONTAINER_RUNTIME run --rm \
-            -v "${testfiles_dir}:/testfiles:z" \
-            --entrypoint /bin/bash \
-            "${IMAGE_NAME}:${IMAGE_TAG}" \
-            /app/generate-python-venvs.sh /testfiles
+            /app/generate-all.sh /testfiles "$max_jobs"
     fi
 }
 
