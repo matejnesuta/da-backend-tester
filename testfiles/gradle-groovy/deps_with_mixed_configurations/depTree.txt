@@ -1,0 +1,89 @@
+
+> Task :dependencies
+
+------------------------------------------------------------
+Root project 'mixed-configurations'
+------------------------------------------------------------
+
+annotationProcessor - Annotation processors and their dependencies for source set 'main'.
+No dependencies
+
+compileClasspath - Compile classpath for source set 'main'.
++--- log4j:log4j:1.2.17
++--- commons-collections:commons-collections:3.2.1
++--- org.projectlombok:lombok:1.18.24
+\--- javax.servlet:javax.servlet-api:4.0.1
+
+compileOnly - Compile-only dependencies for the 'main' feature. (n)
++--- org.projectlombok:lombok:1.18.24 (n)
+\--- javax.servlet:javax.servlet-api:4.0.1 (n)
+
+default - Configuration for default artifacts. (n)
+No dependencies
+
+implementation - Implementation dependencies for the 'main' feature. (n)
++--- log4j:log4j:1.2.17 (n)
+\--- commons-collections:commons-collections:3.2.1 (n)
+
+mainSourceElements - List of source directories contained in the Main SourceSet. (n)
+No dependencies
+
+runtimeClasspath - Runtime classpath of source set 'main'.
++--- log4j:log4j:1.2.17
++--- commons-collections:commons-collections:3.2.1
+\--- org.keycloak:keycloak-core:20.0.0
+     +--- org.jboss.logging:jboss-logging:3.4.3.Final
+     +--- org.bouncycastle:bcprov-jdk15on:1.70
+     \--- com.fasterxml.jackson.core:jackson-core:2.13.3
+
+runtimeElements - Runtime elements for the 'main' feature. (n)
+No dependencies
+
+runtimeOnly - Runtime-only dependencies for the 'main' feature. (n)
+\--- org.keycloak:keycloak-core:20.0.0 (n)
+
+testAnnotationProcessor - Annotation processors and their dependencies for source set 'test'.
+No dependencies
+
+testCompileClasspath - Compile classpath for source set 'test'.
++--- log4j:log4j:1.2.17
++--- commons-collections:commons-collections:3.2.1
++--- org.projectlombok:lombok:1.18.24
++--- javax.servlet:javax.servlet-api:4.0.1
++--- junit:junit:4.12
+|    \--- org.hamcrest:hamcrest-core:1.3
++--- org.springframework:spring-core:5.3.18
+|    \--- org.springframework:spring-jcl:5.3.18
+\--- org.mockito:mockito-core:4.0.0
+     +--- net.bytebuddy:byte-buddy:1.12.1
+     +--- net.bytebuddy:byte-buddy-agent:1.12.1
+     \--- org.objenesis:objenesis:3.2
+
+testCompileOnly - Compile only dependencies for source set 'test'. (n)
+\--- org.mockito:mockito-core:4.0.0 (n)
+
+testImplementation - Implementation only dependencies for source set 'test'. (n)
++--- junit:junit:4.12 (n)
+\--- org.springframework:spring-core:5.3.18 (n)
+
+testRuntimeClasspath - Runtime classpath of source set 'test'.
++--- log4j:log4j:1.2.17
++--- commons-collections:commons-collections:3.2.1
++--- org.keycloak:keycloak-core:20.0.0
+|    +--- org.jboss.logging:jboss-logging:3.4.3.Final
+|    +--- org.bouncycastle:bcprov-jdk15on:1.70
+|    \--- com.fasterxml.jackson.core:jackson-core:2.13.3
++--- junit:junit:4.12
+|    \--- org.hamcrest:hamcrest-core:1.3
+\--- org.springframework:spring-core:5.3.18
+     \--- org.springframework:spring-jcl:5.3.18
+
+testRuntimeOnly - Runtime only dependencies for source set 'test'. (n)
+No dependencies
+
+(n) - Not resolved (configuration is not meant to be resolved)
+
+A web-based, searchable dependency report is available by adding the --scan option.
+
+BUILD SUCCESSFUL in 1s
+1 actionable task: 1 executed

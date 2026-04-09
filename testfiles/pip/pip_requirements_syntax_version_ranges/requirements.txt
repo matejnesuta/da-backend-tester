@@ -1,0 +1,5 @@
+# Test version range syntax
+requests>=2.25.0,<3.0.0
+urllib3~=1.26.0
+certifi>=2021.0.0
+click!=7.1.1

@@ -1,0 +1,7 @@
+# Test wildcard version specifiers
+# Wildcards only work with == and != operators per PEP 440
+# Using >= or other operators with wildcards is invalid syntax
+requests==2.25.*
+urllib3==1.26.*
+certifi==2021.*
+click!=7.1.*

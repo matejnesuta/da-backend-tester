@@ -1,0 +1,3 @@
+# Test extras syntax: package[extra]
+requests[security,socks]==2.25.1
+certifi==2021.5.30

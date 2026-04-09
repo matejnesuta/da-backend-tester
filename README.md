@@ -41,6 +41,7 @@ The tester uses **snapshot testing** (via [syrupy](https://github.com/syrupy-pro
 ├── pytest.ini              # Pytest settings
 ├── entrypoint.sh           # Container entrypoint
 ├── generate-lockfiles.sh   # Lock file generation for JS ecosystems
+├── generate-python-venvs.sh # Virtual env generation for pip ecosystem
 ├── Dockerfile              # Container image definition
 ├── manage-container.sh     # Container build/management script
 ├── run-in-container.sh     # Container test runner wrapper
@@ -186,10 +187,12 @@ The container is **fully self-contained** and builds the Trustify DA clients fro
 
 ```
 Container Build Process:
-1. Install dependencies (Java, Node.js, Maven, Gradle, etc.)
+1. Install dependencies (Java, Node.js, Maven, Gradle, Python, etc.)
 2. Clone trustify-da-java-client repo -> build with Maven -> package JAR
 3. Clone trustify-da-javascript-client repo -> build with npm -> install globally
 4. Copy test framework code
+5. Generate lock files for JS ecosystem test cases (npm, pnpm, yarn)
+6. Generate Python virtual environments for pip ecosystem test cases
 
 Runtime Volume Mounts:
 Host Machine          Container

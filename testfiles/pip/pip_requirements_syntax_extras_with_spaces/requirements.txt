@@ -1,0 +1,5 @@
+# Test extras syntax with spaces (valid per PEP 508)
+# Both with and without spaces are valid
+requests [security, socks]==2.25.1
+httpx [http2] >=0.23.0
+celery [redis, auth] ==5.2.7

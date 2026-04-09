@@ -1,0 +1,15 @@
+# Test combination of extras, version specifiers, and environment markers
+# This is the most complex form of requirement specifiers
+# All markers evaluate to TRUE on Linux with Python 3.11
+
+# Extras + version range + marker
+requests[security] >= 2.8.1, < 3.0 ; python_version >= "3.6"
+
+# Extras + compatible release + marker
+click >= 7.0, < 9.0 ; sys_platform == "linux"
+
+# Extras + wildcard + marker (wildcards only work with == and !=)
+certifi == 2021.* ; python_version >= "3.7"
+
+# Multiple extras + version + marker
+urllib3 >= 1.26.0, < 2.0 ; python_version >= "3.8" and sys_platform == "linux"

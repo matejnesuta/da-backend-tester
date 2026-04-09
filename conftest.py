@@ -3,6 +3,7 @@
 import os
 import copy
 import json
+import shutil
 import pytest
 from pathlib import Path
 from dotenv import load_dotenv

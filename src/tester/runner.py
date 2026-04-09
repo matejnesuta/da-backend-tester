@@ -87,6 +87,11 @@ class ClientRunner:
             if self.backend_url:
                 env['TRUSTIFY_DA_BACKEND_URL'] = self.backend_url
 
+            # Load test-specific .env file if it exists
+            test_env_file = test_dir / '.env'
+            if test_env_file.exists():
+                env.update(self._load_env_file(test_env_file))
+
             # Run the command
             result = subprocess.run(
                 cmd,
@@ -129,3 +134,27 @@ class ClientRunner:
         else:
             # Assume it's an executable or script
             return [client_path, analysis_type.value, str(manifest_path)]
+
+    @staticmethod
+    def _load_env_file(env_file: Path) -> Dict[str, str]:
+        """
+        Load environment variables from a .env file
+
+        Args:
+            env_file: Path to the .env file
+
+        Returns:
+            Dictionary of environment variables
+        """
+        env_vars = {}
+        with open(env_file, 'r') as f:
+            for line in f:
+                line = line.strip()
+                # Skip empty lines and comments
+                if not line or line.startswith('#'):
+                    continue
+                # Parse KEY=VALUE format
+                if '=' in line:
+                    key, value = line.split('=', 1)
+                    env_vars[key.strip()] = value.strip()
+        return env_vars

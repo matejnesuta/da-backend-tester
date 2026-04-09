@@ -24,10 +24,10 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
 RUN npm install -g npm@11.5.1
 
 # Install pnpm
-RUN npm install -g pnpm
+RUN npm install -g pnpm@10.33.0
 
 # Install Yarn Classic and enable Yarn Berry (via corepack)
-RUN npm install -g yarn \
+RUN npm install -g yarn@1.22.22 \
     && corepack enable
 
 # Install Python 3 and pip
@@ -127,6 +127,7 @@ COPY test_vulnerability_analysis.py .
 COPY pytest.ini .
 COPY entrypoint.sh .
 COPY generate-lockfiles.sh .
+COPY generate-python-venvs.sh .
 
 # Create mount point for testfiles
 RUN mkdir -p /testfiles

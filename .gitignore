@@ -64,6 +64,7 @@ testfiles/**/.pnp.js
 testfiles/**/.pnp.loader.mjs
 testfiles/**/.yarn/
 testfiles/**/.yarnrc.yml
+testfiles/**/venv/
 
 # pnpm content-addressable store
 testfiles/**/.pnpm-store/

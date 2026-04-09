@@ -109,6 +109,9 @@ build_container() {
 
     # Generate lock files for JS ecosystem test cases
     generate_lockfiles
+
+    # Generate Python venvs for pip ecosystem test cases
+    generate_python_venvs
 }
 
 generate_lockfiles() {
@@ -121,6 +124,19 @@ generate_lockfiles() {
             --entrypoint /bin/bash \
             "${IMAGE_NAME}:${IMAGE_TAG}" \
             /app/generate-lockfiles.sh /testfiles
+    fi
+}
+
+generate_python_venvs() {
+    local testfiles_dir="${SCRIPT_DIR}/testfiles"
+    if [ -d "$testfiles_dir" ]; then
+        echo ""
+        echo "Generating Python virtual environments for pip ecosystem test cases..."
+        $CONTAINER_RUNTIME run --rm \
+            -v "${testfiles_dir}:/testfiles:z" \
+            --entrypoint /bin/bash \
+            "${IMAGE_NAME}:${IMAGE_TAG}" \
+            /app/generate-python-venvs.sh /testfiles
     fi
 }
 

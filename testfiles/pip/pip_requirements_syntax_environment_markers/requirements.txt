@@ -1,0 +1,23 @@
+# Test environment markers (conditional dependencies)
+# This file tests that clients properly evaluate environment markers
+# On Linux with Python 3.11, some markers are TRUE (should install) and some are FALSE (should skip)
+
+# Python version markers (TRUE on Python 3.11)
+requests==2.25.1 ; python_version >= "3.6"
+urllib3==1.26.5 ; python_version >= "3.7"
+certifi==2021.5.30 ; python_full_version >= "3.6.0"
+
+# Platform markers for Linux (TRUE on Linux)
+click==8.0.4 ; sys_platform == "linux"
+idna==2.10 ; platform_system == "Linux"
+
+# Platform markers for Windows (FALSE on Linux - should be SKIPPED by pip and client)
+pywin32==305 ; sys_platform == "win32"
+colorama==0.4.6 ; platform_system == "Windows"
+pywinpty==2.0.5 ; sys_platform == "win32" and python_version >= "3.6"
+
+# Combined markers with AND (TRUE on Linux)
+chardet==4.0.0 ; python_version >= "3.6" and sys_platform == "linux"
+
+# Combined markers with OR (TRUE)
+six==1.16.0 ; python_version < "3.0" or python_version >= "3.3"
