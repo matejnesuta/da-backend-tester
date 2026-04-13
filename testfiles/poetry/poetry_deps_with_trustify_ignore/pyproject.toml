@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "test-project"
+version = "0.1.0"
+description = "Test Poetry dependencies with trustify-da-ignore comments"
+authors = ["Test <test@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+flask = "2.0.3"
+requests = "2.25.1"
+uvicorn = "0.17.0" # trustify-da-ignore
+click = "8.0.4" # trustify-da-ignore
+beautifulsoup4 = "4.12.2"
+certifi = "2023.7.22"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

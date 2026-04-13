@@ -14,6 +14,8 @@ MANIFEST_PATTERNS: Dict[str, List[str]] = {
     "yarn-berry": ["package.json"],
     "yarn-classic": ["package.json"],
     "cargo": ["Cargo.toml"],
+    "poetry": ["pyproject.toml"],
+    "uv": ["pyproject.toml"],
 }
 
 # Default timeout for client execution (in seconds)

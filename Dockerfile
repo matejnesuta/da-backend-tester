@@ -39,6 +39,14 @@ RUN apt-get update && apt-get install -y \
     && pip3 install pip==24.3.1 --break-system-packages
 ENV TRUSTIFY_DA_PIP_PATH=/usr/bin/pip3
 
+# Install uv (Python package manager)
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh \
+    && mv /root/.local/bin/uv /usr/local/bin/uv
+
+# Install Poetry (Python package manager)
+RUN curl -sSL https://install.python-poetry.org | python3 - \
+    && mv /root/.local/bin/poetry /usr/local/bin/poetry
+
 # Install Go
 ENV GO_VERSION=1.22.1
 RUN wget https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz \

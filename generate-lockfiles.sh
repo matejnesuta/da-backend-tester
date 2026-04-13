@@ -1,8 +1,8 @@
 #!/bin/bash
 #
-# Generate lock files for JS ecosystem test cases.
+# Generate lock files for ecosystem test cases.
 # Intended to run inside the container after build, using the container's
-# package managers (npm, pnpm, yarn) for platform-independent results.
+# package managers (npm, pnpm, yarn, poetry, uv) for platform-independent results.
 #
 # Usage: generate-lockfiles.sh [testfiles-dir] [max-parallel-jobs]
 #
@@ -152,11 +152,77 @@ yarn_classic_pid=$!
 ) &
 yarn_berry_pid=$!
 
+(
+    echo "  Starting poetry lock generation..."
+    job_count=0
+    for dir in "$TESTFILES_DIR"/poetry/*/; do
+        [ -f "$dir/pyproject.toml" ] || continue
+        (
+            name=$(basename "$dir")
+            echo "  poetry: $name"
+            cd "$dir" && rm -f poetry.lock
+            # Retry up to 3 times on failure
+            for attempt in 1 2 3; do
+                if poetry lock --no-interaction 2>&1 >/dev/null; then
+                    break
+                elif [ $attempt -lt 3 ]; then
+                    echo "    WARNING: poetry lock attempt $attempt failed for $name, retrying..."
+                    sleep 1
+                else
+                    echo "    WARNING: poetry lock failed for $name after 3 attempts"
+                fi
+            done
+        ) &
+        ((job_count++))
+        if [ $job_count -ge $MAX_JOBS ]; then
+            wait -n 2>/dev/null || true
+            ((job_count--))
+        fi
+    done
+    wait
+    echo "  poetry lock generation complete"
+) &
+poetry_pid=$!
+
+(
+    echo "  Starting uv lock generation..."
+    job_count=0
+    for dir in "$TESTFILES_DIR"/uv/*/; do
+        [ -f "$dir/pyproject.toml" ] || continue
+        (
+            name=$(basename "$dir")
+            echo "  uv: $name"
+            cd "$dir" && rm -f uv.lock
+            # Retry up to 3 times on failure
+            for attempt in 1 2 3; do
+                if uv lock 2>&1 >/dev/null; then
+                    break
+                elif [ $attempt -lt 3 ]; then
+                    echo "    WARNING: uv lock attempt $attempt failed for $name, retrying..."
+                    sleep 1
+                else
+                    echo "    WARNING: uv lock failed for $name after 3 attempts"
+                fi
+            done
+        ) &
+        ((job_count++))
+        if [ $job_count -ge $MAX_JOBS ]; then
+            wait -n 2>/dev/null || true
+            ((job_count--))
+        fi
+    done
+    wait
+    echo "  uv lock generation complete"
+) &
+uv_pid=$!
+
 # Wait for all package managers to complete
 wait $npm_pid
 wait $pnpm_pid
 wait $yarn_classic_pid
 wait $yarn_berry_pid
+wait $poetry_pid
+wait $uv_pid
 
 echo "Lock file generation complete."
 echo ""
@@ -179,7 +245,15 @@ yarn_berry_dirs=$(find "$TESTFILES_DIR"/yarn-berry -maxdepth 1 -type d -name "*"
 yarn_berry_locks=$(find "$TESTFILES_DIR"/yarn-berry -maxdepth 2 -name "yarn.lock" 2>/dev/null | wc -l)
 echo "YARN-BERRY: $yarn_berry_locks/$yarn_berry_dirs lockfiles generated"
 
-total_expected=$((npm_dirs + pnpm_dirs + yarn_classic_dirs + yarn_berry_dirs))
-total_generated=$((npm_locks + pnpm_locks + yarn_classic_locks + yarn_berry_locks))
+poetry_dirs=$(find "$TESTFILES_DIR"/poetry -maxdepth 1 -type d -name "*" ! -name "poetry" 2>/dev/null | wc -l)
+poetry_locks=$(find "$TESTFILES_DIR"/poetry -name "poetry.lock" 2>/dev/null | wc -l)
+echo "POETRY: $poetry_locks/$poetry_dirs lockfiles generated"
+
+uv_dirs=$(find "$TESTFILES_DIR"/uv -maxdepth 1 -type d -name "*" ! -name "uv" 2>/dev/null | wc -l)
+uv_locks=$(find "$TESTFILES_DIR"/uv -name "uv.lock" 2>/dev/null | wc -l)
+echo "UV: $uv_locks/$uv_dirs lockfiles generated"
+
+total_expected=$((npm_dirs + pnpm_dirs + yarn_classic_dirs + yarn_berry_dirs + poetry_dirs + uv_dirs))
+total_generated=$((npm_locks + pnpm_locks + yarn_classic_locks + yarn_berry_locks + poetry_locks + uv_locks))
 echo "---"
 echo "Total: $total_generated/$total_expected lockfiles generated"
