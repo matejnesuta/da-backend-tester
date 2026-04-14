@@ -1,0 +1,17 @@
+[project]
+name = "package-a"
+version = "0.1.0"
+description = "Package A with vulnerable dependencies"
+requires-python = ">=3.11"
+dependencies = [
+    "beautifulsoup4==4.12.2",
+    "certifi==2023.7.22",
+    "package-b",
+]
+
+[tool.uv.sources]
+package-b = { workspace = true }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

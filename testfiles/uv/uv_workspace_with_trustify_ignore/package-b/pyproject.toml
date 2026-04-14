@@ -1,0 +1,14 @@
+[project]
+name = "package-b"
+version = "0.2.0"
+description = "Package B with trustify ignored dependencies"
+requires-python = ">=3.11"
+dependencies = [
+    "uvicorn==0.17.0", # trustify-da-ignore
+    "certifi==2023.7.22",
+    "click==8.0.4",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

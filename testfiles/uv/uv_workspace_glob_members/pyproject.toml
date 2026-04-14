@@ -1,0 +1,20 @@
+[project]
+name = "test-workspace-glob"
+version = "0.1.0"
+description = "Test uv workspace with glob pattern members"
+requires-python = ">=3.11"
+dependencies = [
+    "package-a",
+    "package-b",
+]
+
+[tool.uv.sources]
+package-a = { workspace = true }
+package-b = { workspace = true }  # Also referenced by package-a
+
+[tool.uv.workspace]
+members = ["packages/*"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

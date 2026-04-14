@@ -1,0 +1,18 @@
+[project]
+name = "package-a"
+version = "0.1.0"
+description = "Package A with ignored dependencies"
+requires-python = ">=3.11"
+dependencies = [
+    "flask==2.0.3",
+    "requests==2.25.1", #exhortignore
+    "beautifulsoup4==4.12.2",
+    "package-b",
+]
+
+[tool.uv.sources]
+package-b = { workspace = true }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

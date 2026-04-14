@@ -2,6 +2,13 @@ version = 1
 revision = 3
 requires-python = ">=3.11"
 
+[manifest]
+members = [
+    "package-a",
+    "package-b",
+    "test-workspace-ignore",
+]
+
 [[package]]
 name = "asgiref"
 version = "3.11.1"
@@ -191,6 +198,42 @@ wheels = [
 ]
 
 [[package]]
+name = "package-a"
+version = "0.1.0"
+source = { editable = "package-a" }
+dependencies = [
+    { name = "beautifulsoup4" },
+    { name = "flask" },
+    { name = "package-b" },
+    { name = "requests" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "beautifulsoup4", specifier = "==4.12.2" },
+    { name = "flask", specifier = "==2.0.3" },
+    { name = "package-b", editable = "package-b" },
+    { name = "requests", specifier = "==2.25.1" },
+]
+
+[[package]]
+name = "package-b"
+version = "0.2.0"
+source = { editable = "package-b" }
+dependencies = [
+    { name = "certifi" },
+    { name = "click" },
+    { name = "uvicorn" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "certifi", specifier = "==2023.7.22" },
+    { name = "click", specifier = "==8.0.4" },
+    { name = "uvicorn", specifier = "==0.17.0" },
+]
+
+[[package]]
 name = "requests"
 version = "2.25.1"
 source = { registry = "https://pypi.org/simple" }
@@ -215,26 +258,18 @@ wheels = [
 ]
 
 [[package]]
-name = "test-project"
+name = "test-workspace-ignore"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
-    { name = "beautifulsoup4" },
-    { name = "certifi" },
-    { name = "click" },
-    { name = "flask" },
-    { name = "requests" },
-    { name = "uvicorn" },
+    { name = "package-a" },
+    { name = "package-b" },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "beautifulsoup4", specifier = "==4.12.2" },
-    { name = "certifi", specifier = "==2023.7.22" },
-    { name = "click", specifier = "==8.0.4" },
-    { name = "flask", specifier = "==2.0.3" },
-    { name = "requests", specifier = "==2.25.1" },
-    { name = "uvicorn", specifier = "==0.17.0" },
+    { name = "package-a", editable = "package-a" },
+    { name = "package-b", editable = "package-b" },
 ]
 
 [[package]]
