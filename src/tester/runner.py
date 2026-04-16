@@ -120,6 +120,123 @@ class ClientRunner:
             if temp_dir and Path(temp_dir).exists():
                 shutil.rmtree(temp_dir, ignore_errors=True)
 
+    def run_batch_analysis(
+        self,
+        client_type: ClientType,
+        workspace_root: Path,
+        concurrency: Optional[int] = None,
+        metadata: bool = False,
+        fail_fast: bool = False,
+        timeout: int = DEFAULT_TIMEOUT,
+    ) -> Tuple[bool, Optional[Dict], Optional[str]]:
+        """
+        Run batch workspace analysis
+
+        Args:
+            client_type: Which client to run (Java or JavaScript)
+            workspace_root: Path to workspace root directory
+            concurrency: Batch concurrency limit
+            metadata: Enable metadata mode (returns errors array)
+            fail_fast: Stop on first error instead of continuing
+            timeout: Timeout in seconds (default: 300)
+
+        Returns:
+            Tuple of (success, batch_result_dict, error_message)
+        """
+        if client_type == ClientType.JAVA:
+            client_path = self.java_client
+        else:
+            client_path = self.js_client
+
+        if not client_path:
+            return False, None, f"{client_type.value} client path not configured"
+
+        # Copy the entire workspace to a temporary location
+        temp_dir = None
+        try:
+            # Create a temporary directory
+            temp_dir = tempfile.mkdtemp(prefix="trustify-batch-test-")
+            temp_path = Path(temp_dir)
+
+            # Copy the workspace directory
+            temp_workspace = temp_path / workspace_root.name
+            shutil.copytree(
+                workspace_root, temp_workspace, symlinks=True,
+                ignore=shutil.ignore_patterns(
+                    '.gradle', 'build', 'target', 'node_modules', '__pycache__',
+                ),
+            )
+
+            # Build the command
+            cmd = self._build_batch_command(
+                client_type, client_path, temp_workspace, concurrency, metadata, fail_fast
+            )
+
+            # Prepare environment with backend URL
+            env = os.environ.copy()
+            if self.backend_url:
+                env['TRUSTIFY_DA_BACKEND_URL'] = self.backend_url
+
+            # Load test-specific .env file if it exists
+            test_env_file = workspace_root / '.env'
+            if test_env_file.exists():
+                env.update(self._load_env_file(test_env_file))
+
+            # Run the command
+            result = subprocess.run(
+                cmd,
+                capture_output=True,
+                text=True,
+                timeout=timeout,
+                env=env,
+            )
+
+            if result.returncode != 0:
+                return False, None, f"Command failed (exit code {result.returncode}): {result.stderr}"
+
+            # Parse the JSON output
+            try:
+                batch_result = json.loads(result.stdout)
+                return True, batch_result, None
+            except json.JSONDecodeError as e:
+                return False, None, f"Failed to parse JSON output: {e}"
+
+        except subprocess.TimeoutExpired:
+            return False, None, f"Command timed out after {timeout} seconds"
+        except Exception as e:
+            return False, None, f"Unexpected error: {e}"
+        finally:
+            # Clean up temporary directory
+            if temp_dir and Path(temp_dir).exists():
+                shutil.rmtree(temp_dir, ignore_errors=True)
+
+    @staticmethod
+    def _build_batch_command(
+        client_type: ClientType,
+        client_path: str,
+        workspace_root: Path,
+        concurrency: Optional[int] = None,
+        metadata: bool = False,
+        fail_fast: bool = False,
+    ) -> list:
+        """Build the command for batch analysis"""
+        if client_type == ClientType.JAVA:
+            # Java client: java -jar client.jar stack-batch <workspace>
+            cmd = ["java", "-jar", client_path, "stack-batch", str(workspace_root)]
+        else:
+            # JavaScript client: client stack-batch <workspace>
+            cmd = [client_path, "stack-batch", str(workspace_root)]
+
+        # Add optional flags
+        if concurrency is not None:
+            cmd.extend(["--concurrency", str(concurrency)])
+        if metadata:
+            cmd.append("--metadata")
+        if fail_fast:
+            cmd.append("--fail-fast")
+
+        return cmd
+
     @staticmethod
     def _build_command(
         client_type: ClientType,

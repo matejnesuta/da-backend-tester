@@ -9,6 +9,7 @@ class AnalysisType(Enum):
     """Type of analysis to perform"""
     COMPONENT = "component"
     STACK = "stack"
+    STACK_BATCH = "stack-batch"
 
 
 class ClientType(Enum):
@@ -23,3 +24,12 @@ class TestCase:
     name: str
     ecosystem: str
     manifest_path: Path
+
+
+@dataclass
+class WorkspaceTestCase:
+    """Represents a workspace test case for batch analysis"""
+    name: str
+    ecosystem: str
+    workspace_root: Path
+    expected_package_count: int = 0  # Number of packages expected in workspace
