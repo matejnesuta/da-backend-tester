@@ -269,6 +269,17 @@ See `.env.example` for all available options and documentation.
 | `TRUSTIFY_DA_JAVA_CLIENT` | Path to Java client JAR (overrides built-in) |
 | `TRUSTIFY_DA_JS_CLIENT` | Path to JavaScript client executable (overrides built-in) |
 
+## Claude Code Commands
+
+If you're using [Claude Code](https://claude.ai/code), this repository includes custom commands to help with testing workflows:
+
+- **`/create-test`** - Interactively create new test cases with proper structure
+- **`/verify-tests`** - Validate existing test cases and find issues  
+- **`/review-snapshots`** - Analyze snapshot differences and decide whether to accept changes
+- **`/validate-snapshot`** - Verify snapshot content matches manifest (checks dev deps excluded, ignore flags respected, cross-ecosystem consistency)
+
+See [.claude/README.md](.claude/README.md) for details.
+
 ## Exit Codes
 
 - `0` - All tests passed
