@@ -1,0 +1,2 @@
+# This directory should be tested with stack-batch analysis
+expected_packages: 3

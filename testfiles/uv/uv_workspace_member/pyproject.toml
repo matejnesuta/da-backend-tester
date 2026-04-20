@@ -1,0 +1,13 @@
+[project]
+name = "test-workspace-member"
+version = "0.1.0"
+requires-python = ">=3.11"
+
+[tool.uv.workspace]
+members = [
+    "package-a",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

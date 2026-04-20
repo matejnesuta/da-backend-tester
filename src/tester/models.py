@@ -24,6 +24,7 @@ class TestCase:
     name: str
     ecosystem: str
     manifest_path: Path
+    workspace_root: Path = None  # For workspace member tests, points to workspace root
 
 
 @dataclass

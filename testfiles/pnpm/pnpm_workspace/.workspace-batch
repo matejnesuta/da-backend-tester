@@ -1,0 +1,4 @@
+# This directory should be tested with stack-batch analysis
+# NOTE: Client only discovers member packages (package-a, package-b), not the root
+# even though root has dependencies in pnpm-lock.yaml
+expected_packages: 2

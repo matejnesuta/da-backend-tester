@@ -1,0 +1,11 @@
+[project]
+name = "package-a"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "requests==2.25.1",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

@@ -1,0 +1,5 @@
+# This directory should be tested with stack-batch analysis
+# Tests invalid package handling with --metadata flag
+# Expected: root + package-a (success) + package-invalid (fails validation) = 3 total
+expected_packages: 3
+test_metadata: true

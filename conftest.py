@@ -32,6 +32,11 @@ def _deep_sort(obj):
             return sorted_items
     if isinstance(obj, float) and obj.is_integer():
         return int(obj)
+    if isinstance(obj, str):
+        # Normalize temp paths in strings
+        import re
+        # Replace /tmp/trustify-test-XXXXX or /tmp/trustify-batch-test-XXXXX with placeholder
+        obj = re.sub(r'/tmp/trustify-(?:batch-)?test-[a-z0-9_]+', '/tmp/trustify-test-NORMALIZED', obj)
     return obj
 
 

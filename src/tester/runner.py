@@ -34,6 +34,7 @@ class ClientRunner:
         client_type: ClientType,
         analysis_type: AnalysisType,
         manifest_path: Path,
+        workspace_root: Optional[Path] = None,
         timeout: int = DEFAULT_TIMEOUT,
     ) -> Tuple[bool, Optional[Dict], Optional[str]]:
         """
@@ -43,6 +44,7 @@ class ClientRunner:
             client_type: Which client to run (Java or JavaScript)
             analysis_type: Type of analysis (component or stack)
             manifest_path: Path to the manifest file
+            workspace_root: Workspace root directory (for monorepo member analysis)
             timeout: Timeout in seconds (default: 300)
 
         Returns:
@@ -64,10 +66,17 @@ class ClientRunner:
             temp_dir = tempfile.mkdtemp(prefix="trustify-test-")
             temp_path = Path(temp_dir)
 
+            # Determine which directory to copy
+            # For workspace member tests, copy the workspace root
+            # For regular tests, copy the manifest's parent directory
+            if workspace_root is not None:
+                test_dir = workspace_root
+            else:
+                test_dir = manifest_path.parent
+
             # Copy the entire test case directory, excluding build caches
             # Stale .gradle caches (from a different Gradle version) can break
             # features like version catalog auto-discovery
-            test_dir = manifest_path.parent
             temp_test_dir = temp_path / test_dir.name
             shutil.copytree(
                 test_dir, temp_test_dir, symlinks=True,
@@ -77,10 +86,21 @@ class ClientRunner:
             )
 
             # Get the new manifest path in the temp directory
-            temp_manifest = temp_test_dir / manifest_path.name
+            # If this is a member test, preserve the directory structure
+            if workspace_root is not None:
+                try:
+                    relative_manifest = manifest_path.relative_to(workspace_root)
+                    temp_manifest = temp_test_dir / relative_manifest
+                    temp_workspace_root = temp_test_dir
+                except ValueError as e:
+                    # manifest_path is not relative to workspace_root (shouldn't happen)
+                    raise RuntimeError(f"manifest_path ({manifest_path}) is not relative to workspace_root ({workspace_root}): {e}")
+            else:
+                temp_manifest = temp_test_dir / manifest_path.name
+                temp_workspace_root = None
 
             # Build the command
-            cmd = self._build_command(client_type, client_path, analysis_type, temp_manifest)
+            cmd = self._build_command(client_type, client_path, analysis_type, temp_manifest, temp_workspace_root)
 
             # Prepare environment with backend URL
             env = os.environ.copy()
@@ -93,12 +113,14 @@ class ClientRunner:
                 env.update(self._load_env_file(test_env_file))
 
             # Run the command
+            # Run from temp_test_dir to maintain correct relative paths
             result = subprocess.run(
                 cmd,
                 capture_output=True,
                 text=True,
                 timeout=timeout,
                 env=env,
+                cwd=temp_test_dir,
             )
 
             if result.returncode != 0:
@@ -243,14 +265,21 @@ class ClientRunner:
         client_path: str,
         analysis_type: AnalysisType,
         manifest_path: Path,
+        workspace_root: Optional[Path] = None,
     ) -> list:
         """Build the command to execute the client"""
         if client_type == ClientType.JAVA:
             # Assume it's a JAR file
-            return ["java", "-jar", client_path, analysis_type.value, str(manifest_path)]
+            cmd = ["java", "-jar", client_path, analysis_type.value, str(manifest_path)]
         else:
             # Assume it's an executable or script
-            return [client_path, analysis_type.value, str(manifest_path)]
+            cmd = [client_path, analysis_type.value, str(manifest_path)]
+
+        # NOTE: Not adding --workspaceDir flag - let the client walk up automatically
+        # The client walks up from the manifest directory to find the lock file
+        # Adding --workspaceDir causes issues with path resolution in the client
+
+        return cmd
 
     @staticmethod
     def _load_env_file(env_file: Path) -> Dict[str, str]:
