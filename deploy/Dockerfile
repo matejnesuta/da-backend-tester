@@ -10,10 +10,14 @@ RUN apt-get update && apt-get install -y \
     gnupg \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Java (OpenJDK 17)
-RUN apt-get update && apt-get install -y \
-    openjdk-17-jdk \
+# Install Java 21 from Eclipse Temurin
+RUN mkdir -p /etc/apt/keyrings \
+    && wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | tee /etc/apt/keyrings/adoptium.asc \
+    && echo "deb [signed-by=/etc/apt/keyrings/adoptium.asc] https://packages.adoptium.net/artifactory/deb bookworm main" | tee /etc/apt/sources.list.d/adoptium.list \
+    && apt-get update \
+    && apt-get install -y temurin-21-jdk \
     && rm -rf /var/lib/apt/lists/*
+ENV JAVA_HOME=/usr/lib/jvm/temurin-21-jdk-amd64
 
 # Install Node.js 20.x
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
@@ -30,13 +34,12 @@ RUN npm install -g pnpm@10.33.0
 RUN npm install -g yarn@1.22.22 \
     && corepack enable
 
-# Install Python 3 and pip
+# Install Python 3 and pip (Bookworm has Python 3.11 which is compatible)
 RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
     python3-venv \
-    && rm -rf /var/lib/apt/lists/* \
-    && pip3 install pip==24.3.1 --break-system-packages
+    && rm -rf /var/lib/apt/lists/*
 ENV TRUSTIFY_DA_PIP_PATH=/usr/bin/pip3
 
 # Install uv (Python package manager)
@@ -133,10 +136,10 @@ COPY src/ ./src/
 COPY conftest.py .
 COPY test_vulnerability_analysis.py .
 COPY pytest.ini .
-COPY entrypoint.sh .
-COPY generate-lockfiles.sh .
-COPY generate-python-venvs.sh .
-COPY generate-all.sh .
+COPY deploy/entrypoint.sh .
+COPY deploy/generate-lockfiles.sh .
+COPY deploy/generate-python-venvs.sh .
+COPY deploy/generate-all.sh .
 
 # Create mount point for testfiles
 RUN mkdir -p /testfiles

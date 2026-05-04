@@ -34,15 +34,17 @@ The tester uses **snapshot testing** (via [syrupy](https://github.com/syrupy-pro
 │       ├── config.py       # Configuration constants
 │       ├── discovery.py    # Test case discovery logic
 │       └── runner.py       # Client execution
+├── deploy/                 # Container deployment files
+│   ├── Dockerfile          # Container image definition
+│   ├── entrypoint.sh       # Container entrypoint
+│   ├── generate-lockfiles.sh   # Lock file generation for JS ecosystems
+│   ├── generate-python-venvs.sh # Virtual env generation for pip ecosystem
+│   └── generate-all.sh     # Parallel generation wrapper
 ├── testfiles/              # Test cases organized by ecosystem
 ├── __snapshots__/          # Syrupy snapshot files (committed to git)
 ├── test_vulnerability_analysis.py  # Pytest test definitions
 ├── conftest.py             # Pytest fixtures and configuration
 ├── pytest.ini              # Pytest settings
-├── entrypoint.sh           # Container entrypoint
-├── generate-lockfiles.sh   # Lock file generation for JS ecosystems
-├── generate-python-venvs.sh # Virtual env generation for pip ecosystem
-├── Dockerfile              # Container image definition
 ├── manage-container.sh     # Container build/management script
 ├── run-in-container.sh     # Container test runner wrapper
 └── README.md
@@ -239,12 +241,14 @@ Use the `manage-container.sh` script for building and managing the container ima
 docker build \
   --build-arg JAVA_CLIENT_BRANCH=develop \
   --build-arg JS_CLIENT_BRANCH=feature-xyz \
+  -f deploy/Dockerfile \
   -t trustify-da-tester:custom .
 
 # Build with GitHub token (for Java client Maven dependencies)
 # Note: manage-container.sh automatically uses GITHUB_TOKEN from .env
 docker build \
   --build-arg GITHUB_TOKEN=ghp_your_token_here \
+  -f deploy/Dockerfile \
   -t trustify-da-tester:latest .
 ```
 
@@ -269,9 +273,9 @@ See `.env.example` for all available options and documentation.
 | `TRUSTIFY_DA_JAVA_CLIENT` | Path to Java client JAR (overrides built-in) |
 | `TRUSTIFY_DA_JS_CLIENT` | Path to JavaScript client executable (overrides built-in) |
 
-## Claude Code Commands
+## Claude Code Skills
 
-If you're using [Claude Code](https://claude.ai/code), this repository includes custom commands to help with testing workflows:
+If you're using [Claude Code](https://claude.ai/code), this repository includes custom skills to help with testing workflows:
 
 - **`/create-test`** - Interactively create new test cases with proper structure
 - **`/verify-tests`** - Validate existing test cases and find issues  

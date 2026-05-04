@@ -1,8 +1,8 @@
 # Claude Code Configuration
 
-This directory contains custom commands for the DA Backend Tester project.
+This directory contains custom skills for the DA Backend Tester project.
 
-## Available Commands
+## Available Skills
 
 ### `/create-test` - Create New Test Case
 Guides you through creating a new test case:
@@ -77,17 +77,17 @@ Verifies snapshot content matches the manifest file:
 
 ## How It Works
 
-These commands provide context-specific guidance to Claude Code. When you invoke a command:
+These skills provide context-specific guidance to Claude Code. When you invoke a skill:
 
-1. Claude loads the command's prompt/instructions
+1. Claude loads the skill's prompt/instructions
 2. Claude has access to your repository files via the usual tools (read, write, glob, grep, bash)
 3. Claude guides you through the task interactively
 4. You can continue the conversation to refine or modify
 
 ## Prompt Caching
 
-The commands use Claude's prompt caching automatically:
-- Command instructions are cached
+The skills use Claude's prompt caching automatically:
+- Skill instructions are cached
 - Repository structure is cached after first access
 - Repeated invocations are fast and cost-effective
 
@@ -111,17 +111,17 @@ The commands use Claude's prompt caching automatically:
 
 ## Customization
 
-To modify a command:
-1. Edit the `.md` file in `.claude/commands/`
+To modify a skill:
+1. Edit the `.md` file in `.claude/skills/`
 2. Changes take effect immediately (no restart needed)
 3. Prompts are version-controlled with your repo
 
-## Adding Your Own Commands
+## Adding Your Own Skills
 
-Create a new `.md` file in `.claude/commands/`:
+Create a new `.md` file in `.claude/skills/`:
 
 ```markdown
-# My Custom Command
+# My Custom Skill
 
 You are helping with <specific task>.
 
@@ -134,11 +134,11 @@ You are helping with <specific task>.
 2. Step two
 ```
 
-The filename becomes the command: `my-custom-command.md` → `/my-custom-command`
+The filename becomes the skill: `my-custom-skill.md` → `/my-custom-skill`
 
 ## Further Reading
 
 - [Claude Code Documentation](https://docs.anthropic.com/claude/docs/claude-code)
-- [Custom Commands Guide](https://docs.anthropic.com/claude/docs/custom-commands)
+- [Custom Skills Guide](https://docs.anthropic.com/claude/docs/custom-skills)
 - Main project [README.md](../README.md)
 - Workspace testing guide: [testfiles/WORKSPACE_TESTING.md](../testfiles/WORKSPACE_TESTING.md)

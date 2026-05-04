@@ -102,6 +102,7 @@ build_container() {
         ${verbose} \
         "${BUILD_ARGS[@]}" \
         -t "${IMAGE_NAME}:${IMAGE_TAG}" \
+        -f "${SCRIPT_DIR}/deploy/Dockerfile" \
         "${SCRIPT_DIR}"
 
     echo ""
