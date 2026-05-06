@@ -56,19 +56,23 @@ testfiles/**/node_modules/
 testfiles/**/dist/
 testfiles/**/__pycache__/
 testfiles/**/.pytest_cache/
-testfiles/**/package-lock.json
-testfiles/**/yarn.lock
-testfiles/**/pnpm-lock.yaml
-testfiles/**/.pnp.cjs
-testfiles/**/.pnp.js
-testfiles/**/.pnp.loader.mjs
-testfiles/**/.yarn/
-testfiles/**/.yarnrc.yml
 testfiles/**/venv/
 
 # pnpm content-addressable store
 testfiles/**/.pnpm-store/
 testfiles/.pnpm-store/
+
+# IMPORTANT: Lock files ARE committed in testfiles/ (needed for reproducible tests)
+# Only ignore node_modules and build caches in tests/ subdirectory
+tests/**/testfiles/**/node_modules/
+tests/**/testfiles/**/.gradle/
+tests/**/testfiles/**/build/
+tests/**/testfiles/**/target/
+tests/**/testfiles/**/dist/
+tests/**/testfiles/**/__pycache__/
+tests/**/testfiles/**/.pytest_cache/
+tests/**/testfiles/**/venv/
+tests/**/testfiles/**/.pnpm-store/
 
 # Old test failure cache
 testfiles/.test-failures.json
