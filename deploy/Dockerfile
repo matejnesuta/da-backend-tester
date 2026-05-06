@@ -131,18 +131,20 @@ COPY requirements.txt .
 # Install Python dependencies
 RUN pip3 install --no-cache-dir -r requirements.txt --break-system-packages
 
-# Copy application code
-COPY src/ ./src/
+# Copy application code (new structure)
+COPY tests/ ./tests/
 COPY conftest.py .
-COPY test_vulnerability_analysis.py .
 COPY pytest.ini .
 COPY deploy/entrypoint.sh .
 COPY deploy/generate-lockfiles.sh .
 COPY deploy/generate-python-venvs.sh .
 COPY deploy/generate-all.sh .
 
-# Create mount point for testfiles
+# Create mount point for testfiles (will be mounted from host)
 RUN mkdir -p /testfiles
+
+# Create __init__.py files for Python module structure
+RUN touch tests/__init__.py tests/client-testing/__init__.py tests/license-testing/__init__.py
 
 # Entrypoint runs pytest
 ENTRYPOINT ["/app/entrypoint.sh"]

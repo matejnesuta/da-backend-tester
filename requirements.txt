@@ -6,7 +6,5 @@ pytest>=7.0.0  # Test framework
 pytest-xdist>=3.0.0  # Parallel test execution
 syrupy>=4.0.0  # Snapshot testing
 
-# Future dependencies for backend testing:
-# requests  # For HTTP requests to backend
-# beautifulsoup4  # For HTML parsing
-# lxml  # For XML/HTML parsing
+# Backend testing dependencies
+requests  # For HTTP requests to backend

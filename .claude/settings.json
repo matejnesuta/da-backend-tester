@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(awk '/^require \\\\\\($/,/^\\\\\\)$/' tests/client-testing/testfiles/golang/go_mod_with_ignore/go.mod)",
+      "Bash(awk '/^require \\\\\\($/,/^\\\\\\)$/' testfiles/golang/go_mod_with_ignore/go.mod)"
+    ]
+  }
+}

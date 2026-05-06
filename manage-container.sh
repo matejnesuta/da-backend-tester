@@ -113,16 +113,20 @@ build_container() {
 }
 
 generate_all() {
-    local testfiles_dir="${SCRIPT_DIR}/testfiles"
+    local testfiles_dir="${SCRIPT_DIR}/tests/client-testing/testfiles"
     local max_jobs="${1:-16}"  # Default to 16 parallel jobs
 
     if [ -d "$testfiles_dir" ]; then
         echo ""
+        echo "Generating lockfiles for client test suite..."
         $CONTAINER_RUNTIME run --rm \
             -v "${testfiles_dir}:/testfiles:z" \
             --entrypoint /bin/bash \
             "${IMAGE_NAME}:${IMAGE_TAG}" \
             /app/generate-all.sh /testfiles "$max_jobs"
+    else
+        echo "Warning: Client testfiles directory not found at ${testfiles_dir}"
+        echo "Skipping lockfile generation"
     fi
 }
 

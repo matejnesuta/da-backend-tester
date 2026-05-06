@@ -40,9 +40,18 @@ The tester uses **snapshot testing** (via [syrupy](https://github.com/syrupy-pro
 │   ├── generate-lockfiles.sh   # Lock file generation for JS ecosystems
 │   ├── generate-python-venvs.sh # Virtual env generation for pip ecosystem
 │   └── generate-all.sh     # Parallel generation wrapper
-├── testfiles/              # Test cases organized by ecosystem
+├── testfiles/              # Test data directory
+│   ├── ecosystems/         # Test cases organized by package ecosystem
+│   │   ├── maven/
+│   │   ├── npm/
+│   │   ├── pip/
+│   │   └── ...
+│   └── licenses/           # Sample license files (for optional license tests)
+├── tests/                  # Optional/separate test suites
+│   └── licenses/           # License API endpoint tests (see tests/licenses/README.md)
 ├── __snapshots__/          # Syrupy snapshot files (committed to git)
-├── test_vulnerability_analysis.py  # Pytest test definitions
+├── test_vulnerability_analysis.py  # Main: Vulnerability analysis tests
+├── test_workspace_analysis.py      # Main: Workspace batch analysis tests
 ├── conftest.py             # Pytest fixtures and configuration
 ├── pytest.ini              # Pytest settings
 ├── manage-container.sh     # Container build/management script
@@ -175,12 +184,17 @@ Each test case directory should contain a manifest file (e.g., `pom.xml`, `packa
 Example:
 ```
 testfiles/
-  maven/
-    pom_deps_with_no_ignore/
-      pom.xml
-  npm/
-    package_json_deps_without_exhortignore_object/
-      package.json
+  ecosystems/
+    maven/
+      pom_deps_with_no_ignore/
+        pom.xml
+    npm/
+      package_json_deps_without_exhortignore_object/
+        package.json
+  licenses/
+    LICENSE-MIT
+    LICENSE-Apache-2.0
+    ...
 ```
 
 ## Container Architecture
@@ -199,7 +213,7 @@ Container Build Process:
 Runtime Volume Mounts:
 Host Machine          Container
 ─────────────        ──────────
-./testfiles/  ─────> /testfiles/
+./testfiles/  ─────> /testfiles/      (includes ecosystems/ and licenses/)
 ./__snapshots__/ ──> /app/__snapshots__/
 
 Built-in Clients:
@@ -272,6 +286,17 @@ See `.env.example` for all available options and documentation.
 | `TRUSTIFY_DA_BACKEND_URL` | URL of the Trustify DA backend |
 | `TRUSTIFY_DA_JAVA_CLIENT` | Path to Java client JAR (overrides built-in) |
 | `TRUSTIFY_DA_JS_CLIENT` | Path to JavaScript client executable (overrides built-in) |
+
+## Additional Test Suites
+
+The main tests (above) validate DA client behavior against the backend using ecosystem test cases.
+
+**Optional separate test suites** in `tests/` directory:
+
+- **`tests/licenses/`** - Backend license API endpoint tests (HTTP-based, no clients needed)
+  - Tests `/licenses`, `/licenses/{spdx}`, `/licenses/identify` endpoints
+  - See [`tests/licenses/README.md`](tests/licenses/README.md) for usage
+  - Run with: `python -m pytest tests/licenses/ -v`
 
 ## Claude Code Skills
 
