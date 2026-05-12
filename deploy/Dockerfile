@@ -31,8 +31,10 @@ RUN npm install -g npm@11.5.1
 RUN npm install -g pnpm@10.33.0
 
 # Install Yarn Classic and enable Yarn Berry (via corepack)
+# Note: corepack is enabled but pnpm version is explicitly pinned to avoid auto-upgrading
 RUN npm install -g yarn@1.22.22 \
-    && corepack enable
+    && corepack enable \
+    && corepack prepare pnpm@10.33.0 --activate
 
 # Install Python 3 and pip (Bookworm has Python 3.11 which is compatible)
 RUN apt-get update && apt-get install -y \

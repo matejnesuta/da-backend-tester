@@ -55,6 +55,11 @@ npm_pid=$!
 
 (
     echo "  Starting pnpm installations..."
+    # Disable corepack for pnpm to use the globally installed version
+    export COREPACK_ENABLE_AUTO_PIN=0
+    # Use the npm-installed pnpm explicitly (10.33.0) instead of corepack's version
+    PNPM_CMD="$(which pnpm 2>/dev/null || echo pnpm)"
+
     job_count=0
     for dir in "$TESTFILES_DIR"/pnpm/*/; do
         [ -f "$dir/package.json" ] || continue
@@ -64,7 +69,7 @@ npm_pid=$!
             cd "$dir" && rm -f pnpm-lock.yaml
             # Retry up to 3 times on failure
             for attempt in 1 2 3; do
-                if pnpm install --lockfile-only --ignore-scripts 2>&1 >/dev/null; then
+                if "$PNPM_CMD" install --lockfile-only --ignore-scripts 2>&1 >/dev/null; then
                     break
                 elif [ $attempt -lt 3 ]; then
                     echo "    WARNING: pnpm install attempt $attempt failed for $name, retrying..."

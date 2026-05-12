@@ -1,0 +1,13 @@
+[tool.poetry]
+name = "license-file-only"
+version = "0.1.0"
+description = ""
+authors = ["Test <test@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+requests = "^2.28.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

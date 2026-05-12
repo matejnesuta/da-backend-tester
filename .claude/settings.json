@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "Bash(awk '/^require \\\\\\($/,/^\\\\\\)$/' tests/client-testing/testfiles/golang/go_mod_with_ignore/go.mod)",
-      "Bash(awk '/^require \\\\\\($/,/^\\\\\\)$/' testfiles/golang/go_mod_with_ignore/go.mod)"
+      "Bash(awk '/^require \\\\\\($/,/^\\\\\\)$/' testfiles/golang/go_mod_with_ignore/go.mod)",
+      "Bash(python -m pytest --collect-only test_vulnerability_analysis.py)",
+      "Bash(python -c \"import sys; sys.path.insert\\(0, 'tests/client-testing'\\); import test_vulnerability_analysis; print\\('Syntax OK'\\)\")",
+      "Bash(python -m pytest --collect-only tests/client-testing/test_vulnerability_analysis.py)"
     ]
   }
 }

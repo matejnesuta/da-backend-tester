@@ -1,0 +1,8 @@
+{
+  "name": "license-lgpl2",
+  "version": "1.0.0",
+  "license": "LGPL-2.1-only",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

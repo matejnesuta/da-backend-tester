@@ -92,8 +92,45 @@ class TestLicensesEndpoint:
             headers={"Content-Type": "application/json"},
         )
 
-        # May return 200 with error in status, or 422 for invalid request
-        assert response.status_code in [200, 422]
+        # May return 200 with error in status, 400 for bad request, or 422 for invalid request
+        assert response.status_code in [200, 400, 422]
+
+    def test_fetch_licenses_malformed_json(self, api_base):
+        """Test with malformed JSON body (PR #604)"""
+        response = requests.post(
+            f"{api_base}/licenses",
+            data="{ this is not valid json }",
+            headers={"Content-Type": "application/json"},
+        )
+
+        # Should return 400 for malformed JSON
+        assert response.status_code == 400
+
+    def test_fetch_licenses_missing_purls_field(self, api_base):
+        """Test with missing 'purls' field in request body (PR #604)"""
+        request_data = {
+            "wrong_field": ["pkg:npm/express@4.18.2"]
+        }
+
+        response = requests.post(
+            f"{api_base}/licenses",
+            json=request_data,
+            headers={"Content-Type": "application/json"},
+        )
+
+        # Should return 400 for missing required field
+        assert response.status_code == 400
+
+    def test_fetch_licenses_null_body(self, api_base):
+        """Test with null/empty body (PR #604)"""
+        response = requests.post(
+            f"{api_base}/licenses",
+            data="",
+            headers={"Content-Type": "application/json"},
+        )
+
+        # Should return 400 for null/empty body
+        assert response.status_code == 400
 
     def test_fetch_licenses_mixed_ecosystems(self, api_base):
         """Test fetching licenses from multiple package ecosystems"""
@@ -212,6 +249,31 @@ class TestLicenseSpdxEndpoint:
             f"Non-existent license should be categorized as UNKNOWN, got {result['category']}"
         assert result["expression"] == "NONEXISTENT-LICENSE-ID"
         assert result["name"] == "NONEXISTENT-LICENSE-ID"
+
+    @pytest.mark.parametrize("legacy_id,expected_category", [
+        # PR #605: Legacy '+' suffix should map to '-or-later' variants
+        # Weak copyleft licenses with + suffix
+        ("LGPL-2.0+", "WEAK_COPYLEFT"),
+        ("LGPL-2.1+", "WEAK_COPYLEFT"),
+        ("LGPL-3.0+", "WEAK_COPYLEFT"),
+        # Strong copyleft licenses with + suffix
+        ("GPL-2.0+", "STRONG_COPYLEFT"),
+        ("GPL-3.0+", "STRONG_COPYLEFT"),
+        ("AGPL-3.0+", "STRONG_COPYLEFT"),
+    ])
+    def test_fetch_license_with_plus_suffix(self, api_base, legacy_id, expected_category):
+        """Test legacy '+' suffix licenses are normalized correctly (PR #605)"""
+        response = requests.get(f"{api_base}/licenses/{legacy_id}")
+
+        assert response.status_code == 200, \
+            f"Expected 200 for {legacy_id}, got {response.status_code}: {response.text}"
+
+        result = response.json()
+
+        # Verify the category matches expected ('-or-later' behavior)
+        assert result["category"] == expected_category, \
+            f"Expected {legacy_id} to be {expected_category} (like -or-later variant), " \
+            f"got {result['category']}"
 
 
 @pytest.mark.license_api

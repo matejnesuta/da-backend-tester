@@ -10,6 +10,7 @@ class AnalysisType(Enum):
     COMPONENT = "component"
     STACK = "stack"
     STACK_BATCH = "stack-batch"
+    LICENSE = "license"
 
 
 class ClientType(Enum):

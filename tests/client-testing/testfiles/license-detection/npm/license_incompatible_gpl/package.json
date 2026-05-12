@@ -1,0 +1,8 @@
+{
+  "name": "license-incompatible-test",
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "extjs-gpl": "6.2.0"
+  }
+}

@@ -40,21 +40,37 @@ def _deep_sort(obj):
     return obj
 
 
-def normalize_result(result):
-    """Normalize an analysis result for comparison: remove timestamps and sort lists."""
+def normalize_result(result, strip_licenses=True):
+    """Normalize an analysis result for comparison: remove timestamps and sort lists.
+
+    Args:
+        result: The analysis result to normalize
+        strip_licenses: If True, remove license fields (for component/stack tests).
+                       If False, preserve licenses (for license tests).
+    """
     normalized = copy.deepcopy(result)
     if isinstance(normalized, dict):
         if "metadata" in normalized and "timestamp" in normalized["metadata"]:
             del normalized["metadata"]["timestamp"]
-        normalized.pop("licenseSummary", None)
-        normalized.pop("licenses", None)
+
+        # Only strip licenses for non-license analysis
+        if strip_licenses:
+            normalized.pop("licenseSummary", None)
+            normalized.pop("licenses", None)
+        else:
+            # For license analysis, remove null optional fields to normalize client differences
+            # JavaScript client includes these as null, Java client omits them
+            if normalized.get("fileLicense") is None:
+                normalized.pop("fileLicense", None)
+            if normalized.get("manifestLicense") is None:
+                normalized.pop("manifestLicense", None)
     return _deep_sort(normalized)
 
 
 class NormalizedAnalysisResultExtension(JSONSnapshotExtension):
     """
     Custom syrupy extension for vulnerability analysis result snapshots that normalizes data before comparison.
-    This removes fields that can vary between runs (like timestamps).
+    This removes fields that can vary between runs (like timestamps) and strips license data.
     """
 
     def serialize(self, data, **kwargs):
@@ -64,13 +80,35 @@ class NormalizedAnalysisResultExtension(JSONSnapshotExtension):
 
     @staticmethod
     def _normalize_result(result):
-        return normalize_result(result)
+        return normalize_result(result, strip_licenses=True)
+
+
+class LicenseAnalysisResultExtension(JSONSnapshotExtension):
+    """
+    Custom syrupy extension for license analysis result snapshots that normalizes data before comparison.
+    This removes fields that can vary between runs (like timestamps) but preserves license data.
+    """
+
+    def serialize(self, data, **kwargs):
+        """Normalize analysis result data and serialize to JSON"""
+        normalized = self._normalize_result(data)
+        return super().serialize(normalized, **kwargs)
+
+    @staticmethod
+    def _normalize_result(result):
+        return normalize_result(result, strip_licenses=False)
 
 
 @pytest.fixture
 def snapshot(snapshot):
-    """Configure snapshot to use our custom analysis result serializer"""
+    """Configure snapshot to use our custom analysis result serializer (strips licenses)"""
     return snapshot.use_extension(NormalizedAnalysisResultExtension)
+
+
+@pytest.fixture
+def license_snapshot(snapshot):
+    """Configure snapshot to use license analysis result serializer (preserves licenses)"""
+    return snapshot.use_extension(LicenseAnalysisResultExtension)
 
 
 def pytest_addoption(parser):
@@ -192,6 +230,18 @@ def pytest_configure(config):
     config.addinivalue_line(
         "markers", "stack: mark test as stack analysis test"
     )
+    config.addinivalue_line(
+        "markers", "license: mark test as license analysis test"
+    )
+    config.addinivalue_line(
+        "markers", "license_detection: mark test as license detection behavior test"
+    )
+    config.addinivalue_line(
+        "markers", "license_compatibility: mark test as license compatibility checking test"
+    )
+    config.addinivalue_line(
+        "markers", "license_check_disabled: mark test for license check disabled functionality"
+    )
 
 
 def pytest_collection_modifyitems(config, items):
@@ -207,3 +257,5 @@ def pytest_collection_modifyitems(config, items):
                     item.add_marker(pytest.mark.component)
                 elif analysis_type == AnalysisType.STACK:
                     item.add_marker(pytest.mark.stack)
+                elif analysis_type == AnalysisType.LICENSE:
+                    item.add_marker(pytest.mark.license)

@@ -171,6 +171,66 @@ python -m pytest --testfiles-dir /path/to/testfiles
 
 Snapshots are stored in the `__snapshots__/` directory at the project root. This directory is mounted into the container so updates persist to the host and can be committed to git.
 
+### License Testing
+
+The tester includes two types of license tests:
+
+#### 1. License Snapshot Tests
+
+License analysis tests run alongside vulnerability and batch tests in `test_vulnerability_analysis.py`:
+
+```bash
+# Run all tests (includes license, component, stack, and batch)
+./run-in-container.sh
+
+# Run only license tests using pytest markers
+./run-in-container.sh -m license
+
+# Run license tests for specific ecosystem
+./run-in-container.sh -m license --ecosystem maven
+
+# Update only license snapshots
+./run-in-container.sh -m license --snapshot-update
+```
+
+**Key differences from vulnerability tests:**
+- Uses the same manifest files from `testfiles/ecosystems/`
+- Invokes clients with the `license` subcommand instead of `component` or `stack`
+- Preserves license data in snapshots (vulnerability tests strip licenses)
+- Stored in separate snapshot files, so updating license snapshots won't affect vulnerability snapshots
+
+#### 2. License Detection Behavior Tests
+
+Tests in `test_license_detection.py` validate license detection behavior using dedicated test cases:
+
+```bash
+# Run license detection tests
+./run-in-container.sh -m license_detection
+
+# Run for specific ecosystem
+./run-in-container.sh -m license_detection -k maven
+```
+
+These tests verify:
+- **Manifest license detection** - For ecosystems with license support (Maven, npm, Cargo)
+- **LICENSE file fallback** - Automatic detection from LICENSE/LICENSE.md/LICENSE.txt
+- **SPDX identification** - Detection of common licenses (MIT, Apache-2.0, GPL, etc.)
+- **Mismatch detection** - When manifest and LICENSE file declare different licenses
+- **Ecosystem-specific behavior** - Go, Gradle, Python always use LICENSE file
+
+Test cases are in `testfiles/license-detection/` with scenarios for:
+- License in manifest only
+- License in LICENSE file only
+- Both matching (no mismatch)
+- Both mismatched (mismatch=true)
+
+**Note:** The `license` subcommand reads only the manifest and LICENSE files, so lockfiles (package-lock.json, go.sum, etc.) are not required for these tests. If you need to add them, use the lockfile generation scripts in `deploy/`.
+
+**Test markers:**
+- `@pytest.mark.license` - License analysis tests
+- `@pytest.mark.component` - Component vulnerability tests
+- `@pytest.mark.stack` - Stack vulnerability tests
+
 **Typical workflow when the backend changes:**
 1. Run tests - review failures to verify changes are intentional
 2. Update snapshots: `./run-in-container.sh --snapshot-update`
