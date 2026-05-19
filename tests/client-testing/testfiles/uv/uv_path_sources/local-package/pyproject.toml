@@ -1,0 +1,11 @@
+[project]
+name = "my-local-package"
+version = "0.1.0"
+description = "A local package for testing path dependencies"
+dependencies = [
+    "click==8.0.4",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"

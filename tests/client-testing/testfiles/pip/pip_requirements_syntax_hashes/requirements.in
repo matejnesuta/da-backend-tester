@@ -1,0 +1,4 @@
+# Test hash values with line continuations
+# This tests that clients can handle --hash directives and backslash line continuations
+requests==2.25.1
+certifi==2021.5.30

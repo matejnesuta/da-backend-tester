@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "test-project"
+version = "0.1.0"
+description = "Test Poetry path source dependencies"
+authors = ["Test <test@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+# Regular package dependencies
+flask = "2.0.3"
+requests = "2.25.1"
+# Path dependency (relative path)
+my-local-package = { path = "./local-package/", develop = false }
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

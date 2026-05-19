@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "test-project"
+version = "0.1.0"
+description = "Test Poetry git source dependencies"
+authors = ["Test <test@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+# Regular package dependency
+flask = "2.0.3"
+# Git dependency with specific tag
+requests = { git = "https://github.com/psf/requests.git", tag = "v2.25.1" }
+# Git dependency with branch
+pyyaml = { git = "https://github.com/yaml/pyyaml.git", branch = "main" }
+# Git dependency with specific revision
+certifi = { git = "https://github.com/certifi/python-certifi.git", rev = "2023.07.22" }
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

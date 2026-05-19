@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "test-project"
+version = "0.1.0"
+description = "Test Poetry version constraint variations (caret, tilde, ranges)"
+authors = ["Test <test@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+# Caret requirement: ^2.0.3 means >=2.0.3 <3.0.0
+flask = "^2.0.3"
+# Tilde requirement: ~2.25 means >=2.25.0 <2.26.0
+requests = "~2.25"
+# Wildcard: 0.17.* means >=0.17.0 <0.18.0
+uvicorn = "0.17.*"
+# Range: >=8.0.0,<9.0.0
+click = ">=8.0.0,<9.0.0"
+# Exact version
+certifi = "2023.7.22"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -247,8 +247,8 @@ LICENSE_DETECTION_CASES = [
         "ecosystem": "npm",
         "manifest": "package.json",
         "expected": {
-            "manifestLicense": {"spdxId": "LGPL-2.1-only", "category": "UNKNOWN"},
-            "fileLicense": {"spdxId": "LGPL-2.1-only", "category": "UNKNOWN"},
+            "manifestLicense": {"spdxId": "LGPL-2.1-only", "category": "WEAK_COPYLEFT"},
+            "fileLicense": {"spdxId": "LGPL-2.1-only", "category": "WEAK_COPYLEFT"},
             "mismatch": False,
         }
     },
@@ -564,9 +564,56 @@ def license_detection_testfiles_dir(testfiles_dir):
         return testfiles_dir / "license-detection"
 
 
+def pytest_generate_tests(metafunc):
+    """
+    Dynamically generate test cases based on --ecosystem filter.
+    This is called for each test function during collection.
+    """
+    if "test_case" in metafunc.fixturenames and metafunc.function.__name__ == "test_license_detection":
+        # Get ecosystem filter from CLI
+        ecosystems = metafunc.config.getoption("--ecosystem")
+
+        # Filter LICENSE_DETECTION_CASES by ecosystem if specified
+        if ecosystems:
+            filtered_cases = [tc for tc in LICENSE_DETECTION_CASES if tc["ecosystem"] in ecosystems]
+        else:
+            filtered_cases = LICENSE_DETECTION_CASES
+
+        # Always parametrize, even with empty list, to avoid fixture errors
+        test_ids = [tc["name"] for tc in filtered_cases] if filtered_cases else []
+        metafunc.parametrize("test_case", filtered_cases if filtered_cases else [], ids=test_ids)
+
+    if "test_case" in metafunc.fixturenames and metafunc.function.__name__ == "test_license_detection_in_component_analysis":
+        # Get ecosystem filter from CLI
+        ecosystems = metafunc.config.getoption("--ecosystem")
+
+        # Filter LICENSE_DETECTION_CASES by ecosystem if specified
+        if ecosystems:
+            filtered_cases = [tc for tc in LICENSE_DETECTION_CASES if tc["ecosystem"] in ecosystems]
+        else:
+            filtered_cases = LICENSE_DETECTION_CASES
+
+        # Always parametrize, even with empty list, to avoid fixture errors
+        test_ids = [tc["name"] for tc in filtered_cases] if filtered_cases else []
+        metafunc.parametrize("test_case", filtered_cases if filtered_cases else [], ids=test_ids)
+
+    if "test_case" in metafunc.fixturenames and metafunc.function.__name__ == "test_license_compatibility":
+        # Get ecosystem filter from CLI
+        ecosystems = metafunc.config.getoption("--ecosystem")
+
+        # Filter LICENSE_COMPATIBILITY_CASES by ecosystem if specified
+        if ecosystems:
+            filtered_cases = [tc for tc in LICENSE_COMPATIBILITY_CASES if tc["ecosystem"] in ecosystems]
+        else:
+            filtered_cases = LICENSE_COMPATIBILITY_CASES
+
+        # Always parametrize, even with empty list, to avoid fixture errors
+        test_ids = [tc["name"] for tc in filtered_cases] if filtered_cases else []
+        metafunc.parametrize("test_case", filtered_cases if filtered_cases else [], ids=test_ids)
+
+
 @pytest.mark.license
 @pytest.mark.license_detection
-@pytest.mark.parametrize("test_case", LICENSE_DETECTION_CASES, ids=[tc["name"] for tc in LICENSE_DETECTION_CASES])
 def test_license_detection(test_case, available_clients, client_runner, license_detection_testfiles_dir):
     """
     Test license detection behavior for different scenarios.
@@ -630,6 +677,83 @@ def test_license_detection(test_case, available_clients, client_runner, license_
         check_license(result.get("fileLicense"), expected["fileLicense"], "fileLicense")
 
 
+@pytest.mark.license
+@pytest.mark.license_detection
+@pytest.mark.component
+def test_license_detection_in_component_analysis(test_case, available_clients, client_runner, license_detection_testfiles_dir):
+    """
+    Test license detection behavior in component analysis for different scenarios.
+
+    This test validates that component analysis includes the same license detection as license analysis:
+    1. Manifest license detection (for ecosystems with support)
+    2. LICENSE file fallback detection
+    3. Mismatch detection when manifest and file differ
+    4. SPDX identification from LICENSE file content
+
+    This ensures that component analysis responses include complete project license information
+    in the licenseSummary.projectLicense field.
+    """
+    assert available_clients, "No clients available to test"
+
+    # Build test case path
+    test_dir = license_detection_testfiles_dir / test_case["name"]
+    manifest_path = test_dir / test_case["manifest"]
+
+    if not manifest_path.exists():
+        pytest.skip(f"Test case not found: {test_case['name']}")
+
+    # Run component analysis (which should include license detection)
+    for client_type in available_clients:
+        success, result, error_msg = client_runner.run_client(
+            client_type, AnalysisType.COMPONENT, manifest_path
+        )
+
+        assert success, f"{client_type.value} client failed: {error_msg}"
+        assert result is not None, f"{client_type.value} returned None"
+
+        # Verify license summary exists in component analysis response
+        assert "licenseSummary" in result, "Expected licenseSummary in component analysis response"
+        license_summary = result["licenseSummary"]
+
+        # Verify projectLicense exists
+        assert "projectLicense" in license_summary, "Expected projectLicense in licenseSummary"
+        project_license = license_summary["projectLicense"]
+
+        # Verify license detection results
+        expected = test_case["expected"]
+
+        # Check mismatch flag
+        assert project_license.get("mismatch") == expected["mismatch"], \
+            f"Expected mismatch={expected['mismatch']}, got {project_license.get('mismatch')}"
+
+        # Helper function to check license object in component analysis
+        # Component analysis uses 'expression' instead of 'spdxId' and 'category' at top level
+        def check_license(actual, expected_data, field_name):
+            if expected_data is None:
+                assert actual is None or not actual, \
+                    f"Expected no {field_name}, got {actual}"
+            else:
+                assert actual is not None, f"Expected {field_name} but got None"
+                # Component analysis uses 'expression' field instead of 'spdxId'
+                assert "expression" in actual, \
+                    f"Expected {field_name} to have 'expression' field, but got {list(actual.keys())}"
+                assert actual["expression"] == expected_data["spdxId"], \
+                    f"Expected {field_name} expression {expected_data['spdxId']}, " \
+                    f"got {actual.get('expression')}"
+                # Category is at top level in component analysis (not nested in details)
+                assert "category" in actual, \
+                    f"Expected {field_name} to have 'category' field, but got {list(actual.keys())}"
+                assert actual["category"] == expected_data["category"], \
+                    f"Expected {field_name} category {expected_data['category']}, " \
+                    f"got {actual.get('category')}"
+
+        # Check manifest license (projectLicense.manifest)
+        check_license(project_license.get("manifest"), expected["manifestLicense"], "projectLicense.manifest")
+
+        # Check file license (projectLicense.file)
+        check_license(project_license.get("file"), expected["fileLicense"], "projectLicense.file")
+
+
 # Test cases for license compatibility checking (component/stack analysis)
 LICENSE_COMPATIBILITY_CASES = [
     {
@@ -647,7 +771,6 @@ LICENSE_COMPATIBILITY_CASES = [
 
 @pytest.mark.license
 @pytest.mark.license_compatibility
-@pytest.mark.parametrize("test_case", LICENSE_COMPATIBILITY_CASES, ids=[tc["name"] for tc in LICENSE_COMPATIBILITY_CASES])
 def test_license_compatibility(test_case, available_clients, client_runner, license_detection_testfiles_dir):
     """
     Test license compatibility checking in component/stack analysis.

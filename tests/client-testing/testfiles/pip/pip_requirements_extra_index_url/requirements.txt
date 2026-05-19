@@ -1,0 +1,16 @@
+# Test extra index URLs
+# Some packages are hosted on alternative PyPI indexes (e.g., PyTorch, internal company indexes)
+# This tests that clients can handle --extra-index-url and --index-url directives
+
+# Standard packages from PyPI
+requests==2.25.1
+certifi==2021.5.30
+
+# Use PyTorch's CPU-only index for smaller downloads and better compatibility
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+# Package from the extra index (CPU-only build is smaller and works everywhere)
+torch==2.5.0+cpu
+
+# Another standard package
+click==8.0.4

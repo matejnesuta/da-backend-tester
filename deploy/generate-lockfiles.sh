@@ -24,6 +24,7 @@ echo "Generating lock files in $TESTFILES_DIR (max $MAX_JOBS parallel jobs per p
 (
     echo "  Starting npm installations..."
     job_count=0
+    # Process main ecosystems directory
     for dir in "$TESTFILES_DIR"/npm/*/; do
         [ -f "$dir/package.json" ] || continue
         (
@@ -48,6 +49,32 @@ echo "Generating lock files in $TESTFILES_DIR (max $MAX_JOBS parallel jobs per p
             ((job_count--))
         fi
     done
+    # Also process license-detection subdirectory if it exists
+    if [ -d "$TESTFILES_DIR/license-detection/npm" ]; then
+        for dir in "$TESTFILES_DIR"/license-detection/npm/*/; do
+            [ -f "$dir/package.json" ] || continue
+            (
+                name=$(basename "$dir")
+                echo "  npm (license-detection): $name"
+                cd "$dir" && rm -f package-lock.json
+                for attempt in 1 2 3; do
+                    if npm install --package-lock-only --ignore-scripts 2>&1 >/dev/null; then
+                        break
+                    elif [ $attempt -lt 3 ]; then
+                        echo "    WARNING: npm install attempt $attempt failed for license-detection/$name, retrying..."
+                        sleep 1
+                    else
+                        echo "    WARNING: npm install failed for license-detection/$name after 3 attempts"
+                    fi
+                done
+            ) &
+            ((job_count++))
+            if [ $job_count -ge $MAX_JOBS ]; then
+                wait -n 2>/dev/null || true
+                ((job_count--))
+            fi
+        done
+    fi
     wait
     echo "  npm installations complete"
 ) &
@@ -61,6 +88,7 @@ npm_pid=$!
     PNPM_CMD="$(which pnpm 2>/dev/null || echo pnpm)"
 
     job_count=0
+    # Process main ecosystems directory
     for dir in "$TESTFILES_DIR"/pnpm/*/; do
         [ -f "$dir/package.json" ] || continue
         (
@@ -85,6 +113,32 @@ npm_pid=$!
             ((job_count--))
         fi
     done
+    # Also process license-detection subdirectory if it exists
+    if [ -d "$TESTFILES_DIR/license-detection/pnpm" ]; then
+        for dir in "$TESTFILES_DIR"/license-detection/pnpm/*/; do
+            [ -f "$dir/package.json" ] || continue
+            (
+                name=$(basename "$dir")
+                echo "  pnpm (license-detection): $name"
+                cd "$dir" && rm -f pnpm-lock.yaml
+                for attempt in 1 2 3; do
+                    if "$PNPM_CMD" install --lockfile-only --ignore-scripts 2>&1 >/dev/null; then
+                        break
+                    elif [ $attempt -lt 3 ]; then
+                        echo "    WARNING: pnpm install attempt $attempt failed for license-detection/$name, retrying..."
+                        sleep 1
+                    else
+                        echo "    WARNING: pnpm install failed for license-detection/$name after 3 attempts"
+                    fi
+                done
+            ) &
+            ((job_count++))
+            if [ $job_count -ge $MAX_JOBS ]; then
+                wait -n 2>/dev/null || true
+                ((job_count--))
+            fi
+        done
+    fi
     wait
     echo "  pnpm installations complete"
 ) &
@@ -95,6 +149,7 @@ pnpm_pid=$!
     # Yarn classic has cache contention issues, so use lower parallelism
     yarn_max_jobs=$((MAX_JOBS < 4 ? MAX_JOBS : 4))
     job_count=0
+    # Process main ecosystems directory
     for dir in "$TESTFILES_DIR"/yarn-classic/*/; do
         [ -f "$dir/package.json" ] || continue
         (
@@ -119,6 +174,32 @@ pnpm_pid=$!
             ((job_count--))
         fi
     done
+    # Also process license-detection subdirectory if it exists
+    if [ -d "$TESTFILES_DIR/license-detection/yarn-classic" ]; then
+        for dir in "$TESTFILES_DIR"/license-detection/yarn-classic/*/; do
+            [ -f "$dir/package.json" ] || continue
+            (
+                name=$(basename "$dir")
+                echo "  yarn-classic (license-detection): $name"
+                cd "$dir" && rm -f yarn.lock
+                for attempt in 1 2 3; do
+                    if yarn install --ignore-scripts 2>&1 >/dev/null; then
+                        break
+                    elif [ $attempt -lt 3 ]; then
+                        echo "    WARNING: yarn install attempt $attempt failed for license-detection/$name, retrying..."
+                        sleep 1
+                    else
+                        echo "    WARNING: yarn install failed for license-detection/$name after 3 attempts"
+                    fi
+                done
+            ) &
+            ((job_count++))
+            if [ $job_count -ge $yarn_max_jobs ]; then
+                wait -n 2>/dev/null || true
+                ((job_count--))
+            fi
+        done
+    fi
     wait
     echo "  yarn-classic installations complete"
 ) &
@@ -127,6 +208,7 @@ yarn_classic_pid=$!
 (
     echo "  Starting yarn-berry installations..."
     job_count=0
+    # Process main ecosystems directory
     for dir in "$TESTFILES_DIR"/yarn-berry/*/; do
         [ -f "$dir/package.json" ] || continue
         (
@@ -152,6 +234,33 @@ yarn_classic_pid=$!
             ((job_count--))
         fi
     done
+    # Also process license-detection subdirectory if it exists
+    if [ -d "$TESTFILES_DIR/license-detection/yarn-berry" ]; then
+        for dir in "$TESTFILES_DIR"/license-detection/yarn-berry/*/; do
+            [ -f "$dir/package.json" ] || continue
+            (
+                name=$(basename "$dir")
+                echo "  yarn-berry (license-detection): $name"
+                cd "$dir" && rm -f yarn.lock .pnp.cjs .pnp.loader.mjs && rm -rf .yarn/cache .yarn/unplugged .yarn/install-state.gz
+                for attempt in 1 2 3; do
+                    if yarn set version berry 2>&1 >/dev/null && yarn install 2>&1 >/dev/null; then
+                        break
+                    elif [ $attempt -lt 3 ]; then
+                        echo "    WARNING: yarn berry install attempt $attempt failed for license-detection/$name, retrying..."
+                        rm -rf .yarn/cache 2>/dev/null
+                        sleep 1
+                    else
+                        echo "    WARNING: yarn berry install failed for license-detection/$name after 3 attempts"
+                    fi
+                done
+            ) &
+            ((job_count++))
+            if [ $job_count -ge $MAX_JOBS ]; then
+                wait -n 2>/dev/null || true
+                ((job_count--))
+            fi
+        done
+    fi
     wait
     echo "  yarn-berry installations complete"
 ) &
@@ -160,6 +269,7 @@ yarn_berry_pid=$!
 (
     echo "  Starting poetry lock generation..."
     job_count=0
+    # Process main ecosystems directory
     for dir in "$TESTFILES_DIR"/poetry/*/; do
         [ -f "$dir/pyproject.toml" ] || continue
         (
@@ -184,6 +294,32 @@ yarn_berry_pid=$!
             ((job_count--))
         fi
     done
+    # Also process license-detection subdirectory if it exists
+    if [ -d "$TESTFILES_DIR/license-detection/poetry" ]; then
+        for dir in "$TESTFILES_DIR"/license-detection/poetry/*/; do
+            [ -f "$dir/pyproject.toml" ] || continue
+            (
+                name=$(basename "$dir")
+                echo "  poetry (license-detection): $name"
+                cd "$dir" && rm -f poetry.lock
+                for attempt in 1 2 3; do
+                    if poetry lock --no-interaction 2>&1 >/dev/null; then
+                        break
+                    elif [ $attempt -lt 3 ]; then
+                        echo "    WARNING: poetry lock attempt $attempt failed for license-detection/$name, retrying..."
+                        sleep 1
+                    else
+                        echo "    WARNING: poetry lock failed for license-detection/$name after 3 attempts"
+                    fi
+                done
+            ) &
+            ((job_count++))
+            if [ $job_count -ge $MAX_JOBS ]; then
+                wait -n 2>/dev/null || true
+                ((job_count--))
+            fi
+        done
+    fi
     wait
     echo "  poetry lock generation complete"
 ) &
@@ -192,6 +328,7 @@ poetry_pid=$!
 (
     echo "  Starting uv lock generation..."
     job_count=0
+    # Process main ecosystems directory
     for dir in "$TESTFILES_DIR"/uv/*/; do
         [ -f "$dir/pyproject.toml" ] || continue
         (
@@ -216,6 +353,32 @@ poetry_pid=$!
             ((job_count--))
         fi
     done
+    # Also process license-detection subdirectory if it exists
+    if [ -d "$TESTFILES_DIR/license-detection/uv" ]; then
+        for dir in "$TESTFILES_DIR"/license-detection/uv/*/; do
+            [ -f "$dir/pyproject.toml" ] || continue
+            (
+                name=$(basename "$dir")
+                echo "  uv (license-detection): $name"
+                cd "$dir" && rm -f uv.lock
+                for attempt in 1 2 3; do
+                    if uv lock 2>&1 >/dev/null; then
+                        break
+                    elif [ $attempt -lt 3 ]; then
+                        echo "    WARNING: uv lock attempt $attempt failed for license-detection/$name, retrying..."
+                        sleep 1
+                    else
+                        echo "    WARNING: uv lock failed for license-detection/$name after 3 attempts"
+                    fi
+                done
+            ) &
+            ((job_count++))
+            if [ $job_count -ge $MAX_JOBS ]; then
+                wait -n 2>/dev/null || true
+                ((job_count--))
+            fi
+        done
+    fi
     wait
     echo "  uv lock generation complete"
 ) &

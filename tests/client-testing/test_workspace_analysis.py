@@ -21,11 +21,12 @@ WORKSPACE_FIXTURES = {
     },
     "pnpm_workspace": {
         "root": Path("tests/client-testing/testfiles/pnpm/pnpm_workspace"),
-        "expected_packages": 3,  # root + 2 members
+        "expected_packages": 2,  # only members (package-a, package-b), not root
         "ecosystem": "pnpm",
     },
     "npm_workspace_member": {
         "member_manifest": Path("tests/client-testing/testfiles/npm/npm_workspace_member/packages/package-a/package.json"),
+        "workspace_root": Path("tests/client-testing/testfiles/npm/npm_workspace_member"),
         "ecosystem": "npm",
     },
 }
@@ -158,17 +159,19 @@ class TestLockFileWalkUp:
         from src.tester.models import AnalysisType
 
         member_manifest = WORKSPACE_FIXTURES["npm_workspace_member"]["member_manifest"]
+        workspace_root = WORKSPACE_FIXTURES["npm_workspace_member"]["workspace_root"]
 
         # Only test JavaScript client
         if ClientType.JAVASCRIPT not in available_clients:
             pytest.skip("JavaScript client not available")
 
         # Run regular stack analysis on the workspace MEMBER manifest
-        # The client should walk up and find the lock file at workspace root
+        # The client should find the lock file at workspace root via --workspaceDir
         success, result, error_msg = client_runner.run_client(
             ClientType.JAVASCRIPT,
             AnalysisType.STACK,
             member_manifest,
+            workspace_root=workspace_root,
         )
 
         # If this succeeds, it proves the client found the lock file at workspace root

@@ -268,16 +268,28 @@ class ClientRunner:
         workspace_root: Optional[Path] = None,
     ) -> list:
         """Build the command to execute the client"""
+        # For workspace member tests, use relative manifest path
+        if workspace_root is not None:
+            try:
+                relative_manifest = manifest_path.relative_to(workspace_root)
+                manifest_to_use = relative_manifest
+            except ValueError:
+                # Fallback to absolute if relative fails
+                manifest_to_use = manifest_path
+        else:
+            manifest_to_use = manifest_path
+
         if client_type == ClientType.JAVA:
             # Assume it's a JAR file
-            cmd = ["java", "-jar", client_path, analysis_type.value, str(manifest_path)]
+            cmd = ["java", "-jar", client_path, analysis_type.value, str(manifest_to_use)]
         else:
             # Assume it's an executable or script
-            cmd = [client_path, analysis_type.value, str(manifest_path)]
+            cmd = [client_path, analysis_type.value, str(manifest_to_use)]
 
-        # NOTE: Not adding --workspaceDir flag - let the client walk up automatically
-        # The client walks up from the manifest directory to find the lock file
-        # Adding --workspaceDir causes issues with path resolution in the client
+        # Add --workspaceDir flag for workspace member tests
+        # Use "." since the command is run from the workspace root directory (temp_test_dir)
+        if workspace_root is not None:
+            cmd.extend(["--workspaceDir", "."])
 
         return cmd
 

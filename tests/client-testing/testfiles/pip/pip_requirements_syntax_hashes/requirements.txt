@@ -1,0 +1,21 @@
+# Test hash values with line continuations
+# This tests that clients can handle --hash directives and backslash line continuations
+# Hashes ensure package integrity and are commonly used in security-conscious environments
+
+# Single package with hash on continuation line
+certifi==2021.5.30 \
+    --hash=sha256:50b1e4f8446b06f41be7dd6338db18e0990601dce795c2b1686458aa7e8fa7d8
+
+# Package with dependencies - all must have hashes when using --require-hashes mode
+requests==2.25.1 \
+    --hash=sha256:c210084e36a42ae6b9219e00e48287def368a26d03a048ddad7bfee44f75871e
+
+# Transitive dependencies (required by requests)
+chardet==4.0.0 \
+    --hash=sha256:f864054d66fd9118f2e67044ac8981a54775ec5b67aed0441892edb553d21da5
+
+idna==2.10 \
+    --hash=sha256:b97d804b1e9b523befed77c48dacec60e6dcb0b5391d57af6a65a312a90648c0
+
+urllib3==1.26.20 \
+    --hash=sha256:0ed14ccfbf1c30a9072c7ca157e4319b70d65f623e91e7b32fadb2853431016e

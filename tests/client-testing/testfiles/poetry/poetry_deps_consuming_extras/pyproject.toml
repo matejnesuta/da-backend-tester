@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "test-project"
+version = "0.1.0"
+description = "Test Poetry consuming package extras syntax"
+authors = ["Test <test@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+# Test consuming extras from other packages
+requests = { version = "2.25.1", extras = ["security", "socks"] }
+celery = { version = "5.2.7", extras = ["redis"] }
+httpx = { version = "0.23.0", extras = ["http2"] }
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

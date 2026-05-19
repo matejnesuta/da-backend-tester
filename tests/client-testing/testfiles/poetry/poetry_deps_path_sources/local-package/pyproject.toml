@@ -1,0 +1,13 @@
+[tool.poetry]
+name = "my-local-package"
+version = "0.1.0"
+description = "A local package for testing path dependencies"
+authors = ["Test <test@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+click = "8.0.4"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
